@@ -1,0 +1,33 @@
+{
+  "name": "codify-front",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "npx webpack serve"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-react": "^7.12.10",
+    "axios": "^0.21.1",
+    "babel-loader": "^8.2.2",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "react": "^17.0.1",
+    "react-cookie": "^4.0.3",
+    "react-dom": "^17.0.1",
+    "react-icons": "^4.1.0",
+    "react-router-dom": "^5.2.0",
+    "react-use-localstorage": "^3.5.3",
+    "styled-components": "^5.2.1",
+    "webpack": "^5.19.0",
+    "webpack-cli": "^4.4.0",
+    "webpack-dev-server": "^3.11.2"
+  }
+}
