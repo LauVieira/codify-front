@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
   entry: './src/index.js',
@@ -28,5 +29,14 @@ module.exports = {
     historyApiFallback: true,
   },
   mode: process.env.NODE_ENV === "production" ? "production" : "development",
-	devtool: "source-map",
+  devtool: "source-map",
+  plugins: [
+    new webpack.DefinePlugin({
+      process: {
+        env: {
+          API_BASE_URL: process.env.API_BASE_URL ? `'${process.env.API_BASE_URL}'` : `'http://localhost:3000'`
+        }
+      }
+    })
+  ]
 };
