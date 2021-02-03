@@ -40,6 +40,7 @@ const Form = styled.form`
   flex-direction: column;
 
   padding: 40px 20px;
+  margin-top: 40px;
 
   background: var(--color-white);
   border-radius: var(--radius-regular);
