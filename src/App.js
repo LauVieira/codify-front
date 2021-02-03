@@ -12,8 +12,7 @@ export default function App() {
 			<Route path='/cadastro' component={Pages.SignUp} />
 			<Route path='/entrar' component={Pages.SignIn} />
 			<Route path='/esqueci-senha' component={Pages.ForgotPassword} />
-			
-
+			<Route path='/redefinir-senha' component={Pages.RedefinePassword} />
 		</Switch>
 	</Router>
   );
