@@ -38,6 +38,7 @@ export default css`
         --color-blue: #46A7D4;
         --color-white: #FFFFFF;
         --color-black: #000000;
+        --color-black-light: #333333;
         --color-green: #76DF93;
         // Nav Bar and Subtitles
         --color-subtitle: #262626;
