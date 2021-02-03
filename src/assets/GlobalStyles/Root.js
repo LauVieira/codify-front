@@ -3,7 +3,7 @@ import { css } from 'styled-components';
 export default css`
     :root {
         // Body
-        --gradient-blue: linear-gradient(to top, #2980b9, #6dd5fa, #ffffff);
+        --gradient-blue: linear-gradient(to bottom, #1D3364, #56C7E7, #56C7E7, #1D3364);
         --background-color: ##E5E5E5;
 
         // Container Yellow Description
@@ -13,6 +13,10 @@ export default css`
         --shadow-strong: 0px 0px 20px rgba(0, 0, 0, 0.15);
         // box shadow default
         --shadow-regular: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+        // Focus
+        --shadow-focus: 0 0 5px rgba(81, 203, 238, 1);
+        --border-focus: 1px solid rgba(81, 203, 238, 1);
 
         // Radius Login / Buttons
         --radius-regular: 10px;
@@ -29,9 +33,6 @@ export default css`
         --font-roboto: 'Roboto', sans-serif;
         // Fonte Titulo
         --font-zilla: 'Zilla Slab Highlight', cursive;
-
-        // Codify Title
-        --color-title-black: #333333;
         
         // Colors
         --color-blue: #46A7D4;
