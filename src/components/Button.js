@@ -34,7 +34,7 @@ const StyledButton = styled.button`
         color: #46A7D4;
         border: 2px solid #46A7D4;
         span {
-            padding-right: 30px;
+            padding-right: 40px;
 
             &::after {
                 opacity: 1;
@@ -51,8 +51,9 @@ const StyledButton = styled.button`
         &::after {
             content: '»';
             position: absolute;
+            font-size: 4rem;
             opacity: 0;
-            top: 0;
+            top: -3px;
             right: -40px;
             transition: 0.4s linear;
         }

@@ -14,7 +14,7 @@ export default function LayoutLandingPage({children}) {
 const MainWrapper = styled.main`
   width: 100%;
   min-height: 100vh;
-  padding-top: 5vh;
+  padding: 5vh 0;
 
   display: flex;
   flex-direction: column;
