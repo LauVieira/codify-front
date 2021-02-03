@@ -14,46 +14,47 @@ export default function Button({children, ...props}) {
 const StyledButton = styled.button`
     border-radius: var(--radius-thin);
     background-color: var(--color-blue);
-    border: 0;
 
     color: var(--color-white);
     text-align: center;
-    font-size: 2.4rem,;
+    font-size: 2.4rem;
     line-height: 2.8rem;
     font-weight: bold;
 
     width: 100%;
-    height: 60px;
+    height: 50px;
 
-    transition: background border color 0.5s linear;
+    margin-bottom: 10px;
+
+    transition: background-color border color 0.5s linear;
     cursor: pointer;
 
-    &:hover {
-        background: white;
+    &:hover, &:focus {
+        background-color: white;
         color: #46A7D4;
-        border: 1px solid #46A7D4;
+        border: 2px solid #46A7D4;
+        span {
+            padding-right: 30px;
+
+            &::after {
+                opacity: 1;
+                right: 0;
+            
+            }
+        }
     }
 
     span {
         position: relative;
         transition: 0.4s linear;
-    }
-    
-    span:after {
-        content: '\00bb';
-        position: absolute;
-        opacity: 0;
-        top: 0;
-        right: -40px;
-        transition: 0.4s linear;
-    }
 
-    &:hover span {
-        padding-right: 30px;
-    }
-
-    &:hover span:after {
-        opacity: 1;
-        right: 0;
+        &::after {
+            content: '»';
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            right: -40px;
+            transition: 0.4s linear;
+        }
     }
 `;

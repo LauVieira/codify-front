@@ -32,8 +32,7 @@ export default css`
         border: 0;
         padding: 0;
         font: inherit;
-        cursor: pointer;
-        outline: none;
+        outline: inherit;
         text-align: inherit;
         font-size: 100%;
         margin: 0;

@@ -14,6 +14,7 @@ const Title = styled.h1`
     font-size: ${props => props.fontSize};
     line-height: ${props => props.lineHeight};
     letter-spacing: 0.6rem;
+    text-align: center;
 
     color: ${props => props.color};
 `;

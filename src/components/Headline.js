@@ -11,8 +11,12 @@ export default function Headline({children}) {
 
 const SubTitle = styled.h2`
   font-family: var(--font-orienta);
-  font-size: 3.4rem;
-  line-height: 4.1rem;
+  font-size: 2.75rem;
+  line-height: 4rem;
+
+  text-align: center;
+
+  margin-left: -21px;
 
   color: var(--color-white);
 `;

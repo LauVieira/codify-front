@@ -1,26 +1,26 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function Input({children, ...props}) {
+export default function Input({...props}) {
     return (
-        <StyledInput {...props}>
-            {children}
-        </StyledInput>
+        <>
+            <StyledInput {...props}/>
+        </>
     );
 }
 
 const StyledInput = styled.input`
     width: 100%;
-    height: 60px;
+    height: 50px;
 
-    border: 1px solid #B4B4B4;
+    border: 2px solid #B4B4B4;
     border-radius: var(--radius-thin);
 
     color: var(--color-black-light);
-    font-size: 2.4rem;
-    line-height: 2.8rem;
+    font-size: 2rem;
+    line-height: 2.4rem;
 
-    margin-bottom: 15px;
+    margin-bottom: 11px;
     padding-left: 15px;
 
     transition: all 0.3s ease-in-out;
