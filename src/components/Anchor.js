@@ -24,4 +24,8 @@ const StyledLink = styled(Link)`
   &:hover, &:focus {
     color: var(--color-blue);
   }
+  
+  &::first-letter {
+    text-transform: uppercase;
+  }
 `;

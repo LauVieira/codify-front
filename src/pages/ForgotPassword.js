@@ -11,7 +11,7 @@ import {
 } from '../components';
 
 
-export default function SignIn() {
+export default function ForgotPassword() {
   return (
     <LayoutLandingPage>
       <Codify 
@@ -25,18 +25,14 @@ export default function SignIn() {
 
       <Form onSubmit={undefined}>
         <Input
-          placeholder='e-mail'
-        />
-        <Input
-          placeholder='senha'
+          placeholder='digite seu e-mail'
         />
         <Button 
         > 
-          entrar 
+          recuperar senha 
         </Button>
 
-        <Anchor to='/cadastrar'> primeira vez ? crie uma conta ! </Anchor>
-        <Anchor to='/recuperar-senha'> esqueceu sua senha ? </Anchor>
+        <Anchor to='/entrar'> voltar para login </Anchor>
       </Form>
     </LayoutLandingPage>
   );

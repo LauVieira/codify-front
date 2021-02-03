@@ -1,16 +1,19 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import GlobalStyle from './assets/GlobalStyles'
-import SignIn from './pages/SignIn';
-import SignUp from './pages/SignUp';
+
+import * as Pages from './pages';
 
 export default function App() {
   return (
 	<Router>
 		<GlobalStyle />
 		<Switch>
-			<Route path='/cadastro' component={SignUp} />
-			<Route path='/entrar' component={SignIn} />
+			<Route path='/cadastro' component={Pages.SignUp} />
+			<Route path='/entrar' component={Pages.SignIn} />
+			<Route path='/esqueci-senha' component={Pages.ForgotPassword} />
+			
+
 		</Switch>
 	</Router>
   );

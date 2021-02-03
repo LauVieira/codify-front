@@ -33,14 +33,14 @@ export default function SignUp() {
         fontSize={'9rem'} 
         lineHeight={'12rem'}
       > 
-        Codify 
+        codify 
       </Codify>
       <Headline> learn. practice. code. </Headline>
 
       <Form onSubmit={undefined}>
         <Input
           type='text'
-          placeholder='Nome completo'
+          placeholder='nome completo'
           value={name}
           onChange={event => setName(event.target.value)}
           autoFocus
@@ -51,7 +51,7 @@ export default function SignUp() {
         />
         <Input
           type='email'
-          placeholder='E-mail'
+          placeholder='e-mail'
           value={email}
           onChange={event => setEmail(event.target.value)}
           pattern={Patterns.email.regex}
@@ -61,7 +61,7 @@ export default function SignUp() {
         />
         <Input
           type='password'
-          placeholder='Senha'
+          placeholder='senha'
           value={password}
           onChange={event => setPassword(event.target.value)}
           pattern={Patterns.password.regex}
@@ -70,7 +70,7 @@ export default function SignUp() {
         />
         <Input
           type='password'
-          placeholder='Repetir senha'
+          placeholder='repetir senha'
           value={passwordRef}
           onChange={event => setPasswordRef(event.target.value)}
           required
@@ -79,11 +79,11 @@ export default function SignUp() {
           type='submit' 
           disabled={disabled}
         > 
-          {disabled ? 'Carregando...': 'Cadastrar'} 
+          {disabled ? 'carregando...': 'cadastrar'} 
         </Button>
 
-        <Anchor to='/entrar'> Já tem conta ? Faça login </Anchor>
-        <Anchor to='/recuperar-senha'> Esqueceu sua senha ? </Anchor>
+        <Anchor to='/entrar'> já tem conta ? Faça login </Anchor>
+        <Anchor to='/recuperar-senha'> esqueceu sua senha ? </Anchor>
       </Form>
     </LayoutLandingPage>
   );

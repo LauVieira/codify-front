@@ -17,4 +17,8 @@ const Title = styled.h1`
     text-align: center;
 
     color: ${props => props.color};
+
+    &::first-letter {
+        text-transform: uppercase;
+    }
 `;

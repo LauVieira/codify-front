@@ -20,7 +20,7 @@ const StyledInput = styled.input`
     font-size: 2rem;
     line-height: 2.4rem;
 
-    margin-bottom: 11px;
+    margin-bottom: 12.5px;
     padding-left: 15px;
 
     transition: all 0.3s ease-in-out;
@@ -33,5 +33,9 @@ const StyledInput = styled.input`
     &::placeholder {
         font-weight: bold;
         color: var(--color-grey-light);
+        
+        &::first-letter {
+            text-transform: uppercase;
+        }
     }
 `;

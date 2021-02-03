@@ -29,6 +29,10 @@ const StyledButton = styled.button`
     transition: background-color border color 0.5s linear;
     cursor: pointer;
 
+    &::first-letter {
+        text-transform: uppercase;
+    }
+
     &:hover, &:focus {
         background-color: white;
         color: #46A7D4;
