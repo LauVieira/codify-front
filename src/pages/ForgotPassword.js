@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import axios from 'axios';
 
 import Patterns from '../utils/PatternsHtml';
 
@@ -24,8 +23,8 @@ export default function ForgotPassword() {
   function handleSubmit(event) {
     event.preventDefault();
 
-    setDisabled(true);
     if(disabled) return;
+    setDisabled(true);
 
     alert('Em construção')
   }

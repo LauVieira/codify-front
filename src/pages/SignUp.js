@@ -45,9 +45,9 @@ export default function SignUp() {
       .then(() => {
         if(confirm('Cadastro feito com sucesso! Redirecionando para tela de login ...')) {
           history.push('/entrar');
+        } else {
+          setDisabled(false);
         }
-
-        setDisabled(false);
       })
       .catch(({response}) => {
         console.error(response);
