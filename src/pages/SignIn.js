@@ -36,7 +36,7 @@ export default function SignIn() {
         </Button>
 
         <Anchor to='/cadastrar'> primeira vez ? crie uma conta ! </Anchor>
-        <Anchor to='/recuperar-senha'> esqueceu sua senha ? </Anchor>
+        <Anchor to='/esqueci-senha'> esqueceu sua senha ? </Anchor>
       </Form>
     </LayoutLandingPage>
   );

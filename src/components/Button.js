@@ -26,6 +26,7 @@ const StyledButton = styled.button`
 
     margin-bottom: 10px;
 
+    text-transform: lowercase;
     transition: background-color border color 0.5s linear;
     cursor: pointer;
 
@@ -59,7 +60,7 @@ const StyledButton = styled.button`
             opacity: 0;
             top: -3px;
             right: -40px;
-            transition: 0.4s linear;
+            transition: 0.2s linear;
         }
     }
 `;

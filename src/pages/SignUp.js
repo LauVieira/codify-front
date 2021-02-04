@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
@@ -20,11 +20,46 @@ export default function SignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordRef, setPasswordRef] = useState('');
-  const [message, setMessage] = useState('');
-  const [messageType, setMessageType] = useState('');
   const [disabled, setDisabled] = useState(false);
 
   const history = useHistory();
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    if(disabled) return;
+
+    if(password !== passwordRef) {
+      alert('Os campos senha e confirmar senha devem ser iguais');
+
+      return;
+    }
+
+    name = Helpers.capitalizeAllAndTrim(name);
+    const body = {name, email, password, passwordRef};
+
+    axios
+      .post(`${process.env.API_BASE_URL}/users/sign-up`, body)
+      .then(() => {
+        alert('Cadastro feito com sucesso! Redirecionando para tela de login ...');
+
+        history.push('/entrar');
+      })
+      .catch(({ response }) => {
+        setDisabled(!disabled);
+
+        switch(response.status) {
+          case 409:
+            alert('Email selecionado já existe na plataforma');
+            break
+          case 422:
+            alert('Não foi possível processar os dados enviados');
+            break
+          default:
+            alert('Erro interno no servidor');
+            break
+        }
+      });
+  }
 
   return (
     <LayoutLandingPage>
@@ -37,7 +72,7 @@ export default function SignUp() {
       </Codify>
       <Headline> learn. practice. code. </Headline>
 
-      <Form onSubmit={undefined}>
+      <Form onSubmit={handleSubmit}>
         <Input
           type='text'
           placeholder='nome completo'
@@ -83,7 +118,7 @@ export default function SignUp() {
         </Button>
 
         <Anchor to='/entrar'> já tem conta ? Faça login </Anchor>
-        <Anchor to='/recuperar-senha'> esqueceu sua senha ? </Anchor>
+        <Anchor to='/esqueci-senha'> esqueceu sua senha ? </Anchor>
       </Form>
     </LayoutLandingPage>
   );

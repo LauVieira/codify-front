@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-export default function Anchor({children, path}) {
+export default function Anchor({children, ...props}) {
   return(
-    <StyledLink to={path}>
+    <StyledLink {...props}>
       {children}
     </StyledLink>
   );
@@ -20,6 +20,7 @@ const StyledLink = styled(Link)`
 
   text-decoration: underline;
   transition: 0.1s;
+  text-transform: lowercase;
 
   &:hover, &:focus {
     color: var(--color-blue);

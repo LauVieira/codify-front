@@ -33,9 +33,6 @@ const StyledInput = styled.input`
     &::placeholder {
         font-weight: bold;
         color: var(--color-grey-light);
-        
-        &::first-letter {
-            text-transform: uppercase;
-        }
+        text-transform: lowercase;
     }
 `;
