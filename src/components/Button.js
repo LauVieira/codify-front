@@ -2,11 +2,10 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import Spinner from './Spinner';
 
-export default function Button({children, loading,...props}) {
-    console.log(loading);
+export default function Button({children, isLoading, ...props}) {
     return (
-        <StyledButton loading={loading} {...props}>
-            {loading ?
+        <StyledButton isLoading={isLoading} {...props}>
+            {isLoading ?
                 <Spinner
                     type='Oval'
                     color='#46A7D4'
@@ -24,8 +23,8 @@ export default function Button({children, loading,...props}) {
 
 const StyledButton = styled.button`
     border-radius: var(--radius-thin);
-    background-color: ${({loading}) => loading ? '#FFFFFF': '#46A7D4'};
-    border: ${({loading}) => loading ? '3px solid #46A7D4': 'none'};
+    background-color: ${({isLoading}) => isLoading ? '#FFFFFF': '#46A7D4'};
+    border: ${({isLoading}) => isLoading ? '3px solid #46A7D4': 'none'};
 
     color: var(--color-white);
     font-size: 2.4rem;
@@ -42,13 +41,13 @@ const StyledButton = styled.button`
     position: relative;
 
     transition: background-color border color 0.5s linear;
-    cursor: ${({loading}) => loading ? 'default': 'pointer'};
+    cursor: ${({isLoading}) => isLoading ? 'default': 'pointer'};
 
     &::first-letter {
         text-transform: uppercase;
     }
 
-    ${({ loading }) => !loading && css`
+    ${({ isLoading }) => !isLoading && css`
             &:hover, &:focus {
                 background-color: var(--color-white);
                 color: #46A7D4;

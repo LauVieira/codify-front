@@ -29,7 +29,7 @@ export default function SignUp() {
     if(disabled) return;
 
     if(password !== passwordRef) {
-      alert('Os campos senha e confirmar senha devem ser iguais');
+      alert(`Os campos "senha" e "confirmar senha" devem ser identicos`);
 
       return;
     }
@@ -113,7 +113,7 @@ export default function SignUp() {
         <Button 
           type='submit' 
           disabled={disabled}
-          loading={disabled}
+          isLoading={disabled}
         > 
           {disabled ? '': 'cadastrar'} 
         </Button>

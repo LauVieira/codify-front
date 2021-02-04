@@ -1,4 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import axios from 'axios';
+
+import Patterns from '../utils/PatternsHtml';
 
 import { 
   Codify, 
@@ -10,8 +14,20 @@ import {
   Form
 } from '../components';
 
-
 export default function SignIn() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [disabled, setDisabled] = useState(false);
+
+  const history = useHistory();
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    if(disabled) return;
+
+    alert('Em construção')
+  }
+
   return (
     <LayoutLandingPage>
       <Codify 
@@ -23,16 +39,33 @@ export default function SignIn() {
       </Codify>
       <Headline> learn. practice. code. </Headline>
 
-      <Form onSubmit={undefined}>
+      <Form onSubmit={handleSubmit}>
         <Input
+          type='email'
           placeholder='e-mail'
+          value={email}
+          onChange={event => setEmail(event.target.value)}
+          pattern={Patterns.email.regex}
+          title={Patterns.email.helper}
+          required
+          autoFocus
+          autocomplete='on'
         />
         <Input
+          type='password'
           placeholder='senha'
+          value={password}
+          onChange={event => setPassword(event.target.value)}
+          pattern={Patterns.password.regex}
+          title={Patterns.password.helper}
+          required
         />
         <Button 
+          type='submit' 
+          disabled={disabled}
+          isLoading={disabled}
         > 
-          entrar 
+          {disabled ? '': 'entrar'} 
         </Button>
 
         <Anchor to='/cadastrar'> primeira vez ? crie uma conta ! </Anchor>
