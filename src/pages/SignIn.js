@@ -26,32 +26,28 @@ export default function SignIn() {
 
   function handleSubmit(event) {
     event.preventDefault();
+
     if(disabled) return;
+    setDisabled(true);
 
     const body = {email, password};
     axios
       .post(`${process.env.API_BASE_URL}/users/sign-in`, body)
       .then(({data}) => {
-        setDisabled(!disabled);
-        const token = Cookies.get('token');
+        /*const token = Cookies.get('token');
 
-        setUser({...data, token});
-        history.push('/');
+        setUser({...data, token});*/
+        if(confirm('Cadastro feito com sucesso! Redirecionando para tela de login ...')) {
+          history.push('/entrar');
+        }
+
+        setDisabled(false);
       })
       .catch(({response}) => {
-        setDisabled(!disabled);
-
-        switch(response.status) {
-          case 404:
-            alert('Email ou senha incorretos');
-            break
-          case 422:
-            alert('Não foi possível processar os dados enviados');
-            break
-          default:
-            alert('Erro interno no servidor');
-            break
-        }
+        console.error(response);
+        setDisabled(false);
+        
+        alert(response.data.error);
       });
   }
 
