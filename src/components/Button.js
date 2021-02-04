@@ -1,22 +1,33 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import Spinner from './Spinner';
 
-export default function Button({children, ...props}) {
+export default function Button({children, loading,...props}) {
+    console.log(loading);
     return (
-        <StyledButton {...props}>
-            <span>
-                {children}
-            </span>
+        <StyledButton loading={loading} {...props}>
+            {loading ?
+                <Spinner
+                    type='Oval'
+                    color='#46A7D4'
+                    width={30}
+                    height={30}
+                />
+                : 
+                <span>
+                    {children}
+                </span>
+            }
         </StyledButton>
     );
 }
 
 const StyledButton = styled.button`
     border-radius: var(--radius-thin);
-    background-color: var(--color-blue);
+    background-color: ${({loading}) => loading ? '#FFFFFF': '#46A7D4'};
+    border: ${({loading}) => loading ? '3px solid #46A7D4': 'none'};
 
     color: var(--color-white);
-    text-align: center;
     font-size: 2.4rem;
     line-height: 2.8rem;
     font-weight: bold;
@@ -26,27 +37,33 @@ const StyledButton = styled.button`
 
     margin-bottom: 10px;
 
+    text-align: center;
     text-transform: lowercase;
+    position: relative;
+
     transition: background-color border color 0.5s linear;
-    cursor: pointer;
+    cursor: ${({loading}) => loading ? 'default': 'pointer'};
 
     &::first-letter {
         text-transform: uppercase;
     }
 
-    &:hover, &:focus {
-        background-color: white;
-        color: #46A7D4;
-        border: 2px solid #46A7D4;
-        span {
-            padding-right: 40px;
+    ${({ loading }) => !loading && css`
+            &:hover, &:focus {
+                background-color: var(--color-white);
+                color: #46A7D4;
+                border: 3px solid #46A7D4;
 
-            &::after {
-                opacity: 1;
-                right: 0;
-            
+                span {
+                    padding-right: 40px;
+
+                    &::after {
+                        opacity: 1;
+                        right: 0;
+                    }
+                }
             }
-        }
+        `
     }
 
     span {

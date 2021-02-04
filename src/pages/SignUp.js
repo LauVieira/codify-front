@@ -113,8 +113,9 @@ export default function SignUp() {
         <Button 
           type='submit' 
           disabled={disabled}
+          loading={disabled}
         > 
-          {disabled ? 'carregando...': 'cadastrar'} 
+          {disabled ? '': 'cadastrar'} 
         </Button>
 
         <Anchor to='/entrar'> já tem conta ? Faça login </Anchor>
