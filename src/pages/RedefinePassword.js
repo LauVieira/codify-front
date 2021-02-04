@@ -57,7 +57,7 @@ export default function ForgotPassword() {
         <Input
           type='password'
           placeholder='repetir senha'
-          value={passwordRef}
+          value={passwordConfirm}
           onChange={event => setConfirmPassword(event.target.value)}
           title='Preencha o campo'
           required
