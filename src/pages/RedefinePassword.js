@@ -52,6 +52,7 @@ export default function ForgotPassword() {
           onChange={event => setPassword(event.target.value)}
           pattern={Patterns.password.regex}
           title={Patterns.password.helper}
+          autoFocus
           required
         />
         <Input
