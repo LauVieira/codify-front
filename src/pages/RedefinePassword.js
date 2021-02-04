@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 
 import Patterns from '../utils/PatternsHtml';
 
@@ -17,8 +16,6 @@ export default function ForgotPassword() {
   const [passwordConfirm, setConfirmPassword] = useState('');
   const [disabled, setDisabled] = useState(false);
 
-  const history = useHistory();
-
   function handleSubmit(event) {
     event.preventDefault();
 
@@ -32,15 +29,15 @@ export default function ForgotPassword() {
       return;
     }
 
-    alert('Em construção')
+    alert('Em construção');
   }
 
   return (
     <LayoutLandingPage>
       <Codify 
-        color={'white'} 
-        fontSize={'9rem'} 
-        lineHeight={'12rem'}
+        color='white'
+        fontSize='9rem'
+        lineHeight='12rem'
       > 
         codify 
       </Codify>
@@ -61,7 +58,7 @@ export default function ForgotPassword() {
           type='password'
           placeholder='repetir senha'
           value={passwordRef}
-          onChange={event => setPasswordRef(event.target.value)}
+          onChange={event => setConfirmPassword(event.target.value)}
           title='Preencha o campo'
           required
         />

@@ -1,7 +1,7 @@
 import Loader from 'react-loader-spinner';
 import React from 'react';
 
-export default function Spinner({type, color, width, height}) {
+export default function Spinner({ type, color, width, height }) {
     return (
         <Loader
             type={type}
@@ -11,4 +11,3 @@ export default function Spinner({type, color, width, height}) {
         />
     );
 }
-

@@ -60,9 +60,9 @@ export default function SignUp() {
   return (
     <LayoutLandingPage>
       <Codify 
-        color={'white'} 
-        fontSize={'9rem'} 
-        lineHeight={'12rem'}
+        color='white'
+        fontSize='9rem'
+        lineHeight='12rem'
       > 
         codify 
       </Codify>
@@ -103,7 +103,7 @@ export default function SignUp() {
           type='password'
           placeholder='repetir senha'
           value={passwordRef}
-          onChange={event => setPasswordRef(event.target.value)}
+          onChange={event => setConfirmPassword(event.target.value)}
           title='Preencha o campo'
           required
         />
@@ -116,7 +116,7 @@ export default function SignUp() {
         </Button>
 
         <Anchor to='/entrar'> já tem conta ? Faça login </Anchor>
-        <Anchor to='/esqueci-senha'> esqueceu sua senha ? </Anchor>
+        <Anchor onClick={() => alert('Em construção')}> esqueceu sua senha ? </Anchor>
       </Form>
     </LayoutLandingPage>
   );
