@@ -29,6 +29,7 @@ export default function ForgotPassword() {
     if(password !== passwordConfirm) {
       alert(`Os campos "nova senha" e "repetir senha" devem ser idênticos`);
 
+      setDisabled(false);
       return;
     }
 

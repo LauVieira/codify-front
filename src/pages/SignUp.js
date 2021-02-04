@@ -50,8 +50,9 @@ export default function SignUp() {
         setDisabled(false);
       })
       .catch(({response}) => {
+        console.error(response);
         setDisabled(false);
-        console.log(response);
+        
         alert(response.data.error);
       });
   }
