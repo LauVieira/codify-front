@@ -43,9 +43,16 @@ export default function SignIn() {
       })
       .catch(({response}) => {
         console.error(response);
-        setDisabled(false);
         
-        alert(response.data.error);
+        switch (response.status) {
+          case 422:
+            alert('Não foi possível processar o formato dos dados');
+            break
+
+          case 401:
+            alert('Email ou senha estão incorretos');
+            break
+        }
       });
   }
 
