@@ -1,4 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import axios from 'axios';
+
+import Patterns from '../utils/PatternsHtml';
 
 import { 
   Codify, 
@@ -12,6 +16,18 @@ import {
 
 
 export default function ForgotPassword() {
+  const [email, setEmail] = useState('');
+  const [disabled, setDisabled] = useState(false);
+
+  const history = useHistory();
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    if(disabled) return;
+
+    alert('Em construção')
+  }
+
   return (
     <LayoutLandingPage>
       <Codify 
@@ -25,11 +41,22 @@ export default function ForgotPassword() {
 
       <Form onSubmit={undefined}>
         <Input
-          placeholder='digite seu e-mail'
+          type='email'
+          placeholder='e-mail'
+          value={email}
+          onChange={event => setEmail(event.target.value)}
+          pattern={Patterns.email.regex}
+          title={Patterns.email.helper}
+          required
+          autoFocus
+          autocomplete='on'
         />
         <Button 
+          type='submit' 
+          disabled={disabled}
+          isLoading={disabled}
         > 
-          recuperar senha 
+          {disabled ? '': 'recuperar senha'} 
         </Button>
 
         <Anchor to='/entrar'> voltar para login </Anchor>
