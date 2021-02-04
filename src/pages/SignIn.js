@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 import Patterns from '../utils/PatternsHtml';
+import UserContext from '../contexts/UserContext';
+import { Cookies } from 'react-cookie';
 
 import { 
   Codify, 
@@ -15,6 +17,7 @@ import {
 } from '../components';
 
 export default function SignIn() {
+  const { setUser } = useContext(UserContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [disabled, setDisabled] = useState(false);
@@ -25,7 +28,31 @@ export default function SignIn() {
     event.preventDefault();
     if(disabled) return;
 
-    alert('Em construção')
+    const body = {email, password};
+    axios
+      .post(`${process.env.API_BASE_URL}/users/sign-in`, body)
+      .then(({data}) => {
+        setDisabled(!disabled);
+        const token = Cookies.get('token');
+
+        setUser({...data, token});
+        history.push('/');
+      })
+      .catch(({response}) => {
+        setDisabled(!disabled);
+
+        switch(response.status) {
+          case 404:
+            alert('Email ou senha incorretos');
+            break
+          case 422:
+            alert('Não foi possível processar os dados enviados');
+            break
+          default:
+            alert('Erro interno no servidor');
+            break
+        }
+      });
   }
 
   return (
