@@ -10,6 +10,7 @@ export default function App() {
 	<Router>
 		<GlobalStyle />
 		<Switch>
+			<Route path='/curso/topico' />
 			<Route path='/curso/:id' component={Course} />
 			<Route path='/cadastro' component={SignUp} />
 			<Route path='/entrar' component={SignIn} />

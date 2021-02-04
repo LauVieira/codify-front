@@ -1,8 +1,8 @@
-import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { courses } from '../utils/mockedCourses';
+import Summary from '../components/Summary';
 
 export default function Course() {
   const [course, setCourse] = useState([]);
@@ -19,6 +19,7 @@ export default function Course() {
             <Details>
                 <h1>{course[0].title}</h1>
                 <p>{course[0].description}</p>
+                <Summary course={course} /> { /* tem que receber o contexto por props e o curso */}
             </Details>
         }
     </Container>
@@ -42,6 +43,7 @@ const Details = styled.div`
     flex-direction: column;
     align-items: center;
     padding-top: 20px;
+    position: relative;
     h1{
         color: #000;
         font-size: 35px;
@@ -51,3 +53,4 @@ const Details = styled.div`
         font-size: 20px;
     }
 `;
+
