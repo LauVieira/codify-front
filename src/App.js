@@ -17,7 +17,7 @@ export default function App() {
         <Route path="/entrar" component={SignIn} />
         <Route path="/cursos" component={Courses} />
         <Route path="/perfil" component={Profile} />
-        <Route path="/" component={LandingPage} exact />
+        <Route path="/home" component={LandingPage} exact />
       </Switch>
     </Router>
   );
