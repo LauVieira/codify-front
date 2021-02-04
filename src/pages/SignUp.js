@@ -29,7 +29,7 @@ export default function SignUp() {
     if(disabled) return;
 
     if(password !== passwordRef) {
-      alert(`Os campos "senha" e "confirmar senha" devem ser identicos`);
+      alert(`Os campos "senha" e "confirmar senha" devem ser idênticos`);
 
       return;
     }
@@ -40,6 +40,7 @@ export default function SignUp() {
     axios
       .post(`${process.env.API_BASE_URL}/users/sign-up`, body)
       .then(() => {
+        setDisabled(!disabled);
         alert('Cadastro feito com sucesso! Redirecionando para tela de login ...');
 
         history.push('/entrar');

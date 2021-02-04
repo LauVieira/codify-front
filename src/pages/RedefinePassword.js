@@ -1,4 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import axios from 'axios';
+
+import Patterns from '../utils/PatternsHtml';
 
 import { 
   Codify, 
@@ -10,6 +14,25 @@ import {
 } from '../components';
 
 export default function ForgotPassword() {
+  const [password, setPassword] = useState('');
+  const [passwordRef, setPasswordRef] = useState('');
+  const [disabled, setDisabled] = useState(false);
+
+  const history = useHistory();
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    if(disabled) return;
+
+    if(password !== passwordRef) {
+      alert(`Os campos "nova senha" e "repetir senha" devem ser idênticos`);
+
+      return;
+    }
+
+    alert('Em construção')
+  }
+
   return (
     <LayoutLandingPage>
       <Codify 
@@ -21,16 +44,29 @@ export default function ForgotPassword() {
       </Codify>
       <Headline> learn. practice. code. </Headline>
 
-      <Form onSubmit={undefined}>
+      <Form onSubmit={handleSubmit}>
         <Input
+          type='password'
           placeholder='nova senha'
+          value={password}
+          onChange={event => setPassword(event.target.value)}
+          pattern={Patterns.password.regex}
+          title={Patterns.password.helper}
+          required
         />
         <Input
-          placeholder='repita sua senha'
+          type='password'
+          placeholder='repetir senha'
+          value={passwordRef}
+          onChange={event => setPasswordRef(event.target.value)}
+          required
         />
         <Button 
+          type='submit' 
+          disabled={disabled}
+          isLoading={disabled}
         > 
-          redefinir senha 
+          {disabled ? '': 'entrar'} 
         </Button>
       </Form>
     </LayoutLandingPage>

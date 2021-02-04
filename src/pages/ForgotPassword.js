@@ -39,7 +39,7 @@ export default function ForgotPassword() {
       </Codify>
       <Headline> learn. practice. code. </Headline>
 
-      <Form onSubmit={undefined}>
+      <Form onSubmit={handleSubmit}>
         <Input
           type='email'
           placeholder='e-mail'
