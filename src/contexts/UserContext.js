@@ -3,14 +3,14 @@ import useLocalStorage from '../hooks/useLocalStorage';
 
 const UserContext = createContext();
 
-export function UserProvider({children, ...props}) {
+export default UserContext;
+
+export function UserProvider({ children }) {
     const [user, setUser] = useLocalStorage('user', null);
 
     return (
-        <UserContext.Provider {...props} value={user, setUser}>
+        <UserContext.Provider value={{user, setUser}}>
             {children}
         </UserContext.Provider>
     );
 }
-
-export default UserContext;

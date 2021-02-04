@@ -16,7 +16,7 @@ import {
 } from '../components';
 
 export default function SignIn() {
-  const { setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [disabled, setDisabled] = useState(false);
@@ -32,9 +32,10 @@ export default function SignIn() {
     const body = {email, password};
     axios
       .post(`${process.env.API_BASE_URL}/users/sign-in`, body)
-      .then(({data}) => {
-        setUser(data);
+      .then(({ data })=> {
         
+        setUser({...data});
+
         if(confirm('Login feito com sucesso! Redirecionando para a página inicial ...')) {
           history.push('/');
         } else {
@@ -43,16 +44,9 @@ export default function SignIn() {
       })
       .catch(({response}) => {
         console.error(response);
-        
-        switch (response.status) {
-          case 422:
-            alert('Não foi possível processar o formato dos dados');
-            break
+        setDisabled(false);
 
-          case 401:
-            alert('Email ou senha estão incorretos');
-            break
-        }
+        alert(response.data);
       });
   }
 
@@ -60,7 +54,7 @@ export default function SignIn() {
     <LayoutLandingPage>
       <Codify 
         color={'white'} 
-        fontSize={'9rem'} 
+        fontSize={'9rem'}
         lineHeight={'12rem'}
       > 
         codify 

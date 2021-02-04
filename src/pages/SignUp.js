@@ -19,48 +19,41 @@ export default function SignUp() {
   let [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [passwordRef, setPasswordRef] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [disabled, setDisabled] = useState(false);
 
   const history = useHistory();
 
   function handleSubmit(event) {
-    // Aceito sugestôes do que fazer a mais dentro do then e catch, e outras validações
-
     event.preventDefault();
+  
     if(disabled) return;
+    setDisabled(true);
 
-    if(password !== passwordRef) {
+    if(password !== confirmPassword) {
       alert(`Os campos "senha" e "confirmar senha" devem ser idênticos`);
+      setDisabled(false);
 
       return;
     }
 
     name = Helpers.capitalizeAllAndTrim(name);
-    const body = {name, email, password, passwordRef};
+    const body = {name, email, password, confirmPassword};
 
     axios
       .post(`${process.env.API_BASE_URL}/users/sign-up`, body)
       .then(() => {
-        setDisabled(!disabled);
-        alert('Cadastro feito com sucesso! Redirecionando para tela de login ...');
-
-        history.push('/entrar');
-      })
-      .catch(({ response }) => {
-        setDisabled(!disabled);
-
-        switch(response.status) {
-          case 409:
-            alert('Email selecionado já existe na plataforma');
-            break
-          case 422:
-            alert('Não foi possível processar os dados enviados');
-            break
-          default:
-            alert('Erro interno no servidor');
-            break
+        if(confirm('Cadastro feito com sucesso! Redirecionando para tela de login ...')) {
+          history.push('/entrar');
+        } else {
+          setDisabled(false);
         }
+      })
+      .catch(({response}) => {
+        console.error(response);
+        setDisabled(false);
+        
+        alert(response.data.error);
       });
   }
 

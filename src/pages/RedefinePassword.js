@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import axios from 'axios';
 
 import Patterns from '../utils/PatternsHtml';
 
@@ -15,18 +14,21 @@ import {
 
 export default function ForgotPassword() {
   const [password, setPassword] = useState('');
-  const [passwordRef, setPasswordRef] = useState('');
+  const [passwordConfirm, setConfirmPassword] = useState('');
   const [disabled, setDisabled] = useState(false);
 
   const history = useHistory();
 
   function handleSubmit(event) {
     event.preventDefault();
-    if(disabled) return;
 
-    if(password !== passwordRef) {
+    if(disabled) return;
+    setDisabled(true);
+
+    if(password !== passwordConfirm) {
       alert(`Os campos "nova senha" e "repetir senha" devem ser idênticos`);
 
+      setDisabled(false);
       return;
     }
 
