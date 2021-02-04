@@ -6,12 +6,14 @@ export default function Button({children, isLoading, ...props}) {
     return (
         <StyledButton isLoading={isLoading} {...props}>
             {isLoading ?
-                <Spinner
-                    type='Oval'
-                    color='#46A7D4'
-                    width={30}
-                    height={30}
-                />
+                <SpinnerContainer>
+                    <Spinner
+                        type='Oval'
+                        color='#46A7D4'
+                        width={35}
+                        height={35}
+                    />
+                </SpinnerContainer>
                 : 
                 <span>
                     {children}
@@ -20,6 +22,11 @@ export default function Button({children, isLoading, ...props}) {
         </StyledButton>
     );
 }
+
+const SpinnerContainer = styled.div`
+    position: relative;
+    top: 2.5px;
+`;
 
 const StyledButton = styled.button`
     border-radius: var(--radius-thin);
