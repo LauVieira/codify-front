@@ -60,6 +60,7 @@ export default function ForgotPassword() {
           placeholder='repetir senha'
           value={passwordRef}
           onChange={event => setPasswordRef(event.target.value)}
+          title='Preencha o campo'
           required
         />
         <Button 

@@ -20,7 +20,7 @@ export default function SignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordRef, setPasswordRef] = useState('');
-  const [disabled, setDisabled] = useState(false);
+  const [disabled, setDisabled] = useState(true);
 
   const history = useHistory();
 
@@ -111,6 +111,7 @@ export default function SignUp() {
           placeholder='repetir senha'
           value={passwordRef}
           onChange={event => setPasswordRef(event.target.value)}
+          title='Preencha o campo'
           required
         />
         <Button 
