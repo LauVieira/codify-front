@@ -23,6 +23,8 @@ export default function ForgotPassword() {
 
   function handleSubmit(event) {
     event.preventDefault();
+
+    setDisabled(true);
     if(disabled) return;
 
     alert('Em construção')

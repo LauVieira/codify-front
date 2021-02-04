@@ -15,16 +15,18 @@ import {
 
 export default function ForgotPassword() {
   const [password, setPassword] = useState('');
-  const [passwordRef, setPasswordRef] = useState('');
+  const [passwordConfirm, setConfirmPassword] = useState('');
   const [disabled, setDisabled] = useState(false);
 
   const history = useHistory();
 
   function handleSubmit(event) {
     event.preventDefault();
-    if(disabled) return;
 
-    if(password !== passwordRef) {
+    if(disabled) return;
+    setDisabled(true);
+
+    if(password !== passwordConfirm) {
       alert(`Os campos "nova senha" e "repetir senha" devem ser idênticos`);
 
       return;
@@ -57,8 +59,8 @@ export default function ForgotPassword() {
         <Input
           type='password'
           placeholder='repetir senha'
-          value={passwordRef}
-          onChange={event => setPasswordRef(event.target.value)}
+          value={passwordConfirm}
+          onChange={event => setConfirmPassword(event.target.value)}
           required
         />
         <Button 
