@@ -4,7 +4,6 @@ import axios from 'axios';
 
 import Patterns from '../utils/PatternsHtml';
 import UserContext from '../contexts/UserContext';
-import { Cookies } from 'react-cookie';
 
 import { 
   Codify, 
@@ -34,14 +33,13 @@ export default function SignIn() {
     axios
       .post(`${process.env.API_BASE_URL}/users/sign-in`, body)
       .then(({data}) => {
-        /*const token = Cookies.get('token');
-
-        setUser({...data, token});*/
-        if(confirm('Cadastro feito com sucesso! Redirecionando para tela de login ...')) {
-          history.push('/entrar');
+        setUser(data);
+        
+        if(confirm('Login feito com sucesso! Redirecionando para a página inicial ...')) {
+          history.push('/');
+        } else {
+          setDisabled(false);
         }
-
-        setDisabled(false);
       })
       .catch(({response}) => {
         console.error(response);
