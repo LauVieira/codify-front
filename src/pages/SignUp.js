@@ -25,6 +25,8 @@ export default function SignUp() {
   const history = useHistory();
 
   function handleSubmit(event) {
+    // Aceito sugestôes do que fazer a mais dentro do then e catch, e outras validações
+
     event.preventDefault();
     if(disabled) return;
 

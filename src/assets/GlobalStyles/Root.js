@@ -15,8 +15,8 @@ export default css`
         --shadow-regular: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
         // Focus
-        --shadow-focus: 0 0 5px rgba(81, 203, 238, 1);
-        --border-focus: 1px solid rgba(81, 203, 238, 1);
+        --shadow-focus: 0 0 5px #46A7D4;
+        --border-focus: 1px solid #46A7D4;
 
         // Radius Login / Buttons
         --radius-regular: 10px;
