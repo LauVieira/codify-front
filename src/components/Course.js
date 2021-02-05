@@ -19,7 +19,7 @@ export default function Course(props) {
 }
 
 const Container = styled.button`
-    margin: 50px 0 0 70px;
+    margin: 50px 0 0 0;
     width: 384px;
     height: 515px;
     border-radius: 20px;

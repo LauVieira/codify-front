@@ -33,27 +33,30 @@ export default function UserCourses() {
   console.log(courses);
   return (
     <Container>
-      {(courses.length)
-        ? (
-          <CourseContainer>
-            {courses.map((c) => (
-              <Course
-                title={c.title}
-                subtitle={c.subtitle}
-                image={c.image}
-                imageDescription={c.imageDescription}
-              />
-            ))}
-          </CourseContainer>
-        )
-        : (
-          <CourseContainer>
-            <Title>Nao tem curso</Title>
-          </CourseContainer>
-        )}
+      <Title><h1>Meus cursos em andamento</h1></Title>
+      <CourseContainer>
+        {courses.map((c) => (
+          <Course
+            title={c.title}
+            subtitle={c.subtitle}
+            image={c.image}
+            imageDescription={c.imageDescription}
+          />
+        ))}
+      </CourseContainer>
     </Container>
   );
 }
+
+const Title = styled.div`
+    width: 75%;
+    margin: 0 auto;
+    h1{
+      font-size: 3rem;
+      color: var(--color-black);
+      font-weight: normal;
+    }
+`;
 
 const Container = styled.div`
     background-color: var(--color-white);
@@ -69,12 +72,4 @@ const CourseContainer = styled.div`
     margin: 0 auto;
     flex-wrap: wrap;
     justify-content: space-between;
-    min-height: 100vh;
-`;
-const Title = styled.div`
-    width: 80%;
-    margin: 50px;
-    font-size: 3rem;
-    color: var(--color-black);
-    font-weight: normal;
 `;
