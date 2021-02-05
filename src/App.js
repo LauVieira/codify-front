@@ -1,11 +1,10 @@
-/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import { CookiesProvider, useCookies } from 'react-cookie';
-import { 
-  BrowserRouter as Router, 
-  Route, 
-  Switch, 
-  Redirect 
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
 } from 'react-router-dom';
 
 import GlobalStyle from './assets/GlobalStyles';
@@ -21,8 +20,8 @@ export default function App() {
           <Switch>
             <UnprotectedRoute path="/cadastrar" component={Pages.SignUp} />
             <UnprotectedRoute path="/entrar" component={Pages.SignIn} />
-            {/*<Route path="/esqueci-senha" component={Pages.ForgotPassword} />*/}
-            {/*<Route path="/redefinir-senha" component={Pages.RedefinePassword} />*/}
+            {/* <Route path="/esqueci-senha" component={Pages.ForgotPassword} /> */}
+            {/* <Route path="/redefinir-senha" component={Pages.RedefinePassword} /> */}
             <ProtectedRoute path="/" exact component={Pages.Home} />
           </Switch>
         </Router>
@@ -33,11 +32,11 @@ export default function App() {
 
 function ProtectedRoute(props) {
   const [cookies] = useCookies();
-  const token = cookies['token'];
+  const { token } = cookies;
 
-  if(!token) {
+  if (!token) {
     return (
-      <Redirect to='/entrar' />
+      <Redirect to="/entrar" />
     );
   }
 
@@ -48,11 +47,11 @@ function ProtectedRoute(props) {
 
 function UnprotectedRoute(props) {
   const [cookies] = useCookies();
-  const token = cookies['token'];
+  const { token } = cookies;
 
-  if(token) {
+  if (token) {
     return (
-      <Redirect to='/'/>
+      <Redirect to="/" />
     );
   }
 

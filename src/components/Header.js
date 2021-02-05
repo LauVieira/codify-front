@@ -1,40 +1,41 @@
-/* eslint-disable react/jsx-filename-extension */
-/* eslint-disable no-unused-vars */
 import React, { useContext } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import UserContext from '../contexts/UserContext';
-import { Codify } from '../components';
+import { Codify } from '.';
 
 export default function Header() {
   const { user } = useContext(UserContext);
   const history = useHistory();
 
   const words = user.name.split(' ');
-  const initialLetters = words.length === 1 ? 
-    `${words[0].charAt()}.`
-    : `${words[0].charAt()}. ${words[1].charAt()}.`
-  
+  const initialLetters = words.length === 1
+    ? `${words[0].charAt()}.`
+    : `${words[0].charAt()}. ${words[1].charAt()}.`;
 
   return (
     <StyledHeader>
       <Navigation>
-        <Codify 
-          color={'#333333'} 
-          fontSize={'5.6rem'} 
-          lineHeight={'6.7rem'}
+        <Codify
+          color="#333333"
+          fontSize="5.6rem"
+          lineHeight="6.7rem"
           onClick={() => history.push('/')}
-        > 
-          Codify 
+        >
+          Codify
         </Codify>
 
-        <NavLink to='/'> Home </NavLink>
+        <NavLink to="/"> Home </NavLink>
         <NavLink onClick={() => alert('Em construção')}> Cursos </NavLink>
         <NavLink onClick={() => alert('Em construção')}> Perfil </NavLink>
       </Navigation>
 
-      <ProfilePicture> {initialLetters} </ProfilePicture>
+      <ProfilePicture>
+        {' '}
+        {initialLetters}
+        {' '}
+      </ProfilePicture>
     </StyledHeader>
   );
 }
@@ -54,7 +55,7 @@ const StyledHeader = styled.header`
   position: fixed;
   top: 0;
   left: 0;
-`;  
+`;
 
 const Navigation = styled.nav`
   display: flex;

@@ -16,7 +16,7 @@ import {
 } from '../components';
 
 export default function SignUp() {
-  let [name, setName] = useState('');
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -37,9 +37,9 @@ export default function SignUp() {
       return;
     }
 
-    name = Helpers.capitalizeAllAndTrim(name);
+    const nameCapitalized = Helpers.capitalizeAllAndTrim(name);
     const body = {
-      name, email, password, confirmPassword,
+      name: nameCapitalized, email, password, confirmPassword,
     };
 
     axios
