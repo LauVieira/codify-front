@@ -25,15 +25,15 @@ export default function SignIn() {
     event.preventDefault();
     if(disabled) return;
 
-    alert('Em construção')
+    alert('Em construção');
   }
 
   return (
     <LayoutLandingPage>
       <Codify 
-        color={'white'} 
-        fontSize={'9rem'} 
-        lineHeight={'12rem'}
+        color='white'
+        fontSize='9rem'
+        lineHeight='12rem'
       > 
         codify 
       </Codify>
@@ -69,7 +69,7 @@ export default function SignIn() {
         </Button>
 
         <Anchor to='/cadastrar'> primeira vez ? crie uma conta ! </Anchor>
-        <Anchor to='/esqueci-senha'> esqueceu sua senha ? </Anchor>
+        <Anchor onClick={() => alert('Em construção')}> esqueceu sua senha ? </Anchor>
       </Form>
     </LayoutLandingPage>
   );

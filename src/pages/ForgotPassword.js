@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 
 import Patterns from '../utils/PatternsHtml';
 
@@ -13,12 +12,9 @@ import {
   Form
 } from '../components';
 
-
 export default function ForgotPassword() {
   const [email, setEmail] = useState('');
   const [disabled, setDisabled] = useState(false);
-
-  const history = useHistory();
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -26,15 +22,15 @@ export default function ForgotPassword() {
     if(disabled) return;
     setDisabled(true);
 
-    alert('Em construção')
+    alert('Em construção');
   }
 
   return (
     <LayoutLandingPage>
       <Codify 
-        color={'white'} 
-        fontSize={'9rem'} 
-        lineHeight={'12rem'}
+        color='white'
+        fontSize='9rem'
+        lineHeight='12rem'
       > 
         codify 
       </Codify>

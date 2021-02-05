@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function LayoutLandingPage({children}) {
+export default function LayoutLandingPage({ children }) {
     return(
         <MainWrapper>
             <Column>
