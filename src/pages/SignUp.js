@@ -55,7 +55,7 @@ export default function SignUp() {
         console.error(response);
         setDisabled(false);
 
-        alert(response.data.error);
+        alert(response.data.message);
       });
   }
 
