@@ -15,8 +15,6 @@ const SubTitle = styled.h2`
   line-height: 4rem;
 
   text-align: center;
-
   margin-left: -21px;
-
   color: var(--color-white);
 `;

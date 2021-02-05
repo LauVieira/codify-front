@@ -104,6 +104,7 @@ export default function SignUp() {
           placeholder='repetir senha'
           value={confirmPassword}
           onChange={event => setConfirmPassword(event.target.value)}
+          title='Preencha o campo'
           required
         />
         <Button 
