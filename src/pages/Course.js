@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { courses } from '../utils/mockedCourses';
@@ -8,6 +9,13 @@ export default function Course() {
   const [course, setCourse] = useState([]);
   const { id } = useParams();
   useEffect(()=>{
+    axios.get(`http://localhost:3000/courses/${id}`)
+    .then(response=>{
+        console.log(response.data);
+    })
+    .catch(error=>{
+
+    })
     setCourse(courses.filter(course => course.id === parseInt(id)));
   }, []);
   
