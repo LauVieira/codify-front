@@ -1,11 +1,11 @@
 import { createGlobalStyle } from 'styled-components';
 
-import main from './main';
-import reset from './reset';
-import root from './root';
+import Main from './Main';
+import Reset from './Reset';
+import Root from './Root';
 
 export default createGlobalStyle`
-    ${reset}
-    ${root}  
-    ${main}
+    ${Reset}
+    ${Root}  
+    ${Main}
 `;

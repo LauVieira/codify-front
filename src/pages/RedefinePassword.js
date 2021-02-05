@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import axios from 'axios';
 
 import Patterns from '../utils/PatternsHtml';
 
@@ -10,20 +8,26 @@ import {
   Input, 
   Button,
   LayoutLandingPage,
-  Anchor,
   Form
 } from '../components';
 
-export default function SignIn() {
-  const [email, setEmail] = useState('');
+export default function ForgotPassword() {
   const [password, setPassword] = useState('');
+  const [passwordConfirm, setConfirmPassword] = useState('');
   const [disabled, setDisabled] = useState(false);
-
-  const history = useHistory();
 
   function handleSubmit(event) {
     event.preventDefault();
+
     if(disabled) return;
+    setDisabled(true);
+
+    if(password !== passwordConfirm) {
+      alert(`Os campos "nova senha" e "repetir senha" devem ser idênticos`);
+
+      setDisabled(false);
+      return;
+    }
 
     alert('Em construção');
   }
@@ -41,23 +45,19 @@ export default function SignIn() {
 
       <Form onSubmit={handleSubmit}>
         <Input
-          type='email'
-          placeholder='e-mail'
-          value={email}
-          onChange={event => setEmail(event.target.value)}
-          pattern={Patterns.email.regex}
-          title={Patterns.email.helper}
-          required
-          autoFocus
-          autocomplete='on'
-        />
-        <Input
           type='password'
-          placeholder='senha'
+          placeholder='nova senha'
           value={password}
           onChange={event => setPassword(event.target.value)}
           pattern={Patterns.password.regex}
           title={Patterns.password.helper}
+          required
+        />
+        <Input
+          type='password'
+          placeholder='repetir senha'
+          value={passwordConfirm}
+          onChange={event => setConfirmPassword(event.target.value)}
           required
         />
         <Button 
@@ -67,9 +67,6 @@ export default function SignIn() {
         > 
           {disabled ? '': 'entrar'} 
         </Button>
-
-        <Anchor to='/cadastrar'> primeira vez ? crie uma conta ! </Anchor>
-        <Anchor onClick={() => alert('Em construção')}> esqueceu sua senha ? </Anchor>
       </Form>
     </LayoutLandingPage>
   );
