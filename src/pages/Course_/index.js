@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
-import StudyProgram from '../components/Courses/StudyProgram';
+import StudyProgram from './StudyProgram';
 
 export default function Course() {
   return (
