@@ -51,6 +51,7 @@ export default function ForgotPassword() {
           onChange={event => setPassword(event.target.value)}
           pattern={Patterns.password.regex}
           title={Patterns.password.helper}
+          autoFocus
           required
         />
         <Input
@@ -58,6 +59,7 @@ export default function ForgotPassword() {
           placeholder='repetir senha'
           value={passwordConfirm}
           onChange={event => setConfirmPassword(event.target.value)}
+          title='Preencha o campo'
           required
         />
         <Button 

@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 import Patterns from '../utils/PatternsHtml';
+import UserContext from '../contexts/UserContext';
 
 import { 
   Codify, 
@@ -15,6 +16,7 @@ import {
 } from '../components';
 
 export default function SignIn() {
+  const { user, setUser } = useContext(UserContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [disabled, setDisabled] = useState(false);
@@ -23,9 +25,29 @@ export default function SignIn() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    if(disabled) return;
 
-    alert('Em construção');
+    if(disabled) return;
+    setDisabled(true);
+
+    const body = {email, password};
+    axios
+      .post(`${process.env.API_BASE_URL}/users/sign-in`, body)
+      .then(({ data })=> {
+        
+        setUser({...data});
+
+        if(confirm('Login feito com sucesso! Redirecionando para a página inicial ...')) {
+          history.push('/');
+        } else {
+          setDisabled(false);
+        }
+      })
+      .catch(({response}) => {
+        console.error(response);
+        setDisabled(false);
+
+        alert(response.data);
+      });
   }
 
   return (
