@@ -1,24 +1,28 @@
+/* eslint-disable import/no-named-as-default */
+/* eslint-disable import/no-named-as-default-member */
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import GlobalStyle from './assets/GlobalStyles';
-import SignIn from './pages/SignIn';
-import SignUp from './pages/SignUp';
-import LandingPage from './pages/LandingPage';
-import Courses from './pages/Courses';
-import Profile from './pages/Profile';
+import { UserProvider } from './contexts/UserContext';
+import * as Pages from './pages';
 
 export default function App() {
   return (
-    <Router>
-      <GlobalStyle />
-      <Switch>
-        <Route path="/cadastro" component={SignUp} />
-        <Route path="/entrar" component={SignIn} />
-        <Route path="/cursos" component={Courses} />
-        <Route path="/perfil" component={Profile} />
-        <Route path="/home" component={LandingPage} exact />
-      </Switch>
-    </Router>
+    <UserProvider>
+      <Router>
+        <GlobalStyle />
+        <Switch>
+          <Route path="/cadastrar" component={Pages.SignUp} />
+          <Route path="/entrar" component={Pages.SignIn} />
+          <Route path="/esqueci-senha" component={Pages.ForgotPassword} />
+          <Route path="/redefinir-senha" component={Pages.RedefinePassword} />
+          <Route path="/cursos" component={Pages.Courses} />
+          <Route path="/perfil" component={Pages.Profile} />
+          <Route path="/home" component={Pages.LandingPage} />
+          <Route path="/" exact component={Pages.Home} />
+        </Switch>
+      </Router>
+    </UserProvider>
   );
 }
