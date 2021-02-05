@@ -7,9 +7,10 @@ import * as Pages from './pages';
 
 export default function App() {
   return (
-	<Router>
-		<GlobalStyle />
-		<Switch>
+    <UserProvider>
+	  <Router>
+	  	  <GlobalStyle />
+		  <Switch>
 			<Route path='/curso/topico' />
 			<Route path='/curso/:id' component={Pages.Course} />
 			<Route path='/cadastrar' component={Pages.SignUp} />
@@ -17,7 +18,8 @@ export default function App() {
 			<Route path='/esqueci-senha' component={Pages.ForgotPassword} />
 			<Route path='/redefinir-senha' component={Pages.RedefinePassword} />
 			<Route path='/' exact component={Pages.Home} />
-		</Switch>
-	</Router>
+		  </Switch>
+	  </Router>
+	</UserProvider>
   );
 }
