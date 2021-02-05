@@ -1,12 +1,20 @@
 /* eslint-disable react/jsx-filename-extension */
 /* eslint-disable no-unused-vars */
 import React, { useContext, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 export default function Course(props) {
-  const {title, subtitle, image, imageDescription} = props;
+  const {
+    title, subtitle, image, imageDescription, id,
+  } = props;
+  const history = useHistory();
+
+  function handleClick() {
+    history.push(`/courses/${id}`);
+  }
   return (
-    <Container>
+    <Container onClick={handleClick}>
       <ImgDiv>
         <Image src={image} alt={imageDescription} />
       </ImgDiv>
@@ -27,7 +35,7 @@ const Container = styled.button`
     flex-shrink:0;
 `;
 
-const ImgDiv = styled.button`
+const ImgDiv = styled.div`
     width: 100%;
     height: 50%;
     vertical-align:top;

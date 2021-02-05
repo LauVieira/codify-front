@@ -19,7 +19,7 @@ export default function App() {
           <Route path="/redefinir-senha" component={Pages.RedefinePassword} />
           <Route path="/cursos" component={Pages.Courses} />
           <Route path="/perfil" component={Pages.Profile} />
-          <Route path="/home" component={Pages.LandingPage} />
+          <Route path="/pagina-inicial" component={Pages.LandingPage} />
           <Route path="/" exact component={Pages.Home} />
         </Switch>
       </Router>

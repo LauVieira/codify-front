@@ -4,7 +4,9 @@ import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 
 export default function LastCourse(props) {
-  const {title, subtitle, image, imageDescription} = props;
+  const {
+    title, subtitle, image, imageDescription,
+  } = props;
   return (
     <PageContainer>
       <Title><h1>Continue seu curso atual</h1></Title>
@@ -17,7 +19,10 @@ export default function LastCourse(props) {
           <p>{subtitle}</p>
           <MoreInfoButton>Ver mais</MoreInfoButton>
         </CourseInformation>
-        <Button>Continuar curso >></Button>
+        <Button>
+          Continuar curso
+          {'>>'}
+        </Button>
       </Container>
     </PageContainer>
   );

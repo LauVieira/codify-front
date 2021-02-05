@@ -11,26 +11,29 @@ export default function UserCourses() {
     subtitle: 'Aprenda Javascript do zero ao avançado, com muita prática!',
     image: 'https://sep.yimg.com/ty/cdn/madisonartshop/most-famous-paintings-2.jpg',
     imageDescription: 'Picasso',
+    id: 1,
   },
   {
     title: 'Javascript do zero!',
     subtitle: 'Aprenda Javascript do zero ao avançado, com muita prática!',
     image: 'https://sep.yimg.com/ty/cdn/madisonartshop/most-famous-paintings-2.jpg',
     imageDescription: 'Picasso',
+    id: 2,
   },
   {
     title: 'Javascript do zero!',
     subtitle: 'Aprenda Javascript do zero ao avançado, com muita prática!',
     image: 'https://sep.yimg.com/ty/cdn/madisonartshop/most-famous-paintings-2.jpg',
     imageDescription: 'Picasso',
+    id: 3,
   },
   {
     title: 'Javascript do zero!',
     subtitle: 'Aprenda Javascript do zero ao avançado, com muita prática!',
     image: 'https://sep.yimg.com/ty/cdn/madisonartshop/most-famous-paintings-2.jpg',
     imageDescription: 'Picasso',
+    id: 4,
   }];
-  console.log(courses);
   return (
     <Container>
       <Title><h1>Meus cursos em andamento</h1></Title>
@@ -41,6 +44,7 @@ export default function UserCourses() {
             subtitle={c.subtitle}
             image={c.image}
             imageDescription={c.imageDescription}
+            key={c.id}
           />
         ))}
       </CourseContainer>

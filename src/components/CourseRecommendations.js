@@ -1,36 +1,26 @@
 /* eslint-disable react/jsx-filename-extension */
 /* eslint-disable no-unused-vars */
-import React, { useContext, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 import Course from './Course';
 
 export default function UserCourses() {
-  const courses = [{
-    title: 'Javascript do zero!',
-    subtitle: 'Aprenda Javascript do zero ao avançado, com muita prática!',
-    image: 'https://sep.yimg.com/ty/cdn/madisonartshop/most-famous-paintings-2.jpg',
-    imageDescription: 'Picasso',
-  },
-  {
-    title: 'Javascript do zero!',
-    subtitle: 'Aprenda Javascript do zero ao avançado, com muita prática!',
-    image: 'https://sep.yimg.com/ty/cdn/madisonartshop/most-famous-paintings-2.jpg',
-    imageDescription: 'Picasso',
-  },
-  {
-    title: 'Javascript do zero!',
-    subtitle: 'Aprenda Javascript do zero ao avançado, com muita prática!',
-    image: 'https://sep.yimg.com/ty/cdn/madisonartshop/most-famous-paintings-2.jpg',
-    imageDescription: 'Picasso',
-  },
-  {
-    title: 'Javascript do zero!',
-    subtitle: 'Aprenda Javascript do zero ao avançado, com muita prática!',
-    image: 'https://sep.yimg.com/ty/cdn/madisonartshop/most-famous-paintings-2.jpg',
-    imageDescription: 'Picasso',
-  }];
-  console.log(courses);
+  const [courses, setCourses] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`${process.env.API_BASE_URL}/courses/suggestions`, { withCredentials: true })
+      .then((response) => {
+        setCourses(response.data);
+      })
+      .catch(({ response }) => {
+        console.error(response);
+
+        alert(response.data);
+      });
+  }, []);
+
   return (
     <Container>
       {(courses.length)
@@ -39,9 +29,11 @@ export default function UserCourses() {
             {courses.map((c) => (
               <Course
                 title={c.title}
-                subtitle={c.subtitle}
-                image={c.image}
+                subtitle={c.description}
+                image={c.background}
                 imageDescription={c.imageDescription}
+                id={c.id}
+                key={c.id}
               />
             ))}
           </CourseContainer>
