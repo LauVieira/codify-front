@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
-import { CookiesProvider, Cookies } from 'react-cookie';
+import { CookiesProvider, useCookies } from 'react-cookie';
 import { 
   BrowserRouter as Router, 
   Route, 
@@ -21,7 +21,7 @@ export default function App() {
           <Switch>
             <UnprotectedRoute path="/cadastrar" component={Pages.SignUp} />
             <UnprotectedRoute path="/entrar" component={Pages.SignIn} />
-            <UnprotectedRoute path="/esqueci-senha" component={Pages.ForgotPassword} />
+            {/*<Route path="/esqueci-senha" component={Pages.ForgotPassword} />*/}
             {/*<Route path="/redefinir-senha" component={Pages.RedefinePassword} />*/}
             <ProtectedRoute path="/" exact component={Pages.Home} />
           </Switch>
@@ -32,7 +32,8 @@ export default function App() {
 }
 
 function ProtectedRoute(props) {
-  const token = Cookies.get('token');
+  const [cookies] = useCookies();
+  const token = cookies['token'];
 
   if(!token) {
     return (
@@ -46,7 +47,8 @@ function ProtectedRoute(props) {
 }
 
 function UnprotectedRoute(props) {
-  const token = Cookies.get('token');
+  const [cookies] = useCookies();
+  const token = cookies['token'];
 
   if(token) {
     return (
