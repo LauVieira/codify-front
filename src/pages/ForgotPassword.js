@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import axios from 'axios';
 
 import Patterns from '../utils/PatternsHtml';
 
@@ -14,16 +12,15 @@ import {
   Form
 } from '../components';
 
-export default function SignIn() {
+export default function ForgotPassword() {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [disabled, setDisabled] = useState(false);
-
-  const history = useHistory();
 
   function handleSubmit(event) {
     event.preventDefault();
+
     if(disabled) return;
+    setDisabled(true);
 
     alert('Em construção');
   }
@@ -51,25 +48,15 @@ export default function SignIn() {
           autoFocus
           autocomplete='on'
         />
-        <Input
-          type='password'
-          placeholder='senha'
-          value={password}
-          onChange={event => setPassword(event.target.value)}
-          pattern={Patterns.password.regex}
-          title={Patterns.password.helper}
-          required
-        />
         <Button 
           type='submit' 
           disabled={disabled}
           isLoading={disabled}
         > 
-          {disabled ? '': 'entrar'} 
+          {disabled ? '': 'recuperar senha'} 
         </Button>
 
-        <Anchor to='/cadastrar'> primeira vez ? crie uma conta ! </Anchor>
-        <Anchor onClick={() => alert('Em construção')}> esqueceu sua senha ? </Anchor>
+        <Anchor to='/entrar'> voltar para login </Anchor>
       </Form>
     </LayoutLandingPage>
   );

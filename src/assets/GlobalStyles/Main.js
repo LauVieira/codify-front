@@ -13,12 +13,11 @@ export default css`
         font-family: var(--font-roboto);
         font-style: normal;
         font-weight: 400;
-        line-height: 1.5;
+        line-height: 1.2;
         color: var(--color-default);
         text-rendering: optimizeLegibility;
-        min-height: 100vh;
-        overflow-y: scroll;
         background: var(--gradient-blue);
+        overflow-y: scroll;
     }
 
     a {
@@ -28,19 +27,18 @@ export default css`
     }
 
     button, input {
-        background: none;
+        background: transparent;
         color: inherit;
         border: 0;
         padding: 0;
         font: inherit;
-        cursor: pointer;
         outline: inherit;
         text-align: inherit;
         font-size: 100%;
         margin: 0;
     }
 
-    strong, h1, h2, h3, h4, h5, h6 { 
+    strong { 
         font-weight: bold;
     }
 `;
