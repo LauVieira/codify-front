@@ -11,7 +11,7 @@ export default function Course() {
   const {courseData, setCourseData} = useContext(CourseContext);
   const { id } = useParams();
   useEffect(()=>{
-    axios.get(`http://localhost:3000/courses/${id}`)
+    axios.get(`http://localhost:3000/courses/${id}`, { withCredentials: true})
     .then(response=>{
         console.log(response.data);
         setCourseData(response.data);

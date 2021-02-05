@@ -31,7 +31,7 @@ export default function SignIn() {
 
     const body = {email, password};
     axios
-      .post(`${process.env.API_BASE_URL}/users/sign-in`, body)
+      .post(`${process.env.API_BASE_URL}/users/sign-in`, body, { withCredentials: true})
       .then(({...data})=> {
         setUser({...data});
         

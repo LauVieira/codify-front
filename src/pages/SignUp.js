@@ -41,7 +41,7 @@ export default function SignUp() {
     const body = {name, email, password, confirmPassword};
 
     axios
-      .post(`${process.env.API_BASE_URL}/users/sign-up`, body)
+      .post(`${process.env.API_BASE_URL}/users/sign-up`, body, { withCredentials: true})
       .then(() => {
         if(confirm('Cadastro feito com sucesso! Redirecionando para tela de login ...')) {
           history.push('/entrar');
