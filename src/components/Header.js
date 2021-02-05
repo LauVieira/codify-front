@@ -1,18 +1,12 @@
-import React, { useContext } from 'react';
-import { useHistory, Link } from 'react-router-dom';
+import React from 'react';
 import styled from 'styled-components';
+import { useHistory, Link } from 'react-router-dom';
 
-import UserContext from '../contexts/UserContext';
-import { Codify } from '.';
+import Codify from './Codify';
+import ProfilePicture from './ProfilePicture';
 
 export default function Header() {
-  const { user } = useContext(UserContext);
   const history = useHistory();
-
-  const words = user.name.split(' ');
-  const initialLetters = words.length === 1
-    ? `${words[0].charAt()}.`
-    : `${words[0].charAt()}. ${words[1].charAt()}.`;
 
   return (
     <StyledHeader>
@@ -31,11 +25,10 @@ export default function Header() {
         <NavLink onClick={() => alert('Em construção')}> Perfil </NavLink>
       </Navigation>
 
-      <ProfilePicture>
-        {' '}
-        {initialLetters}
-        {' '}
-      </ProfilePicture>
+      <ProfilePicture
+        onClick={() => alert('Em construção')}
+        existPhoto
+      />
     </StyledHeader>
   );
 }
@@ -68,7 +61,7 @@ const Navigation = styled.nav`
 const NavLink = styled(Link)`
   margin: 0 0 0 40px;
   font-size: 2rem;
-  color: var(--color-black);
+  color: var(--color-subtitle);
 
   transition: 0.1s;
   text-transform: lowercase;
@@ -80,22 +73,4 @@ const NavLink = styled(Link)`
   &::first-letter {
     text-transform: uppercase;
   }
-`;
-
-const ProfilePicture = styled.figure`
-  width: 70px;
-  height: 70px;
-
-  border-radius: 50%;
-  border: 3px solid #46A7D4;
-  cursor: pointer;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  text-transform: uppercase;
-  color: var(--color-blue);
-  font-size: 2.5rem;
-  letter-spacing: -1.5px;
 `;
