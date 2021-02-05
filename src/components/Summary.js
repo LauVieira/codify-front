@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { mockedUser } from '../utils/mockedCourses';
+import CourseContext from '../contexts/CourseContext';
+import UserContext from '../contexts/UserContext';
 
-export default function Summary(props){
-    const { course } = props;
-    const [user, setUser] = useState([])
+export default function Summary(){
+    const {courseData, setCourseData} = useContext(CourseContext);
+    const { user, setUser } = useContext(UserContext);
     const [percentage, setPercentage] = useState(99);
     const [usedValue, setUsedValue] = useState(percentage);
     const history = useHistory();
-    
+    console.log(user);
     useEffect(()=>{
         if(percentage <= 8){
             setUsedValue(8);
@@ -113,4 +115,7 @@ const Button = styled.button`
     border-radius: 5px;
     font-size: 15px;
     text-align: center;
+    &:hover{
+        cursor:pointer;
+    }
 `;

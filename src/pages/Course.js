@@ -1,33 +1,35 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { courses } from '../utils/mockedCourses';
 import Summary from '../components/Summary';
+import CourseContext from '../contexts/CourseContext';
+
 
 export default function Course() {
-  const [course, setCourse] = useState([]);
+  const {courseData, setCourseData} = useContext(CourseContext);
   const { id } = useParams();
   useEffect(()=>{
     axios.get(`http://localhost:3000/courses/${id}`)
     .then(response=>{
         console.log(response.data);
+        setCourseData(response.data);
     })
     .catch(error=>{
-
+        alert('Erro ao buscar o curso selecionado');
+        console.log(error);
     })
-    setCourse(courses.filter(course => course.id === parseInt(id)));
   }, []);
-  
-  console.log(course);
+  console.log(courseData.course);
   return (
     <Container>
         <HeaderTemporario>Temporário</HeaderTemporario>
-        {course.length !== 0 && 
+        {courseData.length !== 0 && 
             <Details>
-                <h1>{course[0].title}</h1>
-                <p>{course[0].description}</p>
-                <Summary course={course} /> { /* tem que receber o contexto por props e o curso */}
+                <h1>{courseData.course.title}</h1>
+                <p>{courseData.course.description}</p>
+                <Summary />
             </Details>
         }
     </Container>
