@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Header from '../components/Header';
+// import Header from '../components/Header';
 import CourseRecommendations from '../components/CourseRecommendations';
 import LastCourse from '../components/LastCourse';
 import UserCourses from '../components/UserCourses';
@@ -14,9 +14,9 @@ export default function LandingPage() {
   }
   return (
     <>
-      <Header />
-      <button onClick={toggleTheresCourse}>change</button>
-      <Container>
+      {/* <Header /> */}
+      <button type="submit" onClick={toggleTheresCourse}>change</button>
+      <UserLandingPageContainer>
         { theresCourse
           ? (
             <>
@@ -44,12 +44,12 @@ export default function LandingPage() {
               <CourseRecommendations />
             </>
           )}
-      </Container>
+      </UserLandingPageContainer>
     </>
   );
 }
 
-const Message = styled.div`
+const Message = styled.article`
     background-color: var(--color-blue);
     height: 90px;
     width: 100%;
@@ -63,11 +63,11 @@ const Message = styled.div`
       font-weight: bold;
     }
 `;
-const Container = styled.div`
+const UserLandingPageContainer = styled.main`
     background-color: var(--color-white);
     padding-bottom: 50px;
 `;
-const Title = styled.div`
+const Title = styled.article`
     width: 75%;
     margin: 0 auto;
     h1{

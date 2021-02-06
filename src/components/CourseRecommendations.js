@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import Course from './Course';
+import CardCourse from './CardCourse';
 
 export default function UserCourses() {
   const [courses, setCourses] = useState([]);
@@ -17,17 +17,17 @@ export default function UserCourses() {
       .catch(({ response }) => {
         console.error(response);
 
-        alert(response.data);
+        alert(response.data.message);
       });
   }, []);
 
   return (
-    <Container>
+    <RecommendationsContainer>
       {(courses.length)
         ? (
           <CourseContainer>
             {courses.map((c) => (
-              <Course
+              <CardCourse
                 title={c.title}
                 subtitle={c.description}
                 image={c.background}
@@ -43,18 +43,18 @@ export default function UserCourses() {
             <Title>Nao tem curso</Title>
           </CourseContainer>
         )}
-    </Container>
+    </RecommendationsContainer>
   );
 }
 
-const Container = styled.div`
+const RecommendationsContainer = styled.main`
     background-color: var(--color-white);
     border-radius: 5px;
     width: 100%;
     margin: 0 auto;
 `;
 
-const CourseContainer = styled.div`
+const CourseContainer = styled.article`
     width: 75%;
     height: 100%;
     display: flex;
@@ -63,7 +63,7 @@ const CourseContainer = styled.div`
     justify-content: space-between;
     min-height: 100vh;
 `;
-const Title = styled.div`
+const Title = styled.article`
     width: 80%;
     margin: 50px;
     font-size: 3rem;

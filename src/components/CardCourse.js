@@ -4,7 +4,7 @@ import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
-export default function Course(props) {
+export default function CardCourse(props) {
   const {
     title, subtitle, image, imageDescription, id,
   } = props;
@@ -14,19 +14,19 @@ export default function Course(props) {
     history.push(`/courses/${id}`);
   }
   return (
-    <Container onClick={handleClick}>
-      <ImgDiv>
+    <StyledCourse onClick={handleClick}>
+      <Figure>
         <Image src={image} alt={imageDescription} />
-      </ImgDiv>
+      </Figure>
       <CourseInformation>
         <h1>{title}</h1>
         <p>{subtitle}</p>
       </CourseInformation>
-    </Container>
+    </StyledCourse>
   );
 }
 
-const Container = styled.button`
+const StyledCourse = styled.button`
     margin: 50px 0 0 0;
     width: 384px;
     height: 515px;
@@ -35,7 +35,7 @@ const Container = styled.button`
     flex-shrink:0;
 `;
 
-const ImgDiv = styled.div`
+const Figure = styled.figure`
     width: 100%;
     height: 50%;
     vertical-align:top;
@@ -47,7 +47,7 @@ const Image = styled.img`
     border-top-right-radius: 20px;
     
 `;
-const CourseInformation = styled.div`
+const CourseInformation = styled.article`
     width: 100%;
     height: 50%;
     color: black;

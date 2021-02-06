@@ -4,8 +4,6 @@ import ForgotPassword from './ForgotPassword';
 import RedefinePassword from './RedefinePassword';
 import Home from './Home';
 import LandingPage from './LandingPage';
-import Courses from './Courses';
-import Profile from './Profile';
 
 export {
   SignIn,
@@ -14,6 +12,4 @@ export {
   RedefinePassword,
   Home,
   LandingPage,
-  Courses,
-  Profile,
 };
