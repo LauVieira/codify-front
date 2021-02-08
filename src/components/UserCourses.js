@@ -3,7 +3,7 @@
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import Course from './Course';
+import CardCourse from './CardCourse';
 
 export default function UserCourses() {
   const courses = [{
@@ -35,11 +35,11 @@ export default function UserCourses() {
     id: 4,
   }];
   return (
-    <Container>
+    <UserCoursesContainer>
       <Title><h1>Meus cursos em andamento</h1></Title>
       <CourseContainer>
         {courses.map((c) => (
-          <Course
+          <CardCourse
             title={c.title}
             subtitle={c.subtitle}
             image={c.image}
@@ -48,11 +48,11 @@ export default function UserCourses() {
           />
         ))}
       </CourseContainer>
-    </Container>
+    </UserCoursesContainer>
   );
 }
 
-const Title = styled.div`
+const Title = styled.article`
     width: 75%;
     margin: 0 auto;
     h1{
@@ -62,14 +62,14 @@ const Title = styled.div`
     }
 `;
 
-const Container = styled.div`
+const UserCoursesContainer = styled.section`
     background-color: var(--color-white);
     border-radius: 5px;
     width: 100%;
     margin: 0 auto;
 `;
 
-const CourseContainer = styled.div`
+const CourseContainer = styled.article`
     width: 75%;
     height: 100%;
     display: flex;

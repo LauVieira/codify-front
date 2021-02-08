@@ -11,9 +11,9 @@ export default function LastCourse(props) {
     <PageContainer>
       <Title><h1>Continue seu curso atual</h1></Title>
       <Container>
-        <ImgDiv>
+        <Figure>
           <Image src={image} alt={imageDescription} />
-        </ImgDiv>
+        </Figure>
         <CourseInformation>
           <h1>{title}</h1>
           <p>{subtitle}</p>
@@ -27,7 +27,7 @@ export default function LastCourse(props) {
     </PageContainer>
   );
 }
-const Title = styled.div`
+const Title = styled.article`
     width: 80%;
     margin: 10px auto;
     h1{
@@ -37,7 +37,7 @@ const Title = styled.div`
     }
 `;
 
-const Container = styled.div`
+const Container = styled.section`
     width: 80%;
     height: 250px;
     border-radius: 20px;
@@ -47,7 +47,7 @@ const Container = styled.div`
     margin: 0 auto;
 `;
 
-const PageContainer = styled.div`
+const PageContainer = styled.section`
     padding: 50px;
     background-color: var(--color-white);
     border-radius: 5px;
@@ -55,7 +55,7 @@ const PageContainer = styled.div`
     margin: 0 auto;
 `;
 
-const ImgDiv = styled.button`
+const Figure = styled.button`
     width: 30%;
     height: 100%;
     vertical-align:top;
@@ -67,7 +67,7 @@ const Image = styled.img`
     border-top-right-radius: 20px;
     
 `;
-const CourseInformation = styled.div`
+const CourseInformation = styled.article`
     width: 40%;
     height: 50%;
     color: black;
