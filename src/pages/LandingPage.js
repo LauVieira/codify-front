@@ -11,7 +11,7 @@ export default function LandingPage() {
     setTheresCourse(!theresCourse);
   }
   return (
-    <>
+    <> 
       <Header />
       <button type="submit" onClick={toggleTheresCourse}>change</button>
       <UserLandingPageContainer>
