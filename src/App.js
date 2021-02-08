@@ -20,8 +20,8 @@ export default function App() {
           <Switch>
             <UnprotectedRoute path="/cadastrar" component={Pages.SignUp} />
             <UnprotectedRoute path="/entrar" component={Pages.SignIn} />
-            {/* <Route path="/esqueci-senha" component={Pages.ForgotPassword} /> */}
-            {/* <Route path="/redefinir-senha" component={Pages.RedefinePassword} /> */}
+            <Route path="/esqueci-senha" component={Pages.ForgotPassword} />
+            <Route path="/redefinir-senha" component={Pages.RedefinePassword} />
             <ProtectedRoute path="/" exact component={Pages.Home} />
           </Switch>
         </Router>
