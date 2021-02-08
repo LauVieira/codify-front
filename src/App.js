@@ -1,5 +1,3 @@
-/* eslint-disable import/no-named-as-default-member */
-/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import { CookiesProvider, useCookies } from 'react-cookie';
 import {
@@ -16,24 +14,48 @@ import * as Pages from './pages';
 
 export default function App() {
   return (
-    <UserProvider>
-	  <CourseProvider>
-		<Router>
-			<GlobalStyle />
-			<Switch>
-				<Route path='/curso/topico' />
-				<Route path='/curso/:id' component={Pages.Course} />
-				<Route path="/cursos" component={Pages.Courses} />
-				<Route path='/cadastrar' component={Pages.SignUp} />
-				<Route path='/entrar' component={Pages.SignIn} />
-				<Route path='/esqueci-senha' component={Pages.ForgotPassword} />
-				<Route path='/redefinir-senha' component={Pages.RedefinePassword} />
-				<Route path="/perfil" component={Pages.Profile} />
-				<Route path="/pagina-inicial" component={Pages.LandingPage} />
-				<Route path='/' exact component={Pages.Home} />
-			</Switch>
-		</Router>
-	  </CourseProvider>
-    </UserProvider>
+    <CookiesProvider>
+      <UserProvider>
+        <CourseProvider>
+          <Router>
+            <GlobalStyle />
+            <Switch>
+              <ProtectedRoute path="/curso/topico" />
+              <ProtectedRoute path="/curso/:id" component={Pages.Course} />
+              <UnprotectedRoute path="/cadastrar" component={Pages.SignUp} />
+              <UnprotectedRoute path="/entrar" component={Pages.SignIn} />
+              <UnprotectedRoute path="/esqueci-senha" component={Pages.ForgotPassword} />
+              <UnprotectedRoute path="/redefinir-senha" component={Pages.RedefinePassword} />
+              <ProtectedRoute path="/" exact component={Pages.LandingPage} />
+            </Switch>
+          </Router>
+        </CourseProvider>
+      </UserProvider>
+    </CookiesProvider>
+  );
+}
+function ProtectedRoute(props) {
+  const cookies = useCookies(['token']);
+  const { token } = cookies;
+  console.log(cookies);
+  if (!token) {
+    return (
+      <Redirect to="/entrar" />
+    );
+  }
+  return (
+    <Route {...props} />
+  );
+}
+function UnprotectedRoute(props) {
+  const [cookies] = useCookies(['token']);
+  const { token } = cookies;
+  if (token) {
+    return (
+      <Redirect to="/" />
+    );
+  }
+  return (
+    <Route {...props} />
   );
 }

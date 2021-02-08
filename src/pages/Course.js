@@ -1,37 +1,36 @@
 import React, { useContext, useEffect } from 'react';
-import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import { courses } from '../utils/mockedCourses';
+import axios from '../services/api';
 import Summary from '../components/Summary';
 import CourseContext from '../contexts/CourseContext';
 
-
 export default function Course() {
-  const {courseData, setCourseData} = useContext(CourseContext);
+  const { courseData, setCourseData } = useContext(CourseContext);
   const { id } = useParams();
-  useEffect(()=>{
-    axios.get(`http://localhost:3000/courses/${id}`, { withCredentials: true})
-    .then(response=>{
+  useEffect(() => {
+    axios.get(`/courses/${id}`)
+      .then((response) => {
         console.log(response.data);
         setCourseData(response.data);
-    })
-    .catch(error=>{
+      })
+      .catch((error) => {
         alert('Erro ao buscar o curso selecionado');
         console.log(error);
-    })
+      });
   }, []);
   console.log(courseData.course);
   return (
     <Container>
-        <HeaderTemporario>Temporário</HeaderTemporario>
-        {courseData.length !== 0 && 
+      <HeaderTemporario>Temporário</HeaderTemporario>
+      {courseData.length !== 0
+            && (
             <Details>
-                <h1>{courseData.course.title}</h1>
-                <p>{courseData.course.description}</p>
-                <Summary />
+              <h1>{courseData.course.title}</h1>
+              <p>{courseData.course.description}</p>
+              <Summary />
             </Details>
-        }
+            )}
     </Container>
   );
 }
@@ -63,4 +62,3 @@ const Details = styled.div`
         font-size: 20px;
     }
 `;
-

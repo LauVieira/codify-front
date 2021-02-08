@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
+import axios from '../services/api';
 import CardCourse from './CardCourse';
 
 export default function UserCourses() {
