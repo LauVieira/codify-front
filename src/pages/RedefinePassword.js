@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 
 import Patterns from '../utils/PatternsHtml';
 
-import { 
-  Codify, 
-  Headline, 
-  Input, 
+import {
+  Codify,
+  Headline,
+  Input,
   Button,
   LayoutLandingPage,
-  Form
+  Form,
 } from '../components';
 
 export default function ForgotPassword() {
@@ -19,11 +19,11 @@ export default function ForgotPassword() {
   function handleSubmit(event) {
     event.preventDefault();
 
-    if(disabled) return;
+    if (disabled) return;
     setDisabled(true);
 
-    if(password !== passwordConfirm) {
-      alert(`Os campos "nova senha" e "repetir senha" devem ser idênticos`);
+    if (password !== passwordConfirm) {
+      alert('Os campos "nova senha" e "repetir senha" devem ser idênticos');
 
       setDisabled(false);
       return;
@@ -34,40 +34,40 @@ export default function ForgotPassword() {
 
   return (
     <LayoutLandingPage>
-      <Codify 
-        color='white'
-        fontSize='9rem'
-        lineHeight='12rem'
-      > 
-        codify 
+      <Codify
+        color="white"
+        fontSize="9rem"
+        lineHeight="12rem"
+      >
+        codify
       </Codify>
       <Headline> learn. practice. code. </Headline>
 
       <Form onSubmit={handleSubmit}>
         <Input
-          type='password'
-          placeholder='nova senha'
+          type="password"
+          placeholder="nova senha"
           value={password}
-          onChange={event => setPassword(event.target.value)}
+          onChange={(event) => setPassword(event.target.value)}
           pattern={Patterns.password.regex}
           title={Patterns.password.helper}
           autoFocus
           required
         />
         <Input
-          type='password'
-          placeholder='repetir senha'
+          type="password"
+          placeholder="repetir senha"
           value={passwordConfirm}
-          onChange={event => setConfirmPassword(event.target.value)}
-          title='Preencha o campo'
+          onChange={(event) => setConfirmPassword(event.target.value)}
+          title="Preencha o campo"
           required
         />
-        <Button 
-          type='submit' 
+        <Button
+          type="submit"
           disabled={disabled}
           isLoading={disabled}
-        > 
-          {disabled ? '': 'entrar'} 
+        >
+          {disabled ? '' : 'entrar'}
         </Button>
       </Form>
     </LayoutLandingPage>

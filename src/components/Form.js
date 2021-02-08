@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function Form({children, ...props}) {
-    return (
-        <StyledForm {...props}>
-            {children}
-        </StyledForm>
-    );
+export default function Form({ children, ...props }) {
+  return (
+    <StyledForm {...props}>
+      {children}
+    </StyledForm>
+  );
 }
 
 const StyledForm = styled.form`

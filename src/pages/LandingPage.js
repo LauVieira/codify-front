@@ -1,8 +1,6 @@
-/* eslint-disable react/jsx-filename-extension */
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import styled from 'styled-components';
-// import Header from '../components/Header';
+import Header from '../components/Header';
 import CourseRecommendations from '../components/CourseRecommendations';
 import LastCourse from '../components/LastCourse';
 import UserCourses from '../components/UserCourses';
@@ -14,7 +12,7 @@ export default function LandingPage() {
   }
   return (
     <>
-      {/* <Header /> */}
+      <Header />
       <button type="submit" onClick={toggleTheresCourse}>change</button>
       <UserLandingPageContainer>
         { theresCourse

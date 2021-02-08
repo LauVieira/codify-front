@@ -18,5 +18,14 @@ module.exports = {
     'react',
   ],
   rules: {
+    'class-methods-use-this': 'off',
+    'react/jsx-filename-extension': 'off',
+    'react/jsx-props-no-spreading': 'off',
+    'react/prop-types': 'off',
+    'no-alert': 'off',
+    'no-console': 'off',
+    'no-restricted-globals': 'off',
+    'consistent-return': 'off',
+    'no-unused-vars': 'off',
   },
 };

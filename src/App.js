@@ -1,7 +1,17 @@
+<<<<<<< HEAD
 /* eslint-disable import/no-named-as-default-member */
 /* eslint-disable react/jsx-filename-extension */
+=======
+>>>>>>> main
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { CookiesProvider, useCookies } from 'react-cookie';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from 'react-router-dom';
+
 import GlobalStyle from './assets/GlobalStyles';
 import { UserProvider } from './contexts/UserContext';
 import { CourseProvider } from './contexts/CourseContext';
