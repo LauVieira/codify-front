@@ -21,14 +21,11 @@ export default function App() {
 			<Switch>
 				<Route path='/curso/topico' />
 				<Route path='/curso/:id' component={Pages.Course} />
-				<Route path="/cursos" component={Pages.Courses} />
 				<Route path='/cadastrar' component={Pages.SignUp} />
 				<Route path='/entrar' component={Pages.SignIn} />
 				<Route path='/esqueci-senha' component={Pages.ForgotPassword} />
 				<Route path='/redefinir-senha' component={Pages.RedefinePassword} />
-				<Route path="/perfil" component={Pages.Profile} />
-				<Route path="/pagina-inicial" component={Pages.LandingPage} />
-				<Route path='/' exact component={Pages.Home} />
+				<Route path="/" exact component={Pages.LandingPage} />
 			</Switch>
 		</Router>
 	  </CourseProvider>
