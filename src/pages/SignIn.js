@@ -31,12 +31,11 @@ export default function SignIn() {
 
     const body = { email, password };
     axios
-      .post(`${process.env.API_BASE_URL}/users/sign-in`, body)
-      .then((res) => {
-        console.log(res);
-        setUser({ ...res.data });
-
-        if (confirm('Login feito com sucesso! Redirecionando para a página inicial ...')) {
+      .post(`${process.env.API_BASE_URL}/users/sign-in`, body, { withCredentials: true})
+      .then(({...data})=> {
+        setUser({...data});
+        
+        if(confirm('Login feito com sucesso! Redirecionando para a página inicial ...')) {
           history.push('/');
         } else {
           setDisabled(false);
