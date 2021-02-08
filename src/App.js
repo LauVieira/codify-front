@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 /* eslint-disable import/no-named-as-default-member */
 /* eslint-disable react/jsx-filename-extension */
-=======
->>>>>>> main
 import React from 'react';
 import { CookiesProvider, useCookies } from 'react-cookie';
 import {
