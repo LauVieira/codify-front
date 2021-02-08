@@ -2,25 +2,27 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import Spinner from './Spinner';
 
-export default function Button({children, isLoading, ...props}) {
-    return (
-        <StyledButton isLoading={isLoading} {...props}>
-            {isLoading ?
-                <SpinnerContainer>
-                    <Spinner
-                        type='Oval'
-                        color='#46A7D4'
-                        width={35}
-                        height={35}
-                    />
-                </SpinnerContainer>
-                : 
-                <span>
-                    {children}
-                </span>
-            }
-        </StyledButton>
-    );
+export default function Button({ children, isLoading, ...props }) {
+  return (
+    <StyledButton isLoading={isLoading} {...props}>
+      {isLoading
+        ? (
+          <SpinnerContainer>
+            <Spinner
+              type="Oval"
+              color="#46A7D4"
+              width={35}
+              height={35}
+            />
+          </SpinnerContainer>
+        )
+        : (
+          <span>
+            {children}
+          </span>
+        )}
+    </StyledButton>
+  );
 }
 
 const SpinnerContainer = styled.div`
@@ -30,8 +32,8 @@ const SpinnerContainer = styled.div`
 
 const StyledButton = styled.button`
     border-radius: var(--radius-thin);
-    background-color: ${({isLoading}) => isLoading ? '#FFFFFF': '#46A7D4'};
-    border: ${({isLoading}) => isLoading ? '3px solid #46A7D4': 'none'};
+    background-color: ${({ isLoading }) => (isLoading ? '#FFFFFF' : '#46A7D4')};
+    border: ${({ isLoading }) => (isLoading ? '3px solid #46A7D4' : 'none')};
 
     color: var(--color-white);
     font-size: 2.4rem;
@@ -48,7 +50,7 @@ const StyledButton = styled.button`
     position: relative;
 
     transition: background-color border color 0.5s linear;
-    cursor: ${({isLoading}) => isLoading ? 'default': 'pointer'};
+    cursor: ${({ isLoading }) => (isLoading ? 'default' : 'pointer')};
 
     &::first-letter {
         text-transform: uppercase;
@@ -70,7 +72,7 @@ const StyledButton = styled.button`
                 }
             }
         `
-    }
+}
 
     span {
         position: relative;

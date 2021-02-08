@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function Input({...props}) {
-    return (
-        <StyledInput {...props}/>
-    );
+export default function Input({ ...props }) {
+  return (
+    <StyledInput {...props} />
+  );
 }
 
 const StyledInput = styled.input`
