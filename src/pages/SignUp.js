@@ -10,7 +10,7 @@ import {
   Headline,
   Input,
   Button,
-  LayoutLandingPage,
+  LayoutInitialPage,
   Anchor,
   Form,
 } from '../components';
@@ -36,11 +36,18 @@ export default function SignUp() {
 
       return;
     }
-
     const nameCapitalized = Helpers.capitalizeAllAndTrim(name);
+    if (nameCapitalized.split(' ').length === 1) {
+      alert('Digite o nome completo (nome e sobrenome)');
+      setDisabled(false);
+
+      return;
+    }
     const body = {
       name: nameCapitalized, email, password, confirmPassword,
     };
+
+    console.log(body);
 
     axios
       .post('/users/sign-up', body)
@@ -60,7 +67,7 @@ export default function SignUp() {
   }
 
   return (
-    <LayoutLandingPage>
+    <LayoutInitialPage>
       <Logo
         color="white"
         fontSize="9rem"
@@ -118,6 +125,6 @@ export default function SignUp() {
         <Anchor to="/entrar"> já tem conta ? Faça login </Anchor>
         <Anchor to="#" onClick={() => alert('Em construção')}> esqueceu sua senha ? </Anchor>
       </Form>
-    </LayoutLandingPage>
+    </LayoutInitialPage>
   );
 }

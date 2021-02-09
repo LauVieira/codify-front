@@ -8,14 +8,14 @@ export default function UserCourses() {
 
   useEffect(() => {
     axios
-      .get(`${process.env.API_BASE_URL}/courses/suggestions`, { withCredentials: true })
+      .get('/courses/suggestions')
       .then((response) => {
         setCourses(response.data);
       })
       .catch(({ response }) => {
         console.error(response);
 
-        alert(response.data.message);
+        alert(response.data);
       });
   }, []);
 

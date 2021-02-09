@@ -2,7 +2,7 @@ import Logo from './Logo';
 import Headline from './Headline';
 import Input from './Input';
 import Button from './Button';
-import LayoutLandingPage from './LayoutLandingPage';
+import LayoutInitialPage from './LayoutInitialPage';
 import Anchor from './Anchor';
 import Form from './Form';
 import Spinner from './Spinner';
@@ -11,13 +11,14 @@ import ProfilePicture from './ProfilePicture';
 import CardCourse from './CardCourse';
 import LastCourse from './LastCourse';
 import UserCourses from './UserCourses';
+import Summary from './Summary';
 
 export {
   Logo,
   Headline,
   Input,
   Button,
-  LayoutLandingPage,
+  LayoutInitialPage,
   Anchor,
   Form,
   Spinner,
@@ -26,4 +27,5 @@ export {
   CardCourse,
   LastCourse,
   UserCourses,
+  Summary
 };

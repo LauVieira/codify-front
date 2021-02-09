@@ -7,7 +7,7 @@ import {
   Headline,
   Input,
   Button,
-  LayoutLandingPage,
+  LayoutInitialPage,
   Form,
 } from '../components';
 
@@ -33,7 +33,7 @@ export default function ForgotPassword() {
   }
 
   return (
-    <LayoutLandingPage>
+    <LayoutInitialPage>
       <Logo
         color="white"
         fontSize="9rem"
@@ -68,6 +68,6 @@ export default function ForgotPassword() {
           {disabled ? '' : 'entrar'}
         </Button>
       </Form>
-    </LayoutLandingPage>
+    </LayoutInitialPage>
   );
 }

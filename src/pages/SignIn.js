@@ -10,7 +10,7 @@ import {
   Headline,
   Input,
   Button,
-  LayoutLandingPage,
+  LayoutInitialPage,
   Anchor,
   Form,
 } from '../components';
@@ -41,16 +41,16 @@ export default function SignIn() {
           setDisabled(false);
         }
       })
-      .catch(({ response }) => {
-        console.error(response);
+      .catch((error) => {
+        console.error(error);
         setDisabled(false);
 
-        alert(response.data.message);
+        alert(error.response.data);
       });
   }
 
   return (
-    <LayoutLandingPage>
+    <LayoutInitialPage>
       <Logo
         color="white"
         fontSize="9rem"
@@ -90,6 +90,6 @@ export default function SignIn() {
         <Anchor to="/cadastrar"> primeira vez ? crie uma conta ! </Anchor>
         <Anchor to="#" onClick={() => alert('Em construção')}> esqueceu sua senha ? </Anchor>
       </Form>
-    </LayoutLandingPage>
+    </LayoutInitialPage>
   );
 }

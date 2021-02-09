@@ -7,9 +7,7 @@ export default function ProfilePicture({ existPhoto, ...props }) {
   const { user } = useContext(UserContext);
   const words = user.name.split(' ');
 
-  const initialLetters = words.length === 1
-    ? `${words[0].charAt()}.`
-    : `${words[0].charAt()}. ${words[1].charAt()}.`;
+  const initialLetters = `${words[0].charAt()}. ${words[1].charAt()}.`;
 
   return (
     <Photo existPhoto={existPhoto} {...props}>
