@@ -9,7 +9,7 @@ export default function CardCourse(props) {
   const history = useHistory();
 
   function handleClick() {
-    history.push(`/courses/${id}`);
+    history.push(`/curso/${id}`);
   }
   return (
     <StyledCourse onClick={handleClick}>

@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from '../services/api';
 import Summary from '../components/Summary';
+import Header from '../components/Header';
 import CourseContext from '../contexts/CourseContext';
 
 export default function Course() {
@@ -21,9 +22,10 @@ export default function Course() {
   }, []);
   console.log(courseData.course);
   return (
-    <Container>
-      <HeaderTemporario>Temporário</HeaderTemporario>
-      {courseData.length !== 0
+    <>
+      <Header />
+      <Container>
+        {courseData.length !== 0
             && (
             <Details>
               <h1>{courseData.course.title}</h1>
@@ -31,7 +33,8 @@ export default function Course() {
               <Summary />
             </Details>
             )}
-    </Container>
+      </Container>
+    </>
   );
 }
 
@@ -39,26 +42,26 @@ const Container = styled.div`
     width: 100vw;
     height: 100vh;
     background-color: #E5E5E5;
+    margin-top: 100px;
 `;
 
-const HeaderTemporario = styled.header`
-    height: 90px;
-    background-color: #FFFFFF;
-`;
 const Details = styled.div`
-    height: 180px;
+    height: 200px;
     background: linear-gradient(180deg, #EFDA4F 0%, rgba(239, 218, 79, 0.56) 100%);
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 20px;
+    padding-top: 35px;
     position: relative;
     h1{
         color: #000;
         font-size: 35px;
+        font-weight: 700;
     }
     p{
-        color: #000;
+        color: #383838;
         font-size: 20px;
+        font-weight: 400;
+        margin-top: 10px;
     }
 `;
