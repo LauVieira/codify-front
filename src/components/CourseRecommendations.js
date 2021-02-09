@@ -46,14 +46,14 @@ export default function UserCourses() {
 }
 
 const RecommendationsContainer = styled.main`
-    background-color: var(--color-white);
+    background-color: #f9f9f9;
     border-radius: 5px;
     width: 100%;
     margin: 0 auto;
 `;
 
 const CourseContainer = styled.article`
-    width: 75%;
+    width: 70%;
     height: 100%;
     display: flex;
     margin: 0 auto;
@@ -64,7 +64,7 @@ const CourseContainer = styled.article`
 const Title = styled.article`
     width: 80%;
     margin: 50px;
-    font-size: 3rem;
+    font-size: 1.938rem;
     color: var(--color-black);
     font-weight: normal;
 `;
