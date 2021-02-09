@@ -35,9 +35,9 @@ export default function App() {
   );
 }
 function ProtectedRoute(props) {
-  const cookies = useCookies(['token']);
+  const [cookies] = useCookies(['token']);
   const { token } = cookies;
-  console.log(cookies);
+
   if (!token) {
     return (
       <Redirect to="/entrar" />

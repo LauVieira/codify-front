@@ -25,7 +25,7 @@ export default function Header() {
 
       <ProfilePicture
         onClick={() => alert('Em construção')}
-        existPhoto
+        existPhoto={false}
       />
     </StyledHeader>
   );
