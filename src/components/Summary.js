@@ -39,7 +39,7 @@ export default function Summary(){
                 </div>
             </Advance>
             </div>
-            <Button onClick={redirect}>Iniciar curso >></Button>
+            <Button onClick={redirect}>Iniciar curso &gt;&gt;</Button>
         </Container>
     );
 }
