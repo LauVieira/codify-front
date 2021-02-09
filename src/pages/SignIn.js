@@ -1,22 +1,22 @@
 import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../services/api';
 
 import Patterns from '../utils/PatternsHtml';
 import UserContext from '../contexts/UserContext';
 
-import { 
-  Codify, 
-  Headline, 
-  Input, 
+import {
+  Logo,
+  Headline,
+  Input,
   Button,
-  LayoutLandingPage,
+  LayoutInitialPage,
   Anchor,
-  Form
+  Form,
 } from '../components';
 
 export default function SignIn() {
-  const { user, setUser } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [disabled, setDisabled] = useState(false);
@@ -26,73 +26,70 @@ export default function SignIn() {
   function handleSubmit(event) {
     event.preventDefault();
 
-    if(disabled) return;
+    if (disabled) return;
     setDisabled(true);
 
-    const body = {email, password};
+    const body = { email, password };
     axios
-      .post(`${process.env.API_BASE_URL}/users/sign-in`, body)
-      .then(({ data })=> {
-        
-        setUser({...data});
+      .post('/users/sign-in', body)
+      .then(({ data }) => {
+        setUser({ ...data });
 
-        if(confirm('Login feito com sucesso! Redirecionando para a página inicial ...')) {
+        if (confirm('Login feito com sucesso! Redirecionando para a página inicial ...')) {
           history.push('/');
         } else {
           setDisabled(false);
         }
       })
-      .catch(({response}) => {
-        console.error(response);
+      .catch((error) => {
+        console.error(error);
         setDisabled(false);
 
-        alert(response.data);
+        alert(error.response.data);
       });
   }
 
   return (
-    <LayoutLandingPage>
-      <Codify 
-        color='white'
-        fontSize='9rem'
-        lineHeight='12rem'
-      > 
-        codify 
-      </Codify>
+    <LayoutInitialPage>
+      <Logo
+        color="white"
+        fontSize="9rem"
+        lineHeight="12rem"
+      />
       <Headline> learn. practice. code. </Headline>
 
       <Form onSubmit={handleSubmit}>
         <Input
-          type='email'
-          placeholder='e-mail'
+          type="email"
+          placeholder="e-mail"
           value={email}
-          onChange={event => setEmail(event.target.value)}
+          onChange={(event) => setEmail(event.target.value)}
           pattern={Patterns.email.regex}
           title={Patterns.email.helper}
           required
           autoFocus
-          autocomplete='on'
+          autocomplete="on"
         />
         <Input
-          type='password'
-          placeholder='senha'
+          type="password"
+          placeholder="senha"
           value={password}
-          onChange={event => setPassword(event.target.value)}
+          onChange={(event) => setPassword(event.target.value)}
           pattern={Patterns.password.regex}
           title={Patterns.password.helper}
           required
         />
-        <Button 
-          type='submit' 
+        <Button
+          type="submit"
           disabled={disabled}
           isLoading={disabled}
-        > 
-          {disabled ? '': 'entrar'} 
+        >
+          {disabled ? '' : 'entrar'}
         </Button>
 
-        <Anchor to='/cadastrar'> primeira vez ? crie uma conta ! </Anchor>
-        <Anchor onClick={() => alert('Em construção')}> esqueceu sua senha ? </Anchor>
+        <Anchor to="/cadastrar"> primeira vez ? crie uma conta ! </Anchor>
+        <Anchor to="#" onClick={() => alert('Em construção')}> esqueceu sua senha ? </Anchor>
       </Form>
-    </LayoutLandingPage>
+    </LayoutInitialPage>
   );
 }

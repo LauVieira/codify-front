@@ -6,7 +6,9 @@
   "scripts": {
     "test": "npx jest -i",
     "start": "node server.js",
-    "dev": "npx webpack serve"
+    "dev": "npx webpack serve",
+    "eslint": "npx eslint --fix src",
+    "build": "npx webpack"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +22,7 @@
     "express": "^4.17.1",
     "path": "^0.12.7",
     "react": "^17.0.1",
+    "react-cookie": "^4.0.3",
     "react-dom": "^17.0.1",
     "react-icons": "^4.1.0",
     "react-loader-spinner": "^4.0.0",

@@ -2,7 +2,7 @@ import SignIn from './SignIn';
 import SignUp from './SignUp';
 import ForgotPassword from './ForgotPassword';
 import RedefinePassword from './RedefinePassword';
-import Home from './Home';
+import Course from './Course';
 import LandingPage from './LandingPage';
 
 export {
@@ -10,6 +10,6 @@ export {
   SignUp,
   ForgotPassword,
   RedefinePassword,
-  Home,
+  Course,
   LandingPage,
 };

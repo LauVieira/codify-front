@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function Headline({children}) {
-    return (
-        <SubTitle>
-            {children}
-        </SubTitle>
-    );
+export default function Headline({ children }) {
+  return (
+    <SubTitle>
+      {children}
+    </SubTitle>
+  );
 }
 
 const SubTitle = styled.h2`

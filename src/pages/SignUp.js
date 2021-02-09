@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../services/api';
 
 import Patterns from '../utils/PatternsHtml';
 import Helpers from '../utils/Helpers';
 
-import { 
-  Codify, 
-  Headline, 
-  Input, 
+import {
+  Logo,
+  Headline,
+  Input,
   Button,
-  LayoutLandingPage,
+  LayoutInitialPage,
   Anchor,
-  Form
+  Form,
 } from '../components';
 
 export default function SignUp() {
-  let [name, setName] = useState('');
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -26,98 +26,105 @@ export default function SignUp() {
 
   function handleSubmit(event) {
     event.preventDefault();
-  
-    if(disabled) return;
+
+    if (disabled) return;
     setDisabled(true);
 
-    if(password !== confirmPassword) {
-      alert(`Os campos "senha" e "confirmar senha" devem ser idênticos`);
+    if (password !== confirmPassword) {
+      alert('Os campos "senha" e "confirmar senha" devem ser idênticos');
       setDisabled(false);
 
       return;
     }
+    const nameCapitalized = Helpers.capitalizeAllAndTrim(name);
+    if (nameCapitalized.split(' ').length === 1) {
+      alert('Digite o nome completo (nome e sobrenome)');
+      setDisabled(false);
 
-    name = Helpers.capitalizeAllAndTrim(name);
-    const body = {name, email, password, confirmPassword};
+      return;
+    }
+    const body = {
+      name: nameCapitalized, email, password, confirmPassword,
+    };
+
+    console.log(body);
 
     axios
-      .post(`${process.env.API_BASE_URL}/users/sign-up`, body)
+      .post('/users/sign-up', body)
       .then(() => {
-        if(confirm('Cadastro feito com sucesso! Redirecionando para tela de login ...')) {
+        if (confirm('Cadastro feito com sucesso! Redirecionando para tela de login ...')) {
           history.push('/entrar');
         } else {
           setDisabled(false);
         }
       })
-      .catch(({response}) => {
-        console.error(response);
+      .catch((error) => {
+        console.error(error);
         setDisabled(false);
-        
-        alert(response.data.error);
+
+        alert(error.response.data);
       });
   }
 
   return (
-    <LayoutLandingPage>
-      <Codify 
-        color='white'
-        fontSize='9rem'
-        lineHeight='12rem'
-      > 
-        codify 
-      </Codify>
+    <LayoutInitialPage>
+      <Logo
+        color="white"
+        fontSize="9rem"
+        lineHeight="12rem"
+      />
       <Headline> learn. practice. code. </Headline>
 
       <Form onSubmit={handleSubmit}>
         <Input
-          type='text'
-          placeholder='nome completo'
+          type="text"
+          placeholder="nome completo"
           value={name}
-          onChange={event => setName(event.target.value)}
+          onChange={(event) => setName(event.target.value)}
           autoFocus
           pattern={Patterns.name.regex}
-          autocomplete='on'
+          autocomplete="on"
           title={Patterns.name.helper}
           required
         />
         <Input
-          type='email'
-          placeholder='e-mail'
+          type="email"
+          placeholder="e-mail"
           value={email}
-          onChange={event => setEmail(event.target.value)}
+          onChange={(event) => setEmail(event.target.value)}
           pattern={Patterns.email.regex}
           title={Patterns.email.helper}
           required
-          autocomplete='on'
+          autocomplete="on"
         />
         <Input
-          type='password'
-          placeholder='senha'
+          type="password"
+          placeholder="senha"
           value={password}
-          onChange={event => setPassword(event.target.value)}
+          onChange={(event) => setPassword(event.target.value)}
           pattern={Patterns.password.regex}
           title={Patterns.password.helper}
           required
         />
         <Input
-          type='password'
-          placeholder='repetir senha'
+          type="password"
+          placeholder="repetir senha"
           value={confirmPassword}
-          onChange={event => setConfirmPassword(event.target.value)}
-          title='Preencha o campo'
+          onChange={(event) => setConfirmPassword(event.target.value)}
+          title="Preencha o campo"
           required
         />
-        <Button 
-          type='submit' 
+        <Button
+          type="submit"
           disabled={disabled}
           isLoading={disabled}
-        > 
-          {disabled ? '': 'cadastrar'} 
+        >
+          {disabled ? '' : 'cadastrar'}
         </Button>
 
-        <Anchor to='/entrar'> já tem conta ? Faça login </Anchor>
-        <Anchor onClick={() => alert('Em construção')}> esqueceu sua senha ? </Anchor>
+        <Anchor to="/entrar"> já tem conta ? Faça login </Anchor>
+        <Anchor to="#" onClick={() => alert('Em construção')}> esqueceu sua senha ? </Anchor>
       </Form>
-    </LayoutLandingPage>
+    </LayoutInitialPage>
   );
 }

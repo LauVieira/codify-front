@@ -1,8 +1,6 @@
-/* eslint-disable react/jsx-filename-extension */
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import styled from 'styled-components';
-// import Header from '../components/Header';
+import Header from '../components/Header';
 import CourseRecommendations from '../components/CourseRecommendations';
 import LastCourse from '../components/LastCourse';
 import UserCourses from '../components/UserCourses';
@@ -14,7 +12,7 @@ export default function LandingPage() {
   }
   return (
     <>
-      {/* <Header /> */}
+      <Header />
       <button type="submit" onClick={toggleTheresCourse}>change</button>
       <UserLandingPageContainer>
         { theresCourse
@@ -50,21 +48,22 @@ export default function LandingPage() {
 }
 
 const Message = styled.article`
+    margin-top:80px;
     background-color: var(--color-blue);
-    height: 90px;
+    height: 131px;
     width: 100%;
     color: white;
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding-left: 50px;
-    font-size: 20px;
+    font-size: 30px;
     .bold{
       font-weight: bold;
     }
 `;
 const UserLandingPageContainer = styled.main`
-    background-color: var(--color-white);
+    background-color: #E5E5E5;
     padding-bottom: 50px;
 `;
 const Title = styled.article`

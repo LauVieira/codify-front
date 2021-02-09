@@ -1,7 +1,4 @@
-/* eslint-disable react/jsx-filename-extension */
-/* eslint-disable no-unused-vars */
-import React, { useContext, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import React from 'react';
 import styled from 'styled-components';
 import CardCourse from './CardCourse';
 

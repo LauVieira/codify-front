@@ -6,11 +6,11 @@ const UserContext = createContext();
 export default UserContext;
 
 export function UserProvider({ children }) {
-    const [user, setUser] = useLocalStorage('user', null);
+  const [user, setUser] = useLocalStorage('user', null);
 
-    return (
-        <UserContext.Provider value={{user, setUser}}>
-            {children}
-        </UserContext.Provider>
-    );
+  return (
+    <UserContext.Provider value={{ user, setUser }}>
+      {children}
+    </UserContext.Provider>
+  );
 }

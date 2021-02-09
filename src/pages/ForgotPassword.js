@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 
 import Patterns from '../utils/PatternsHtml';
 
-import { 
-  Codify, 
-  Headline, 
-  Input, 
+import {
+  Logo,
+  Headline,
+  Input,
   Button,
-  LayoutLandingPage,
+  LayoutInitialPage,
   Anchor,
-  Form
+  Form,
 } from '../components';
 
 export default function ForgotPassword() {
@@ -19,45 +19,43 @@ export default function ForgotPassword() {
   function handleSubmit(event) {
     event.preventDefault();
 
-    if(disabled) return;
+    if (disabled) return;
     setDisabled(true);
 
     alert('Em construção');
   }
 
   return (
-    <LayoutLandingPage>
-      <Codify 
-        color='white'
-        fontSize='9rem'
-        lineHeight='12rem'
-      > 
-        codify 
-      </Codify>
+    <LayoutInitialPage>
+      <Logo
+        color="white"
+        fontSize="9rem"
+        lineHeight="12rem"
+      />
       <Headline> learn. practice. code. </Headline>
 
       <Form onSubmit={handleSubmit}>
         <Input
-          type='email'
-          placeholder='e-mail'
+          type="email"
+          placeholder="e-mail"
           value={email}
-          onChange={event => setEmail(event.target.value)}
+          onChange={(event) => setEmail(event.target.value)}
           pattern={Patterns.email.regex}
           title={Patterns.email.helper}
           required
           autoFocus
-          autocomplete='on'
+          autocomplete="on"
         />
-        <Button 
-          type='submit' 
+        <Button
+          type="submit"
           disabled={disabled}
           isLoading={disabled}
-        > 
-          {disabled ? '': 'recuperar senha'} 
+        >
+          {disabled ? '' : 'recuperar senha'}
         </Button>
 
-        <Anchor to='/entrar'> voltar para login </Anchor>
+        <Anchor to="/entrar"> voltar para login </Anchor>
       </Form>
-    </LayoutLandingPage>
+    </LayoutInitialPage>
   );
 }
