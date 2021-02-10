@@ -27,5 +27,5 @@ export {
   CardCourse,
   LastCourse,
   UserCourses,
-  Summary
+  Summary,
 };

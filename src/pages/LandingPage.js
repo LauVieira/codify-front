@@ -48,21 +48,22 @@ export default function LandingPage() {
 }
 
 const Message = styled.article`
+    margin-top:80px;
     background-color: var(--color-blue);
-    height: 90px;
+    height: 131px;
     width: 100%;
     color: white;
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding-left: 50px;
-    font-size: 20px;
+    font-size: 30px;
     .bold{
       font-weight: bold;
     }
 `;
 const UserLandingPageContainer = styled.main`
-    background-color: var(--color-white);
+    background-color: #E5E5E5;
     padding-bottom: 50px;
 `;
 const Title = styled.article`
