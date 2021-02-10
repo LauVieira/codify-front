@@ -13,6 +13,7 @@ import LastCourse from './LastCourse';
 import UserCourses from './UserCourses';
 import Summary from './Summary';
 import CourseRecommendations from './CourseRecommendations';
+import ArrowBackButton from './ArrowBackButton';
 
 export {
   Logo,
@@ -30,4 +31,5 @@ export {
   UserCourses,
   Summary,
   CourseRecommendations,
+  ArrowBackButton,
 };
