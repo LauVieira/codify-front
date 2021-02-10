@@ -46,7 +46,7 @@ export default function UserCourses() {
 }
 
 const RecommendationsContainer = styled.main`
-    background-color: #f9f9f9;
+    background-color: var(--background-color);
     border-radius: 5px;
     width: 100%;
     margin: 0 auto;

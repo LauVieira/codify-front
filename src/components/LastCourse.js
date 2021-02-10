@@ -47,7 +47,7 @@ const Container = styled.section`
 
 const PageContainer = styled.section`
     padding: 50px;
-    background-color: var(--color-white);
+    background-color: var(--background-color);
     border-radius: 5px;
     width: 100%;
     margin: 0 auto;

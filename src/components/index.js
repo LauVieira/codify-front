@@ -12,6 +12,7 @@ import CardCourse from './CardCourse';
 import LastCourse from './LastCourse';
 import UserCourses from './UserCourses';
 import Summary from './Summary';
+import CourseRecommendations from './CourseRecommendations';
 
 export {
   Logo,
@@ -28,4 +29,5 @@ export {
   LastCourse,
   UserCourses,
   Summary,
+  CourseRecommendations,
 };
