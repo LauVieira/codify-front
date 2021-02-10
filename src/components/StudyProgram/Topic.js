@@ -55,6 +55,7 @@ const OverviewLeft = styled.span`
 `;
 
 const OverviewRight = styled.span`
+  align-items: center;
   display: flex;
 
   p {

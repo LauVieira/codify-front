@@ -15,16 +15,20 @@ export default function StudyProgram () {
     <ProgramBox>
       <H1>Ementa</H1>
       <Ul>
-        {temporaryList.map( topic => 
-          <Topic key={topic.id} topic={topic} />
-        )}
+        {temporaryList.map((topic, index) => (
+          <>
+            <Topic key={topic.id} topic={topic} />
+            {index !== temporaryList.length - 1 && <Line />}
+          </>
+        ))}
       </Ul>
     </ProgramBox>
   );
 }
 
 const ProgramBox = styled.div`
-  width: 100%;
+  margin: 180px auto 0 auto;
+  width: 80%;
 `;
 
 const H1 = styled.h1`
@@ -35,7 +39,13 @@ const H1 = styled.h1`
 
 const Ul = styled.ul`
   background-color: #FFF;
-  border-radius: 2rem;
-  box-shadow: 1px 1px 10px 2px rgba(0,0,0,0.2);
+  border-radius: 15px;
+  box-shadow: 1px 1px 10px 2px rgba(0,0,0,0.1);
+  width: 100%;
+`;
+
+const Line = styled.div`
+  background: rgba(220,220,220,0.5);
+  height: 1px;
   width: 100%;
 `;

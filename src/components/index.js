@@ -13,6 +13,7 @@ import LastCourse from './LastCourse';
 import UserCourses from './UserCourses';
 import Summary from './Summary';
 import StudyProgram from './StudyProgram';
+import CourseRecommendations from './CourseRecommendations';
 
 export {
   Logo,
@@ -30,4 +31,5 @@ export {
   UserCourses,
   Summary,
   StudyProgram,
+  CourseRecommendations,
 };
