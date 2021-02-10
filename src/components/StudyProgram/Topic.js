@@ -20,10 +20,12 @@ export default function Topic(props) {
         </OverviewRight>
       </Overview>
 
-      {expand && 
+      {expand
+      && (
       <Details>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      </Details>}
+      </Details>
+      )}
     </Li>
   );
 }

@@ -2,13 +2,23 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Topic from './Topic';
 
-export default function StudyProgram () {
+export default function StudyProgram() {
   const temporaryList = [
-    { id: 1, title: 'Apresentação', classes: '2 aulas', exercises: '5 exercícios' },
-    { id: 2, title: 'Preparando o ambiente', classes: '2 aulas', exercises: '5 exercícios' },
-    { id: 3, title: 'Introdução à linguagem JS', classes: '2 aulas', exercises: '5 exercícios' },
-    { id: 4, title: 'Variáveis e Tipos de Dados', classes: '2 aulas', exercises: '5 exercícios' },
-    { id: 5, title: 'Estruturas lógicas e condicionais', classes: '2 aulas', exercises: '5 exercícios' },
+    {
+      id: 1, title: 'Apresentação', classes: '2 aulas', exercises: '5 exercícios',
+    },
+    {
+      id: 2, title: 'Preparando o ambiente', classes: '2 aulas', exercises: '5 exercícios',
+    },
+    {
+      id: 3, title: 'Introdução à linguagem JS', classes: '2 aulas', exercises: '5 exercícios',
+    },
+    {
+      id: 4, title: 'Variáveis e Tipos de Dados', classes: '2 aulas', exercises: '5 exercícios',
+    },
+    {
+      id: 5, title: 'Estruturas lógicas e condicionais', classes: '2 aulas', exercises: '5 exercícios',
+    },
   ];
 
   return (

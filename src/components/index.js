@@ -14,6 +14,7 @@ import UserCourses from './UserCourses';
 import Summary from './Summary';
 import StudyProgram from './StudyProgram';
 import CourseRecommendations from './CourseRecommendations';
+import YoutubePlayer from './YoutubePlayer';
 
 export {
   Logo,
@@ -32,4 +33,5 @@ export {
   Summary,
   StudyProgram,
   CourseRecommendations,
+  YoutubePlayer,
 };
