@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
-import Header from '../components/Header';
-import CourseRecommendations from '../components/CourseRecommendations';
-import LastCourse from '../components/LastCourse';
-import UserCourses from '../components/UserCourses';
+
+import { Header, CourseRecommendations, LastCourse, UserCourses } from '../components';
+import UserContext from '../contexts/UserContext';
 
 export default function LandingPage() {
+  const { user } = useContext(UserContext);
   const [theresCourse, setTheresCourse] = useState(false);
+
   function toggleTheresCourse() {
     setTheresCourse(!theresCourse);
   }
+
   return (
     <>
       <Header />
@@ -19,7 +21,7 @@ export default function LandingPage() {
           ? (
             <>
               <Message>
-                <p>Olá Pedro!</p>
+                <p>{user.name}</p>
                 <p className="bold">Bem-vindo de volta! Continue seu curso atual abaixo :)</p>
               </Message>
               <LastCourse
@@ -36,8 +38,8 @@ export default function LandingPage() {
           : (
             <>
               <Message>
-                <p>Olá Pedro!</p>
-                <p className="bold">Você não começou nenhum curso ainda.Experimente um! :)</p>
+                <p>{user.name}</p>
+                <p className="bold">Você não começou nenhum curso ainda. Experimente um! :)</p>
               </Message>
               <CourseRecommendations />
             </>
