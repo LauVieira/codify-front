@@ -16,7 +16,7 @@ export default function StudyProgram () {
       <H1>Ementa</H1>
       <Ul>
         {temporaryList.map( topic => 
-          <Topic key={topic.id} topic={topic}/>
+          <Topic key={topic.id} topic={topic} />
         )}
       </Ul>
     </ProgramBox>

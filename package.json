@@ -4,9 +4,11 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npx jest -i",
     "start": "node server.js",
-    "dev": "npx webpack serve"
+    "dev": "npx webpack serve",
+    "eslint": "npx eslint --fix src",
+    "build": "npx webpack"
   },
   "keywords": [],
   "author": "",
@@ -23,11 +25,19 @@
     "react-cookie": "^4.0.3",
     "react-dom": "^17.0.1",
     "react-icons": "^4.1.0",
+    "react-loader-spinner": "^4.0.0",
     "react-router-dom": "^5.2.0",
-    "react-use-localstorage": "^3.5.3",
     "styled-components": "^5.2.1",
     "webpack": "^5.19.0",
     "webpack-cli": "^4.4.0",
     "webpack-dev-server": "^3.11.2"
+  },
+  "devDependencies": {
+    "eslint": "^7.19.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.2.0"
   }
 }

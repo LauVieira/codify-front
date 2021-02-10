@@ -5,7 +5,7 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'public'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   module: {
     rules: [
@@ -15,28 +15,29 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env','@babel/preset-react']
-          }
-        }
-      }
-    ]
+            presets: ['@babel/preset-env', '@babel/preset-react'],
+          },
+        },
+      },
+    ],
   },
   devServer: {
     contentBase: path.join(__dirname, 'public'),
-    publicPath: "/",
+    publicPath: '/',
     compress: true,
     port: 9000,
     historyApiFallback: true,
   },
-  mode: process.env.NODE_ENV === "production" ? "production" : "development",
-  devtool: "source-map",
+  mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
+  devtool: 'source-map',
   plugins: [
     new webpack.DefinePlugin({
       process: {
         env: {
-          API_BASE_URL: process.env.API_BASE_URL ? `'${process.env.API_BASE_URL}'` : `'http://localhost:3000'`
-        }
-      }
-    })
-  ]
+          // API_BASE_URL: process.env.API_BASE_URL ? `'${process.env.API_BASE_URL}'` : `'http://localhost:3000'`
+          API_BASE_URL: '\'http://localhost:3000\'',
+        },
+      },
+    }),
+  ],
 };

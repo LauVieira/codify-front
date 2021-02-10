@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { RiArrowDownSLine } from 'react-icons/ri';
 
-export default function Topic (props) {
+export default function Topic(props) {
   const { title, classes, exercises } = props.topic;
-  const [ expand, setExpand ] = useState(false);
+  const [expand, setExpand] = useState(false);
 
   return (
-    <Li onClick={ () => setExpand(!expand)}>
+    <Li onClick={() => setExpand(!expand)}>
       <Overview>
         <OverviewLeft>
           <RiArrowDownSLine />
@@ -20,7 +20,8 @@ export default function Topic (props) {
         </OverviewRight>
       </Overview>
 
-      {expand && <Details>
+      {expand && 
+      <Details>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
       </Details>}
     </Li>
