@@ -10,6 +10,7 @@ export default function UserCourses() {
     axios
       .get('/courses/suggestions')
       .then((response) => {
+        console.log(response.data);
         setCourses(response.data);
       })
       .catch(({ response }) => {
@@ -28,8 +29,8 @@ export default function UserCourses() {
               <CardCourse
                 title={c.title}
                 subtitle={c.description}
-                image={c.background}
-                imageDescription={c.imageDescription}
+                image={c.photo}
+                imageDescription={c.alt}
                 id={c.id}
                 key={c.id}
               />
