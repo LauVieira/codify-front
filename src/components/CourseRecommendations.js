@@ -10,7 +10,6 @@ export default function UserCourses() {
     axios
       .get('/courses/suggestions')
       .then((response) => {
-        console.log(response.data);
         setCourses(response.data);
       })
       .catch(({ response }) => {
