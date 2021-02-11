@@ -2,17 +2,18 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useHistory, Link } from 'react-router-dom';
 import { IoIosArrowDown } from 'react-icons/io';
+
 import axios from '../services/api';
 import ArrowBackButton from './ArrowBackButton';
 
-export default function Header() {
+export default function StudyAreaHeader() {
   const [courseInfo, setCourseInfo] = useState('');
   const history = useHistory();
   useEffect(() => {
     axios
       .get('/courses/topic/5')
-      .then((response) => {
-        setCourseInfo(response.data);
+      .then(({ data }) => {
+        setCourseInfo(data);
       })
       .catch(({ response }) => {
         console.error(response);
@@ -70,13 +71,17 @@ const ChapterTopicInformation = styled.section`
   font-weight:bold;
   color: var(--color-grey-study-area);
   font-family: var(--font-roboto);
+  
   line-height: 29px;
+
   h1 {
     margin-right: 10px;
   }
+
   .icon{
     top: 38%;
     transform: rotate(0.11deg);
     font-size: 2.5rem;
   }
+  
 `;
