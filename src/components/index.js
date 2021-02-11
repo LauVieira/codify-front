@@ -15,6 +15,9 @@ import UserCourses from './UserCourses';
 import Summary from './Summary';
 import StudyProgram from './StudyProgram';
 import CourseRecommendations from './CourseRecommendations';
+import YoutubePlayer from './YoutubePlayer';
+import ArrowBackButton from './ArrowBackButton';
+import CheckBox from './CheckBox';
 
 export {
   Logo,
@@ -34,4 +37,7 @@ export {
   StudyProgram,
   CourseRecommendations,
   StudyAreaHeader,
+  YoutubePlayer,
+  ArrowBackButton,
+  CheckBox,
 };

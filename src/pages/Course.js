@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from '../services/api';
-import { Header, Summary, StudyProgram} from '../components';
+import { Header, Summary, StudyProgram } from '../components';
 import CourseContext from '../contexts/CourseContext';
 
 export default function Course() {
@@ -42,8 +42,7 @@ export default function Course() {
 
 const Container = styled.div`
   width: 100vw;
-  height: 100vh;
-  background-color: #E5E5E5;
+  background-color: #F9F9F9;
   margin-top: 100px;
 `;
 
