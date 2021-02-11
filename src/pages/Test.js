@@ -16,7 +16,7 @@ export default function Test() {
           height="40px"
           left="15px"
           top="9px"
-          fontSize="30px"
+          fontSize="32px"
         />
       </HeaderTest>
       <A>
