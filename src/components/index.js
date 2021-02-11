@@ -37,5 +37,5 @@ export {
   CourseRecommendations,
   YoutubePlayer,
   ArrowBackButton,
-  CheckBox
+  CheckBox,
 };

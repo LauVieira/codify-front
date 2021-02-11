@@ -30,11 +30,11 @@ export default function YoutubePlayer({ link }) {
 
   return (
     <YouTube
-        videoId={videoId}
-        className='styled-youtube'
-        opts={opts}
-        onReady={videoOnReady}
-        onError={videoOnError}
+      videoId={videoId}
+      className="styled-youtube"
+      opts={opts}
+      onReady={videoOnReady}
+      onError={videoOnError}
     />
   );
 }

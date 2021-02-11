@@ -3,18 +3,22 @@ import styled from 'styled-components';
 import { IoCheckmark } from 'react-icons/io5';
 
 export default function CheckBox({ isChecked, setIsChecked }) {
-    return(
-        <Label htmlFor='concluded' isChecked={isChecked}>  
-            <Check 
-                id='concluded' 
-                type='checkbox'
-                value={isChecked} 
-                onChange={() => setIsChecked(!isChecked)}
-            />
-            <Square> <IconCheck isChecked={isChecked}/> </Square>
-            <p> Marcar como concluído </p>
-        </Label>
-    );
+  return (
+    <Label htmlFor="concluded" isChecked={isChecked}>
+      <Check
+        id="concluded"
+        type="checkbox"
+        value={isChecked}
+        onChange={() => setIsChecked(!isChecked)}
+      />
+      <Square>
+        {' '}
+        <IconCheck isChecked={isChecked} />
+        {' '}
+      </Square>
+      <p> Marcar como concluído </p>
+    </Label>
+  );
 }
 
 const Label = styled.label`

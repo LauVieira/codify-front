@@ -11,7 +11,7 @@ export default function Test() {
     <>
       <HeaderTest>
         <ArrowBackButton
-          to='#'
+          to="#"
           width="40px"
           height="40px"
           left="15px"
@@ -20,7 +20,7 @@ export default function Test() {
         />
       </HeaderTest>
       <A>
-        <CheckBox isChecked={isChecked} setIsChecked={setIsChecked}/>
+        <CheckBox isChecked={isChecked} setIsChecked={setIsChecked} />
       </A>
     </>
   );
