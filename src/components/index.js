@@ -7,6 +7,7 @@ import Anchor from './Anchor';
 import Form from './Form';
 import Spinner from './Spinner';
 import Header from './Header';
+import StudyAreaHeader from './StudyAreaHeader';
 import ProfilePicture from './ProfilePicture';
 import CardCourse from './CardCourse';
 import LastCourse from './LastCourse';
@@ -32,4 +33,5 @@ export {
   Summary,
   StudyProgram,
   CourseRecommendations,
+  StudyAreaHeader,
 };
