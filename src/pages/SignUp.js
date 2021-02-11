@@ -47,8 +47,6 @@ export default function SignUp() {
       name: nameCapitalized, email, password, confirmPassword,
     };
 
-    console.log(body);
-
     axios
       .post('/users/sign-up', body)
       .then(() => {
