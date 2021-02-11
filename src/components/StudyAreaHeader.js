@@ -3,15 +3,16 @@ import styled from 'styled-components';
 import { useHistory, Link } from 'react-router-dom';
 import { IoIosArrowDown } from 'react-icons/io';
 import axios from '../services/api';
+import ArrowBackButton from './ArrowBackButton';
 
 export default function Header() {
-  const [oi, setOi] = useState('');
+  const [courseInfo, setCourseInfo] = useState('');
   const history = useHistory();
   useEffect(() => {
     axios
-      .get('/courses/topic/1')
+      .get('/courses/topic/5')
       .then((response) => {
-        console.log(response.data);
+        setCourseInfo(response.data);
       })
       .catch(({ response }) => {
         console.error(response);
@@ -22,10 +23,22 @@ export default function Header() {
 
   return (
     <StyledHeader>
+      <ArrowBackButton
+        to="#"
+        width="40px"
+        height="40px"
+        left="15px"
+        top="9px"
+        fontSize="30px"
+      />
       <ChapterTopicInformation>
-        <h1>
-          idjaisdjasiod
-        </h1>
+        {courseInfo
+          ? (
+            <h1>
+              {`${courseInfo.chapter.title} - ${courseInfo.topic.title}`}
+            </h1>
+          )
+          : <h1>nada</h1>}
         <IoIosArrowDown className="icon" />
       </ChapterTopicInformation>
     </StyledHeader>
@@ -44,14 +57,11 @@ const StyledHeader = styled.header`
   align-items: center;
   justify-content: center;
 
-  position: fixed;
-  top: 0;
-  left: 0;
-
   z-index: 1;
+  position: relative;
 `;
 
-const ChapterTopicInformation = styled.div`
+const ChapterTopicInformation = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;

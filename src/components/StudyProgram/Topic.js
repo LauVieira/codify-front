@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { RiArrowDownSLine } from 'react-icons/ri';
 
-export default function Topic(props) {
-  const { title, classes, exercises } = props.topic;
+export default function Topic({ topic }) {
+  const { title, classes, exercises } = topic;
   const [expand, setExpand] = useState(false);
 
   return (
@@ -23,7 +23,7 @@ export default function Topic(props) {
       {expand
       && (
       <Details>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt u.
       </Details>
       )}
     </Li>
