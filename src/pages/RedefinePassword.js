@@ -3,11 +3,11 @@ import React, { useState } from 'react';
 import Patterns from '../utils/PatternsHtml';
 
 import {
-  Codify,
+  Logo,
   Headline,
   Input,
   Button,
-  LayoutLandingPage,
+  LayoutInitialPage,
   Form,
 } from '../components';
 
@@ -33,14 +33,12 @@ export default function ForgotPassword() {
   }
 
   return (
-    <LayoutLandingPage>
-      <Codify
+    <LayoutInitialPage>
+      <Logo
         color="white"
         fontSize="9rem"
         lineHeight="12rem"
-      >
-        codify
-      </Codify>
+      />
       <Headline> learn. practice. code. </Headline>
 
       <Form onSubmit={handleSubmit}>
@@ -70,6 +68,6 @@ export default function ForgotPassword() {
           {disabled ? '' : 'entrar'}
         </Button>
       </Form>
-    </LayoutLandingPage>
+    </LayoutInitialPage>
   );
 }

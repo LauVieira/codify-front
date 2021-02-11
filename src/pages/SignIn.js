@@ -1,16 +1,16 @@
 import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../services/api';
 
 import Patterns from '../utils/PatternsHtml';
 import UserContext from '../contexts/UserContext';
 
 import {
-  Codify,
+  Logo,
   Headline,
   Input,
   Button,
-  LayoutLandingPage,
+  LayoutInitialPage,
   Anchor,
   Form,
 } from '../components';
@@ -31,33 +31,31 @@ export default function SignIn() {
 
     const body = { email, password };
     axios
-      .post(`${process.env.API_BASE_URL}/users/sign-in`, body, { withCredentials: true})
-      .then(({...data})=> {
-        setUser({...data});
-        
-        if(confirm('Login feito com sucesso! Redirecionando para a página inicial ...')) {
+      .post('/users/sign-in', body)
+      .then(({ data }) => {
+        setUser({ ...data });
+
+        if (confirm('Login feito com sucesso! Redirecionando para a página inicial ...')) {
           history.push('/');
         } else {
           setDisabled(false);
         }
       })
-      .catch(({ response }) => {
-        console.error(response);
+      .catch((error) => {
+        console.error(error);
         setDisabled(false);
 
-        alert(response.data.message);
+        alert(error.respon);
       });
   }
 
   return (
-    <LayoutLandingPage>
-      <Codify
+    <LayoutInitialPage>
+      <Logo
         color="white"
         fontSize="9rem"
         lineHeight="12rem"
-      >
-        codify
-      </Codify>
+      />
       <Headline> learn. practice. code. </Headline>
 
       <Form onSubmit={handleSubmit}>
@@ -90,8 +88,8 @@ export default function SignIn() {
         </Button>
 
         <Anchor to="/cadastrar"> primeira vez ? crie uma conta ! </Anchor>
-        <Anchor onClick={() => alert('Em construção')}> esqueceu sua senha ? </Anchor>
+        <Anchor to="#" onClick={() => alert('Em construção')}> esqueceu sua senha ? </Anchor>
       </Form>
-    </LayoutLandingPage>
+    </LayoutInitialPage>
   );
 }

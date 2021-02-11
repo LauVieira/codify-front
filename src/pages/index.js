@@ -10,6 +10,6 @@ export {
   SignUp,
   ForgotPassword,
   RedefinePassword,
-  Course, 
+  Course,
   LandingPage,
 };

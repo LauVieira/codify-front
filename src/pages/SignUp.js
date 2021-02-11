@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../services/api';
 
 import Patterns from '../utils/PatternsHtml';
 import Helpers from '../utils/Helpers';
 
 import {
-  Codify,
+  Logo,
   Headline,
   Input,
   Button,
-  LayoutLandingPage,
+  LayoutInitialPage,
   Anchor,
   Form,
 } from '../components';
@@ -36,14 +36,19 @@ export default function SignUp() {
 
       return;
     }
-
     const nameCapitalized = Helpers.capitalizeAllAndTrim(name);
+    if (nameCapitalized.split(' ').length === 1) {
+      alert('Digite o nome completo (nome e sobrenome)');
+      setDisabled(false);
+
+      return;
+    }
     const body = {
       name: nameCapitalized, email, password, confirmPassword,
     };
 
     axios
-      .post(`${process.env.API_BASE_URL}/users/sign-up`, body, { withCredentials: true})
+      .post('/users/sign-up', body)
       .then(() => {
         if (confirm('Cadastro feito com sucesso! Redirecionando para tela de login ...')) {
           history.push('/entrar');
@@ -51,23 +56,21 @@ export default function SignUp() {
           setDisabled(false);
         }
       })
-      .catch(({ response }) => {
-        console.error(response);
+      .catch((error) => {
+        console.error(error);
         setDisabled(false);
 
-        alert(response.data.message);
+        alert(error.response.data);
       });
   }
 
   return (
-    <LayoutLandingPage>
-      <Codify
+    <LayoutInitialPage>
+      <Logo
         color="white"
         fontSize="9rem"
         lineHeight="12rem"
-      >
-        codify
-      </Codify>
+      />
       <Headline> learn. practice. code. </Headline>
 
       <Form onSubmit={handleSubmit}>
@@ -118,8 +121,8 @@ export default function SignUp() {
         </Button>
 
         <Anchor to="/entrar"> já tem conta ? Faça login </Anchor>
-        <Anchor onClick={() => alert('Em construção')}> esqueceu sua senha ? </Anchor>
+        <Anchor to="#" onClick={() => alert('Em construção')}> esqueceu sua senha ? </Anchor>
       </Form>
-    </LayoutLandingPage>
+    </LayoutInitialPage>
   );
 }
