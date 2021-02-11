@@ -18,6 +18,7 @@ import CourseRecommendations from './CourseRecommendations';
 import YoutubePlayer from './YoutubePlayer';
 import ArrowBackButton from './ArrowBackButton';
 import CheckBox from './CheckBox';
+import ActivitesTimeLine from './ActivitesTimeLine';
 
 export {
   Logo,
@@ -40,4 +41,5 @@ export {
   YoutubePlayer,
   ArrowBackButton,
   CheckBox,
+  ActivitesTimeLine,
 };
