@@ -12,9 +12,7 @@ export default function CheckBox({ isChecked, setIsChecked }) {
         onChange={() => setIsChecked(!isChecked)}
       />
       <Square>
-        {' '}
         <IconCheck isChecked={isChecked} />
-        {' '}
       </Square>
       <p> Marcar como concluído </p>
     </Label>
