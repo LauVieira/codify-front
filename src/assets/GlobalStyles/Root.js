@@ -51,5 +51,6 @@ export default css`
         // Ver Mais
         --color-grey-thin: #BBBBBB;
         --color-grey-study-area: #D6D6D6;
+        --color-grey-activity: #B2B2B2;
     }
 `;

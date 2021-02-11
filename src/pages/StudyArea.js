@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 
 import {
-  StudyAreaHeader, ActivitesTimeLine,
+  StudyAreaHeader, ActivitesTimeLine, StudyAreaContent
 } from '../components';
 import UserContext from '../contexts/UserContext';
 
@@ -13,8 +13,7 @@ export default function StudyArea() {
     <>
       <StudyAreaHeader />
       <ActivitesTimeLine />
-      <UserLandingPageContainer />
-      {/* </UserLandingPageContainer> */}
+      <StudyAreaContent />
     </>
   );
 }

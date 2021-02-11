@@ -10,7 +10,7 @@ export default function Header() {
   const history = useHistory();
   useEffect(() => {
     axios
-      .get('/courses/topic/5')
+      .get('/courses/topic/3')
       .then((response) => {
         setCourseInfo(response.data);
       })
@@ -24,11 +24,11 @@ export default function Header() {
   return (
     <StyledHeader>
       <ArrowBackButton
-        to="#"
+        to="/curso/1"
         width="40px"
         height="40px"
         left="15px"
-        top="9px"
+        top="12px"
         fontSize="30px"
       />
       <ChapterTopicInformation>

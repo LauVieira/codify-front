@@ -26,7 +26,7 @@ export default function Summary() {
   }, []);
 
   function redirect() {
-    history.push('/curso/1/chapter/1/topic/1');
+    history.push('/curso/1/capitulo/1/topico/1');
   }
 
   return (

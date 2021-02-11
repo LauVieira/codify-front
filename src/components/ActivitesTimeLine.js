@@ -4,16 +4,49 @@ import { useHistory, Link } from 'react-router-dom';
 import { IoIosArrowDown } from 'react-icons/io';
 import axios from '../services/api';
 import ArrowBackButton from './ArrowBackButton';
-import Activity from './Activity';
+import ActivityContainer from './ActivityContainer';
+import ActivityLine from './ActivityLine';
 
 export default function ActivitesTimeLine() {
+  const activities = [{
+    doing: false,
+    done: true,
+  },
+  {
+    doing: true,
+    done: true,
+  },
+  {
+    doing: false,
+    done: true,
+  },
+  {
+    doing: false,
+    done: false,
+  },
+  {
+    doing: false,
+    done: false,
+  }];
   return (
     <>
       <StyledHeader>
-        <ActivitiesContainer>
-          <h1>nada</h1>
-          <Activity />
-        </ActivitiesContainer>
+        <Container>
+          {
+            activities.map((a, i) => {
+              if (i === activities.length - 1) {
+                return <ActivityContainer doing={a.doing} done={a.done} />;
+              }
+
+              return (
+                <>
+                  <ActivityContainer doing={a.doing} done={a.done} />
+                  <ActivityLine doing={a.doing} done={a.done} />
+                </>
+              );
+            })
+          }
+        </Container>
       </StyledHeader>
     </>
   );
@@ -33,11 +66,13 @@ const StyledHeader = styled.header`
 
   z-index: 1;
   position: relative;
-  border-bottom: 1px solid red;
+  border-bottom: 1px solid #717171;
 `;
 
-const ActivitiesContainer = styled.section`
-  background-color: blue;
+const Container = styled.section`
   height: 50%;
   width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;

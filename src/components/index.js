@@ -8,6 +8,7 @@ import Form from './Form';
 import Spinner from './Spinner';
 import Header from './Header';
 import StudyAreaHeader from './StudyAreaHeader';
+import StudyAreaContent from './StudyAreaContent';
 import ProfilePicture from './ProfilePicture';
 import CardCourse from './CardCourse';
 import LastCourse from './LastCourse';
@@ -42,4 +43,5 @@ export {
   ArrowBackButton,
   CheckBox,
   ActivitesTimeLine,
+  StudyAreaContent,
 };
