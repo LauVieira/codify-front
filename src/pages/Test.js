@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { CheckBox } from '../components';
 import ArrowBackButton from '../components/ArrowBackButton';
 import YoutubePlayer from '../components/YoutubePlayer';
 
 export default function Test() {
+  const [isChecked, setIsChecked] = useState(false);
   const link = 'https://www.youtube.com/watch?v=vp3Lf3Ex5ZI';
   return (
     <>
@@ -18,7 +20,7 @@ export default function Test() {
         />
       </HeaderTest>
       <A>
-        <YoutubePlayer link={link} />
+        <CheckBox isChecked={isChecked} setIsChecked={setIsChecked}/>
       </A>
     </>
   );
@@ -31,6 +33,7 @@ const HeaderTest = styled.div`
 `;
 
 const A = styled.div`
+    padding-top: 90px;
     display: flex;
     justify-content: center;
     align-items: center;

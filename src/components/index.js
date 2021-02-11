@@ -16,6 +16,7 @@ import StudyProgram from './StudyProgram';
 import CourseRecommendations from './CourseRecommendations';
 import YoutubePlayer from './YoutubePlayer';
 import ArrowBackButton from './ArrowBackButton';
+import CheckBox from './CheckBox';
 
 export {
   Logo,
@@ -36,4 +37,5 @@ export {
   CourseRecommendations,
   YoutubePlayer,
   ArrowBackButton,
+  CheckBox
 };
