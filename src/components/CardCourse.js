@@ -9,7 +9,7 @@ export default function CardCourse(props) {
   const history = useHistory();
 
   function handleClick() {
-    history.push(`/courses/${id}`);
+    history.push(`/curso/${id}`);
   }
   return (
     <StyledCourse onClick={handleClick}>
@@ -31,6 +31,8 @@ const StyledCourse = styled.button`
     border-radius: 20px;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
     flex-shrink:0;
+    background-color: var(--color-white);
+    cursor: pointer;
 `;
 
 const Figure = styled.figure`

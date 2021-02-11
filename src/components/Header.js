@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useHistory, Link } from 'react-router-dom';
 
-import Codify from './Codify';
+import Logo from './Logo';
 import ProfilePicture from './ProfilePicture';
 
 export default function Header() {
@@ -11,23 +11,21 @@ export default function Header() {
   return (
     <StyledHeader>
       <Navigation>
-        <Codify
+        <Logo
           color="#333333"
           fontSize="5.6rem"
           lineHeight="6.7rem"
           onClick={() => history.push('/')}
-        >
-          Codify
-        </Codify>
+        />
 
         <NavLink to="/"> Home </NavLink>
-        <NavLink onClick={() => alert('Em construção')}> Cursos </NavLink>
-        <NavLink onClick={() => alert('Em construção')}> Perfil </NavLink>
+        <NavLink to="#" onClick={() => alert('Em construção')}> Cursos </NavLink>
+        <NavLink to="#" onClick={() => alert('Em construção')}> Perfil </NavLink>
       </Navigation>
 
       <ProfilePicture
         onClick={() => alert('Em construção')}
-        existPhoto
+        existPhoto={false}
       />
     </StyledHeader>
   );
@@ -48,6 +46,8 @@ const StyledHeader = styled.header`
   position: fixed;
   top: 0;
   left: 0;
+
+  z-index: 1;
 `;
 
 const Navigation = styled.nav`

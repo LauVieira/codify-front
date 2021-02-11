@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function Codify({ children, ...props }) {
+export default function Logo({ ...props }) {
   return (
     <Title {...props}>
-      {children}
+      codify
     </Title>
   );
 }

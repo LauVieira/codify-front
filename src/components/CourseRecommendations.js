@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
+import axios from '../services/api';
 import CardCourse from './CardCourse';
 
 export default function UserCourses() {
@@ -8,14 +8,14 @@ export default function UserCourses() {
 
   useEffect(() => {
     axios
-      .get(`${process.env.API_BASE_URL}/courses/suggestions`, { withCredentials: true })
+      .get('/courses/suggestions')
       .then((response) => {
         setCourses(response.data);
       })
       .catch(({ response }) => {
         console.error(response);
 
-        alert(response.data.message);
+        alert(response.data);
       });
   }, []);
 
@@ -28,8 +28,8 @@ export default function UserCourses() {
               <CardCourse
                 title={c.title}
                 subtitle={c.description}
-                image={c.background}
-                imageDescription={c.imageDescription}
+                image={c.photo}
+                imageDescription={c.alt}
                 id={c.id}
                 key={c.id}
               />
@@ -46,14 +46,14 @@ export default function UserCourses() {
 }
 
 const RecommendationsContainer = styled.main`
-    background-color: var(--color-white);
+    background-color: var(--background-color);
     border-radius: 5px;
     width: 100%;
     margin: 0 auto;
 `;
 
 const CourseContainer = styled.article`
-    width: 75%;
+    width: 70%;
     height: 100%;
     display: flex;
     margin: 0 auto;
@@ -64,7 +64,7 @@ const CourseContainer = styled.article`
 const Title = styled.article`
     width: 80%;
     margin: 50px;
-    font-size: 3rem;
+    font-size: 1.938rem;
     color: var(--color-black);
     font-weight: normal;
 `;

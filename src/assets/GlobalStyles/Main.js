@@ -16,7 +16,8 @@ export default css`
         line-height: 1.2;
         color: var(--color-default);
         text-rendering: optimizeLegibility;
-        background: var(--gradient-blue);
+        background: url('./images/background.png') no-repeat center/80%;
+        background-size: cover;
         overflow-y: scroll;
     }
 

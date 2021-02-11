@@ -7,7 +7,8 @@
     "test": "npx jest -i",
     "start": "node server.js",
     "dev": "npx webpack serve",
-    "eslint": "npx eslint --fix src"
+    "eslint": "npx eslint --fix src",
+    "build": "npx webpack"
   },
   "keywords": [],
   "author": "",

@@ -23,6 +23,6 @@ export const courses = [
 ];
 
 export const mockedUser = {
-    name: "Teste da Silva",
-    icon: "https://imagens2.ne10.uol.com.br/blogsne10/mundobit/uploads/2014/05/kabosu.jpg"
-}
+  name: 'Teste da Silva',
+  icon: 'https://imagens2.ne10.uol.com.br/blogsne10/mundobit/uploads/2014/05/kabosu.jpg',
+};
