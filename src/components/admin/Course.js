@@ -76,4 +76,3 @@ export const PostEdit = (props) => (
 //     </SimpleForm>
 //   </Create>
 // );
-
