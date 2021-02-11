@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import axios from '../services/api';
 import { Header, Summary, StudyProgram} from '../components';
 import CourseContext from '../contexts/CourseContext';
-import Header from '../components/Header';
 
 export default function Course() {
   const { courseData, setCourseData } = useContext(CourseContext);

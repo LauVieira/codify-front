@@ -45,7 +45,7 @@ export default function SignIn() {
         console.error(error);
         setDisabled(false);
 
-        alert(error.respon);
+        alert(error.response.data.message);
       });
   }
 
