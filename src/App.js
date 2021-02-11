@@ -6,6 +6,7 @@ import {
   Redirect,
 } from 'react-router-dom';
 import { CookiesProvider, useCookies } from 'react-cookie';
+import Test from './pages/Test';
 
 import GlobalStyle from './assets/GlobalStyles';
 import { UserProvider } from './contexts/UserContext';
@@ -27,6 +28,7 @@ export default function App() {
               <UnprotectedRoute path="/esqueci-senha" component={Pages.ForgotPassword} />
               <UnprotectedRoute path="/redefinir-senha" component={Pages.RedefinePassword} />
               <ProtectedRoute path="/" exact component={Pages.LandingPage} />
+              <Route path="/teste" component={Test} />
             </Switch>
           </Router>
         </CourseProvider>

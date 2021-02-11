@@ -6,41 +6,35 @@ export default function YoutubePlayer({ link }) {
   const videoId = getYouTubeID(link);
 
   function videoOnReady(event) {
-    // acess to player in all event handlers via event.target
     const player = event.target;
+
     player.pauseVideo();
-    // player.seekTo();
-    // console.log(player);
   }
 
-  function videoStateChange(event) {
-    const player = event.target;
-    console.log(player.getCurrentTime());
+  function videoOnError() {
+    alert('Não foi possível carregar o vídeo...');
   }
 
   const opts = {
-    height: '390',
-    width: '640',
+    height: '488',
+    width: '800',
     playerVars: {
-        // https://developers.google.com/youtube/player_parameters
-      autoplay: 1,
+      autoplay: 0,
+      controls: 2,
+      enablejsapi: 1,
+      rel: 0,
+      showinfo: 0,
+      origin: 'http://localhost:9000',
     },
   };
 
   return (
     <YouTube
-      videoId={videoId}
-      opts={opts}
-      onReady={() => console.log('ON READY CALLBACK'))}
-      onStateChange={() => console.log('ON STATE CHANGE')}
-      onPlay={() => console.log('ON PLAY CALLBACK')}
-      onPause={() => console.log('ON PAUSE CALLBACK')}
-      onStart={() => console.log('ON START CALLBACK')}
-      onError={() => console.log('ON ERROR CALLBACK')}
+        videoId={videoId}
+        className='styled-youtube'
+        opts={opts}
+        onReady={videoOnReady}
+        onError={videoOnError}
     />
   );
 }
-
-/*const StyledYoutube = styled()`
-
-`;*/
