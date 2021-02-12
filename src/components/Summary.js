@@ -21,10 +21,6 @@ export default function Summary() {
     }
   }, []);
 
-  useEffect(() => {
-    setUser(mockedUser);
-  }, []);
-
   function redirect() {
     history.push('/curso/topico');
   }
