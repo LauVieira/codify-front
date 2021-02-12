@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useHistory, Link } from 'react-router-dom';
 import { IoIosArrowDown } from 'react-icons/io';
 
 import axios from '../services/api';
@@ -8,7 +7,6 @@ import ArrowBackButton from './ArrowBackButton';
 
 export default function StudyAreaHeader() {
   const [courseInfo, setCourseInfo] = useState('');
-  const history = useHistory();
   useEffect(() => {
     axios
       .get('/courses/topic/5')
