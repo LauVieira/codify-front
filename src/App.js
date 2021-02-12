@@ -38,7 +38,7 @@ export default function App() {
 function ProtectedRoute(props) {
   const { user } = useContext(UserContext);
 
-  if (!user.id) {
+  if (!user || !user.id) {
     return (
       <Redirect to="/entrar" />
     );
@@ -50,7 +50,7 @@ function ProtectedRoute(props) {
 function UnprotectedRoute(props) {
   const { user } = useContext(UserContext);
 
-  if (!user.id) {
+  if (user && user.id) {
     return (
       <Redirect to="/" />
     );
