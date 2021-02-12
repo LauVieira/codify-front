@@ -13,17 +13,6 @@ import {
   DateInput,
 } from 'react-admin';
 
-
-// export const PostEdit = (props) => (
-//   <Edit {...props}>
-//     <SimpleForm>
-//       <TextInput disabled source="id" />
-//       <TextInput source="title" />
-//       <TextInput source="body" />
-//     </SimpleForm>
-//   </Edit>
-// );
-
 export const CourseList = (props) => (
   <List {...props}>
     <Datagrid>
@@ -36,7 +25,7 @@ export const CourseList = (props) => (
       <DateField source="createdAt" />
       <DateField source="updatedAt" />
       <EditButton basePath="/courses" />
-      <DeleteButton basePath="courses" />
+      <DeleteButton basePath="/courses" />
     </Datagrid>
   </List>
 );
