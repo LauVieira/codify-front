@@ -1,5 +1,7 @@
 import React from 'react';
-import { Admin, Resource, fetchUtils } from 'react-admin';
+import {
+  Admin, Resource, fetchUtils, Title,
+} from 'react-admin';
 import simpleRestProvider from 'ra-data-simple-rest';
 import { CourseList, CourseCreate, CourseEdit } from '../../components/admin/Course';
 import { ChapterList, ChapterCreate, ChapterEdit } from '../../components/admin/Chapter';
@@ -18,6 +20,7 @@ const dataProvider = simpleRestProvider('http://localhost:3000/admin', httpClien
 export default function Dashboard() {
   return (
     <Admin authProvider={authProvider} dataProvider={dataProvider}>
+      <Title title="Codify - Admin - " />
       <Resource name="courses" list={CourseList} create={CourseCreate} edit={CourseEdit} />
       <Resource name="chapters" list={ChapterList} create={ChapterCreate} edit={ChapterEdit} />
       <Resource name="topics" list={TopicList} create={TopicCreate} edit={TopicEdit} />
