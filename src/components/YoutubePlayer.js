@@ -24,7 +24,7 @@ export default function YoutubePlayer({ link }) {
       enablejsapi: 1,
       rel: 0,
       showinfo: 0,
-      origin: 'http://localhost:9000',
+      origin: (process.env.DEPLOY_LINK || 'http://localhost:9000'),
     },
   };
 

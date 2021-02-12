@@ -7,13 +7,17 @@ import Button from './Button';
 import YoutubePlayer from './YoutubePlayer';
 import CheckBox from './CheckBox';
 
-export default function Header() {
+export default function StudyAreaContent() {
+  const [isChecked, setIsChecked] = useState(false);
   return (
     <Container>
       <Box>
         <YoutubePlayer link="https://www.youtube.com/watch?v=BN_8bCfVp88" />
         <ContainerBox>
-          <CheckBox />
+          <CheckBox
+            isChecked={isChecked}
+            setIsChecked={setIsChecked}
+          />
           <Button>Avançar</Button>
         </ContainerBox>
       </Box>

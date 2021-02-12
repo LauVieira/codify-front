@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { IoIosArrowDown } from 'react-icons/io';
 import axios from '../services/api';
 import ArrowBackButton from './ArrowBackButton';
 
 export default function Header() {
   const [courseInfo, setCourseInfo] = useState('');
+  const { id } = useParams();
   const history = useHistory();
   useEffect(() => {
     axios
@@ -24,7 +25,7 @@ export default function Header() {
   return (
     <StyledHeader>
       <ArrowBackButton
-        to="/curso/1"
+        to={`/curso/${id}`}
         width="40px"
         height="40px"
         left="15px"
