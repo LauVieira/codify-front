@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -8,7 +8,7 @@ import {
 import { CookiesProvider, useCookies } from 'react-cookie';
 
 import GlobalStyle from './assets/GlobalStyles';
-import { UserProvider } from './contexts/UserContext';
+import UserContext, { UserProvider } from './contexts/UserContext';
 import { CourseProvider } from './contexts/CourseContext';
 import * as Pages from './pages';
 
@@ -36,10 +36,9 @@ export default function App() {
 }
 
 function ProtectedRoute(props) {
-  const [cookies] = useCookies(['token']);
-  const { token } = cookies;
+  const { user } = useContext(UserContext);
 
-  if (!token) {
+  if (!user.id) {
     return (
       <Redirect to="/entrar" />
     );
@@ -49,9 +48,9 @@ function ProtectedRoute(props) {
   );
 }
 function UnprotectedRoute(props) {
-  const [cookies] = useCookies(['token']);
-  const { token } = cookies;
-  if (token) {
+  const { user } = useContext(UserContext);
+
+  if (!user.id) {
     return (
       <Redirect to="/" />
     );
