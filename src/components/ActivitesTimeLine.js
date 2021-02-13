@@ -1,49 +1,55 @@
+/* eslint-disable no-param-reassign */
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { useHistory, useParams } from 'react-router-dom';
 import axios from '../services/api';
-import ArrowBackButton from './ArrowBackButton';
 import ActivityContainer from './ActivityContainer';
 import ActivityLine from './ActivityLine';
 
 export default function ActivitesTimeLine() {
-  const activities = [{
-    doing: false,
-    done: true,
-  },
-  {
-    doing: true,
-    done: true,
-  },
-  {
-    doing: false,
-    done: true,
-  },
-  {
-    doing: false,
-    done: false,
-  },
-  {
-    doing: false,
-    done: false,
-  }];
+  const [act, setAct] = useState('');
+  const { id } = useParams();
+  const history = useHistory();
+  useEffect(() => {
+    axios
+      .get('/courses/topics/1')
+      .then((response) => {
+        const actvida = response.data.topic.activities.map((i) => {
+          i.doing = false;
+          i.done = false;
+          return i;
+        });
+        setAct(actvida);
+        console.log(actvida);
+      })
+      .catch(({ response }) => {
+        console.error(response);
+
+        alert(response.data);
+      });
+  }, []);
+  console.log(act);
+
   return (
     <>
       <StyledHeader>
         <Container>
-          {
-            activities.map((a, i) => {
-              if (i === activities.length - 1) {
-                return <ActivityContainer doing={a.doing} done={a.done} />;
-              }
+          { act
+            ? (
+              act.map((a, i) => {
+                if (i === act.length - 1) {
+                  return <ActivityContainer doing={a.doing} done={a.done} type={a.type} />;
+                }
 
-              return (
-                <>
-                  <ActivityContainer doing={a.doing} done={a.done} />
-                  <ActivityLine doing={a.doing} done={a.done} />
-                </>
-              );
-            })
-          }
+                return (
+                  <>
+                    <ActivityContainer doing={a.doing} done={a.done} type={a.type} />
+                    <ActivityLine doing={a.doing} done={a.done} />
+                  </>
+                );
+              })
+            )
+            : <p>Not activities</p>}
         </Container>
       </StyledHeader>
     </>

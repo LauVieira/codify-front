@@ -3,12 +3,12 @@ import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 
 export default function ActivityContainer(props) {
-  const { done, doing } = props;
+  const { done, doing, type } = props;
   return (
     <>
       <Container>
         <Activity isDone={done} isDoing={doing} />
-        <ActivityName isDone={done} isDoing={doing}>Exercicio</ActivityName>
+        <ActivityName isDone={done} isDoing={doing}>{(type === 'theory') ? 'Teoria' : 'Exercicio'}</ActivityName>
       </Container>
     </>
   );

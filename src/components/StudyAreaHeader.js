@@ -11,8 +11,9 @@ export default function Header() {
   const history = useHistory();
   useEffect(() => {
     axios
-      .get('/courses/topic/3')
+      .get('/courses/topics/1')
       .then((response) => {
+        console.log(response.data);
         setCourseInfo(response.data);
       })
       .catch(({ response }) => {
