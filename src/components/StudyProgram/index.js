@@ -1,27 +1,24 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Topic from './Topic';
+import Chapter from './Chapter';
 
-export default function StudyProgram () {
-  const temporaryList = [
-    { id: 1, title: 'Apresentação', classes: '2 aulas', exercises: '5 exercícios' },
-    { id: 2, title: 'Preparando o ambiente', classes: '2 aulas', exercises: '5 exercícios' },
-    { id: 3, title: 'Introdução à linguagem JS', classes: '2 aulas', exercises: '5 exercícios' },
-    { id: 4, title: 'Variáveis e Tipos de Dados', classes: '2 aulas', exercises: '5 exercícios' },
-    { id: 5, title: 'Estruturas lógicas e condicionais', classes: '2 aulas', exercises: '5 exercícios' },
-  ];
+export default function StudyProgram(props) {
+  const { program } = props;
 
   return (
     <ProgramBox>
+
       <H1>Ementa</H1>
+
       <Ul>
-        {temporaryList.map((topic, index) => (
+        {program.map((chapter, index) => (
           <>
-            <Topic key={topic.id} topic={topic} />
-            {index !== temporaryList.length - 1 && <Line />}
+            <Chapter key={chapter.id} chapter={chapter} />
+            {index !== program.length - 1 && <Line />}
           </>
         ))}
       </Ul>
+
     </ProgramBox>
   );
 }

@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from '../services/api';
-import { Header, Summary, StudyProgram} from '../components';
+import { Header, Summary, StudyProgram } from '../components';
 import CourseContext from '../contexts/CourseContext';
 
 export default function Course() {
@@ -11,7 +11,6 @@ export default function Course() {
   useEffect(() => {
     axios.get(`/courses/${id}`)
       .then((response) => {
-        console.log(response.data);
         setCourseData(response.data);
       })
       .catch((error) => {
@@ -19,7 +18,7 @@ export default function Course() {
         console.log(error);
       });
   }, []);
-  console.log(courseData.course);
+
   return (
     <>
       <Header />
@@ -32,7 +31,7 @@ export default function Course() {
                   <p>{courseData.course.description}</p>
                   <Summary />
                 </Details>
-                <StudyProgram />
+                <StudyProgram program={courseData.program} />
               </>
             )}
       </Container>
@@ -43,7 +42,7 @@ export default function Course() {
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
-  background-color: #E5E5E5;
+  background-color: #F8F8F8;
   margin-top: 100px;
 `;
 

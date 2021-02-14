@@ -14,7 +14,7 @@ export default function Summary() {
   const [percentage, setPercentage] = useState(99);
   const [usedValue, setUsedValue] = useState(percentage);
   const history = useHistory();
-  console.log(user);
+
   useEffect(() => {
     if (percentage <= 8) {
       setUsedValue(8);
