@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useHistory, Link } from 'react-router-dom';
@@ -7,20 +8,29 @@ import Button from './Button';
 import YoutubePlayer from './YoutubePlayer';
 import CheckBox from './CheckBox';
 
-export default function StudyAreaContent() {
+export default function StudyAreaContent({ activity }) {
   const [isChecked, setIsChecked] = useState(false);
   return (
     <Container>
-      <Box>
-        <YoutubePlayer link="https://www.youtube.com/watch?v=BN_8bCfVp88" />
-        <ContainerBox>
-          <CheckBox
-            isChecked={isChecked}
-            setIsChecked={setIsChecked}
-          />
-          <Button>Avançar</Button>
-        </ContainerBox>
-      </Box>
+      {activity
+        ? (
+          <Box>
+            {activity.type === 'theory'
+              ? (activity.theory
+                ? <YoutubePlayer link={activity.theory.youtubeLink} />
+                : <YoutubePlayer link="https://www.youtube.com/watch?v=BN_8bCfVp88" />)
+              : <Word>{activity.id}</Word>}
+            <ContainerBox>
+              <CheckBox
+                isChecked={isChecked}
+                setIsChecked={setIsChecked}
+                activity={activity.id}
+              />
+              <Button>Avançar</Button>
+            </ContainerBox>
+          </Box>
+        )
+        : <Word>Nao tem atividade</Word>}
     </Container>
   );
 }
@@ -61,4 +71,7 @@ const ContainerBox = styled.section`
   justify-content: space-between;
   width: 100%;
   padding-top: 10px;
+`;
+const Word = styled.h1`
+  color: red;
 `;

@@ -2,14 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 import { IoCheckmark } from 'react-icons/io5';
 
-export default function CheckBox({ isChecked, setIsChecked }) {
+export default function CheckBox({ isChecked, setIsChecked, activity }) {
+  function handleClick() {
+    setIsChecked(!isChecked);
+  }
   return (
     <Label htmlFor="concluded" isChecked={isChecked}>
       <Check
         id="concluded"
         type="checkbox"
         value={isChecked}
-        onChange={() => setIsChecked(!isChecked)}
+        onChange={() => handleClick()}
       />
       <Square>
         <IconCheck isChecked={isChecked} />

@@ -1,19 +1,35 @@
-import React, { useState, useContext } from 'react';
+/* eslint-disable no-unused-vars */
+import React, { useState, useContext, useEffect } from 'react';
 import styled from 'styled-components';
+import axios from '../services/api';
 
 import {
-  StudyAreaHeader, ActivitesTimeLine, StudyAreaContent
+  StudyAreaHeader, ActivitesTimeLine,
 } from '../components';
 import UserContext from '../contexts/UserContext';
 
 export default function StudyArea() {
   const { user } = useContext(UserContext);
+  const [activities, setActivities] = useState('');
+  const [courseInfo, setCourseInfo] = useState('');
+  useEffect(() => {
+    axios
+      .get('/courses/topics/1')
+      .then((response) => {
+        setCourseInfo(response.data);
+        setActivities(response.data.topic.activities);
+      })
+      .catch(({ response }) => {
+        console.error(response);
+
+        alert(response.data);
+      });
+  }, []);
 
   return (
     <>
-      <StudyAreaHeader />
-      <ActivitesTimeLine />
-      <StudyAreaContent />
+      <StudyAreaHeader courseInfo={courseInfo || ''} />
+      <ActivitesTimeLine activities={activities || []} />
     </>
   );
 }

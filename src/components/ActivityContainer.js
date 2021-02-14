@@ -1,12 +1,15 @@
 /* eslint-disable no-nested-ternary */
-import React, { useState } from 'react';
-import styled, { css } from 'styled-components';
+import React from 'react';
+import styled from 'styled-components';
 
 export default function ActivityContainer(props) {
-  const { done, doing, type } = props;
+  const {
+    done, doing, type, acti, setActivity
+  } = props;
+
   return (
     <>
-      <Container>
+      <Container onClick={() => setActivity(acti)}>
         <Activity isDone={done} isDoing={doing} />
         <ActivityName isDone={done} isDoing={doing}>{(type === 'theory') ? 'Teoria' : 'Exercicio'}</ActivityName>
       </Container>
@@ -14,7 +17,7 @@ export default function ActivityContainer(props) {
   );
 }
 
-const Container = styled.div`
+const Container = styled.button`
   display: flex;
   flex-direction: column;
   justify-content: center;

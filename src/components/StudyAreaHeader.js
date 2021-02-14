@@ -1,27 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useHistory, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { IoIosArrowDown } from 'react-icons/io';
-import axios from '../services/api';
 import ArrowBackButton from './ArrowBackButton';
 
-export default function Header() {
-  const [courseInfo, setCourseInfo] = useState('');
+export default function Header({ courseInfo }) {
   const { id } = useParams();
-  const history = useHistory();
-  useEffect(() => {
-    axios
-      .get('/courses/topics/1')
-      .then((response) => {
-        console.log(response.data);
-        setCourseInfo(response.data);
-      })
-      .catch(({ response }) => {
-        console.error(response);
-
-        alert(response.data);
-      });
-  }, []);
 
   return (
     <StyledHeader>
