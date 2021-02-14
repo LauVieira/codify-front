@@ -70,7 +70,7 @@ const Overview = styled.section`
 `;
 
 const DetailsUl = styled.ul`
-  background-color: #F8F8F8;
+  background-color: #F9F9F9;
   font-size: 1.8rem;
   padding: 3rem;
 `;

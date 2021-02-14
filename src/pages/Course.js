@@ -42,7 +42,7 @@ export default function Course() {
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
-  background-color: #F8F8F8;
+  background-color: #F9F9F9;
   margin-top: 100px;
 `;
 

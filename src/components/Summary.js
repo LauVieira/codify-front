@@ -21,10 +21,6 @@ export default function Summary() {
     }
   }, []);
 
-  useEffect(() => {
-    setUser(mockedUser);
-  }, []);
-
   function redirect() {
     history.push('/curso/topico');
   }
@@ -103,7 +99,7 @@ const Advance = styled.div`
         position: relative;
         p{
             position: absolute;
-            bottom: 20%;
+            bottom: 12%;
             font-size: 10px;
             color: white;
             font-weight: bold;
@@ -117,12 +113,12 @@ const Advance = styled.div`
         margin: 4px 0px;
     }
     progress::-webkit-progress-bar {
-        background-color: #EAEAEA;
-        border-radius: 7px;
+      background-color: #EAEAEA;
+      border-radius: 7px;
     }
     progress::-webkit-progress-value {
-        background-color: #76DF93;
-        border-radius: 7px;
-        color: white;
+      background-color: #76DF93;
+      border-radius: 7px;
+      color: white;
     }
 `;
