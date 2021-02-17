@@ -7,7 +7,6 @@ import axios from '../services/api';
 import {
   StudyAreaHeader, ActivitesTimeLine,
 } from '../components';
-import UserContext from '../contexts/UserContext';
 
 export default function StudyArea() {
   const { user } = useContext(UserContext);
