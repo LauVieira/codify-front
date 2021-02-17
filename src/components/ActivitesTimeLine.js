@@ -1,36 +1,63 @@
+/* eslint-disable no-param-reassign */
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { IoIosArrowDown } from 'react-icons/io';
-import axios from '../services/api';
+import ActivityContainer from './ActivityContainer';
+import ActivityLine from './ActivityLine';
+import StudyAreaContent from './StudyAreaContent';
 
-export default function Header() {
-  const [courseInfo, setCourseInfo] = useState('');
+export default function ActivitesTimeLine({ activities }) {
+  const [act, setAct] = useState('');
+  const [activity, setActivity] = useState('');
   useEffect(() => {
-    axios
-      .get('/courses/topic/5')
-      .then((response) => {
-        setCourseInfo(response.data);
-      })
-      .catch(({ response }) => {
-        console.error(response);
-
-        alert(response.data);
-      });
-  }, []);
+    const arrayActivities = activities.map((activityItem) => {
+      activityItem.doing = false;
+      activityItem.done = false;
+      return activityItem;
+    });
+    setAct(arrayActivities);
+    setActivity(arrayActivities[0]);
+  }, [activities]);
 
   return (
-    <StyledHeader>
-      <ChapterTopicInformation>
-        {courseInfo
-          ? (
-            <h1>
-              {`${courseInfo.chapter.title} - ${courseInfo.topic.title}`}
-            </h1>
-          )
-          : <h1>nada</h1>}
-        <IoIosArrowDown className="icon" />
-      </ChapterTopicInformation>
-    </StyledHeader>
+    <>
+      <StyledHeader>
+        <Container>
+          { act
+            ? (
+              act.map((a, i) => {
+                if (i === act.length - 1) {
+                  return (
+                    <ActivityContainer
+                      doing={a.doing}
+                      done={a.done}
+                      type={a.type}
+                      key={a.id}
+                      acti={a}
+                      setActivity={setActivity}
+                    />
+                  );
+                }
+
+                return (
+                  <>
+                    <ActivityContainer
+                      doing={a.doing}
+                      done={a.done}
+                      type={a.type}
+                      key={a.id}
+                      acti={a}
+                      setActivity={setActivity}
+                    />
+                    <ActivityLine doing={a.doing} done={a.done} />
+                  </>
+                );
+              })
+            )
+            : <p>Not activities</p>}
+        </Container>
+      </StyledHeader>
+      <StudyAreaContent activity={activity} />
+    </>
   );
 }
 
@@ -48,24 +75,13 @@ const StyledHeader = styled.header`
 
   z-index: 1;
   position: relative;
+  border-bottom: 1px solid #717171;
 `;
 
-const ChapterTopicInformation = styled.section`
+const Container = styled.section`
+  height: 50%;
+  width: 50%;
   display: flex;
   align-items: center;
-  justify-content: center;
-  height: 100%;
-  font-size: 2rem;
-  font-weight:bold;
-  color: var(--color-grey-study-area);
-  font-family: var(--font-roboto);
-  line-height: 29px;
-  h1 {
-    margin-right: 10px;
-  }
-  .icon{
-    top: 38%;
-    transform: rotate(0.11deg);
-    font-size: 2.5rem;
-  }
+  justify-content: space-between;
 `;

@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { useParams } from 'react-router-dom';
 import { IoIosArrowDown } from 'react-icons/io';
-
 import axios from '../services/api';
 import ArrowBackButton from './ArrowBackButton';
 
 export default function StudyAreaHeader() {
   const [courseInfo, setCourseInfo] = useState('');
+  const {id, topicId } = useParams();
   useEffect(() => {
     axios
-      .get('/courses/topic/5')
+      .get(`/courses/topics/${topicId}`)
       .then(({ data }) => {
         setCourseInfo(data);
       })
@@ -23,11 +24,11 @@ export default function StudyAreaHeader() {
   return (
     <StyledHeader>
       <ArrowBackButton
-        to="#"
+        to={`/curso/${id}`}
         width="40px"
         height="40px"
         left="15px"
-        top="9px"
+        top="12px"
         fontSize="30px"
       />
       <ChapterTopicInformation>
