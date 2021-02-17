@@ -60,7 +60,7 @@ export default function SignUp() {
         console.error(error);
         setDisabled(false);
 
-        alert(error.response.data);
+        alert(error.response.data.message);
       });
   }
 

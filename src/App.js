@@ -11,6 +11,7 @@ import GlobalStyle from './assets/GlobalStyles';
 import UserContext, { UserProvider } from './contexts/UserContext';
 import { CourseProvider } from './contexts/CourseContext';
 import * as Pages from './pages';
+import Dashboard from './pages/Admin/Dashboard';
 
 export default function App() {
   return (
@@ -28,6 +29,7 @@ export default function App() {
               <UnprotectedRoute path="/esqueci-senha" component={Pages.ForgotPassword} />
               <UnprotectedRoute path="/redefinir-senha" component={Pages.RedefinePassword} />
               <ProtectedRoute path="/" exact component={Pages.LandingPage} />
+              <Route path="/admin" component={Dashboard} />
             </Switch>
           </Router>
         </CourseProvider>
