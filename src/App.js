@@ -1,14 +1,14 @@
-import React from 'react';
-import { CookiesProvider, useCookies } from 'react-cookie';
+import React, { useContext } from 'react';
 import {
   BrowserRouter as Router,
   Route,
   Switch,
   Redirect,
 } from 'react-router-dom';
+import { CookiesProvider, useCookies } from 'react-cookie';
 
 import GlobalStyle from './assets/GlobalStyles';
-import { UserProvider } from './contexts/UserContext';
+import UserContext, { UserProvider } from './contexts/UserContext';
 import { CourseProvider } from './contexts/CourseContext';
 import * as Pages from './pages';
 import Dashboard from './pages/Admin/Dashboard';
@@ -22,6 +22,7 @@ export default function App() {
             <GlobalStyle />
             <Switch>
               <ProtectedRoute path="/curso/topico" />
+              <ProtectedRoute path="/curso/:id/capitulo/:chapterId/topico/:topicId" component={Pages.StudyArea} />
               <ProtectedRoute path="/curso/:id" component={Pages.Course} />
               <UnprotectedRoute path="/cadastrar" component={Pages.SignUp} />
               <UnprotectedRoute path="/entrar" component={Pages.SignIn} />
@@ -36,11 +37,11 @@ export default function App() {
     </CookiesProvider>
   );
 }
-function ProtectedRoute(props) {
-  const [cookies] = useCookies(['token']);
-  const { token } = cookies;
 
-  if (!token) {
+function ProtectedRoute(props) {
+  const { user } = useContext(UserContext);
+
+  if (!user || !user.id) {
     return (
       <Redirect to="/entrar" />
     );
@@ -50,9 +51,9 @@ function ProtectedRoute(props) {
   );
 }
 function UnprotectedRoute(props) {
-  const [cookies] = useCookies(['token']);
-  const { token } = cookies;
-  if (token) {
+  const { user } = useContext(UserContext);
+
+  if (user && user.id) {
     return (
       <Redirect to="/" />
     );

@@ -40,4 +40,8 @@ const Photo = styled.figure`
     height: 100%;
     border-radius: 50%;
   }
+
+  &:hover {
+    filter: brightness(120%);
+  }
 `;

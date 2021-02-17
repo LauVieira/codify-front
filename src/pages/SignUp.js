@@ -47,8 +47,6 @@ export default function SignUp() {
       name: nameCapitalized, email, password, confirmPassword,
     };
 
-    console.log(body);
-
     axios
       .post('/users/sign-up', body)
       .then(() => {
@@ -62,7 +60,7 @@ export default function SignUp() {
         console.error(error);
         setDisabled(false);
 
-        alert(error.response.data);
+        alert(error.response.data.message);
       });
   }
 

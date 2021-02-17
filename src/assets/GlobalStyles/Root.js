@@ -3,11 +3,7 @@ import { css } from 'styled-components';
 export default css`
     :root {
         // Body
-        --gradient-blue: linear-gradient(to bottom, #1D3364, #56C7E7, #56C7E7, #1D3364);
         --background-color: ##E5E5E5;
-
-        // Container Yellow Description
-        --gradient-yellow: linear-gradient(180deg, #EFDA4F 0%, rgba(239, 218, 79, 0.56) 100%);
         
         // box shadow rest items
         --shadow-strong: 0px 0px 20px rgba(0, 0, 0, 0.15);
@@ -54,5 +50,6 @@ export default css`
         
         // Ver Mais
         --color-grey-thin: #BBBBBB;
+        --color-grey-study-area: #D6D6D6;
     }
 `;

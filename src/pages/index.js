@@ -4,6 +4,7 @@ import ForgotPassword from './ForgotPassword';
 import RedefinePassword from './RedefinePassword';
 import Course from './Course';
 import LandingPage from './LandingPage';
+import StudyArea from './StudyArea';
 
 export {
   SignIn,
@@ -12,4 +13,5 @@ export {
   RedefinePassword,
   Course,
   LandingPage,
+  StudyArea,
 };
