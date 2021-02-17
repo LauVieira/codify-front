@@ -9,10 +9,10 @@ export default function ActivitesTimeLine({ activities }) {
   const [act, setAct] = useState('');
   const [activity, setActivity] = useState('');
   useEffect(() => {
-    const arrayActivities = activities.map((i) => {
-      i.doing = false;
-      i.done = false;
-      return i;
+    const arrayActivities = activities.map((activityItem) => {
+      activityItem.doing = false;
+      activityItem.done = false;
+      return activityItem;
     });
     setAct(arrayActivities);
     setActivity(arrayActivities[0]);

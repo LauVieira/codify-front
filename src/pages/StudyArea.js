@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useContext, useEffect } from 'react';
 import styled from 'styled-components';
+import { useParams } from 'react-router-dom';
 import axios from '../services/api';
 
 import {
@@ -12,9 +13,9 @@ export default function StudyArea() {
   const { user } = useContext(UserContext);
   const [activities, setActivities] = useState('');
   const [courseInfo, setCourseInfo] = useState('');
+  const { id } = useParams();
   useEffect(() => {
-    axios
-      .get('/courses/topics/1')
+    axios`/courses/topics/${id}`)
       .then((response) => {
         setCourseInfo(response.data);
         setActivities(response.data.topic.activities);
