@@ -20,7 +20,7 @@ const dataProvider = simpleRestProvider(`${process.env.API_BASE_URL}/admin`, htt
 
 export default function Dashboard() {
   return (
-    <Admin authProvider={authProvider} dataProvider={dataProvider}>
+    <Admin dataProvider={dataProvider}>
       <Title title="Codify - Admin - " />
       <Resource name="courses" list={CourseList} create={CourseCreate} edit={CourseEdit} />
       <Resource name="chapters" list={ChapterList} create={ChapterCreate} edit={ChapterEdit} />
@@ -29,3 +29,5 @@ export default function Dashboard() {
     </Admin>
   );
 }
+
+//authProvider={authProvider}

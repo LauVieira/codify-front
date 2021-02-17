@@ -55,8 +55,8 @@ export const CourseEdit = (props) => (
       <TextInput source="photo" />
       <TextInput source="alt" />
       <TextInput source="background" />
-      <DateInput disabled source="createdAt" />
-      <DateInput disabled source="updatedAt" />
+      <DateInput source="createdAt" />
+      <DateInput source="updatedAt" />
       <DeleteButton basePath="courses" />
     </SimpleForm>
   </Edit>
