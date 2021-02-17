@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from '../services/api';
-import { Header, Summary, StudyProgram} from '../components';
+import { Header, Summary, StudyProgram } from '../components';
 import CourseContext from '../contexts/CourseContext';
 
 export default function Course() {
