@@ -1,7 +1,9 @@
 import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 
-import { Header, CourseRecommendations, LastCourse, UserCourses } from '../components';
+import {
+  Header, CourseRecommendations, LastCourse, UserCourses,
+} from '../components';
 import UserContext from '../contexts/UserContext';
 
 export default function LandingPage() {
