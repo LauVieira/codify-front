@@ -8,8 +8,12 @@ export default function Topic(props) {
   const { topic, courseId } = props;
   const link = `/curso/${courseId}/capitulo/${topic.chapterId}/topico/${topic.id}`;
 
+  function stopPropagation(event) {
+    event.stopPropagation();
+  }
+
   return (
-    <Li checked={checked}>
+    <Li checked={checked} onClick={stopPropagation}>
 
       <p>
         {checked ? <RiCheckboxCircleFill /> : <RiCheckboxBlankCircleFill />}
