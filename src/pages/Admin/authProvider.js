@@ -1,9 +1,10 @@
 import axios from '../../services/api';
 
 const authProvider = {
-  login: ({ username, password }) => axios.post('/users/login', { username, password })
+  login: ({ username, password }) => axios.post('admin/users/login', { username, password })
     .then((response) => {
-      localStorage.setItem('auth', response.data.token);
+      console.log(response);
+      localStorage.setItem('auth', JSON.stringify(response.data));
     })
     .catch((err) => {
       throw new Error(err.response.data.error);
@@ -24,7 +25,7 @@ const authProvider = {
     const token = localStorage.getItem('auth');
     if (!token) return Promise.resolve();
 
-    return axios.post('/users/logout', {}, { headers: { Authorization: `Bearer ${token}` } })
+    return axios.post('admin/users/logout', {}, { headers: { Authorization: `Bearer ${token}` } })
       .then(() => localStorage.removeItem('auth'))
       .catch((err) => {
         throw new Error(err.response.data.error);
