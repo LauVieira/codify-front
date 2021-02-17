@@ -11,7 +11,7 @@ const httpClient = (url, options = {}) => {
   options.credentials = 'include';
   return fetchUtils.fetchJson(url, options);
 };
-const dataProvider = simpleRestProvider('http://localhost:3000/admin', httpClient);
+const dataProvider = simpleRestProvider(`${process.env.API_BASE_URL}/admin`, httpClient);
 
 export default function Dashboard() {
   return (
