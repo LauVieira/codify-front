@@ -7,11 +7,18 @@ import Anchor from './Anchor';
 import Form from './Form';
 import Spinner from './Spinner';
 import Header from './Header';
+import StudyAreaHeader from './StudyAreaHeader';
 import ProfilePicture from './ProfilePicture';
 import CardCourse from './CardCourse';
 import LastCourse from './LastCourse';
 import UserCourses from './UserCourses';
 import Summary from './Summary';
+import StudyProgram from './StudyProgram';
+import CourseRecommendations from './CourseRecommendations';
+import YoutubePlayer from './YoutubePlayer';
+import ArrowBackButton from './ArrowBackButton';
+import CheckBox from './CheckBox';
+import ActivitesTimeLine from './ActivitesTimeLine';
 
 export {
   Logo,
@@ -28,4 +35,11 @@ export {
   LastCourse,
   UserCourses,
   Summary,
+  StudyProgram,
+  CourseRecommendations,
+  StudyAreaHeader,
+  YoutubePlayer,
+  ArrowBackButton,
+  CheckBox,
+  ActivitesTimeLine,
 };
