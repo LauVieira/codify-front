@@ -7,10 +7,10 @@ import ArrowBackButton from './ArrowBackButton';
 
 export default function StudyAreaHeader() {
   const [courseInfo, setCourseInfo] = useState('');
-  const { id } = useParams();
+  const {id, topicId } = useParams();
   useEffect(() => {
     axios
-      .get(`/courses/topic/${id}`)
+      .get(`/courses/topics/${topicId}`)
       .then(({ data }) => {
         setCourseInfo(data);
       })

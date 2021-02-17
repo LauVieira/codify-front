@@ -9,12 +9,11 @@ import {
 } from '../components';
 
 export default function StudyArea() {
-  const { user } = useContext(UserContext);
   const [activities, setActivities] = useState('');
   const [courseInfo, setCourseInfo] = useState('');
-  const { id } = useParams();
+  const { topicId } = useParams();
   useEffect(() => {
-    axios`/courses/topics/${id}`)
+    axios.get(`/courses/topics/${topicId}`)
       .then((response) => {
         setCourseInfo(response.data);
         setActivities(response.data.topic.activities);
