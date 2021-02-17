@@ -15,7 +15,7 @@ export default function UserCourses() {
       .catch(({ response }) => {
         console.error(response);
 
-        alert(response.data);
+        alert(response.data.message);
       });
   }, []);
 
