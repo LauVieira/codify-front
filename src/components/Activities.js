@@ -5,7 +5,7 @@ import ActivityContainer from './ActivityContainer';
 import ActivityLine from './ActivityLine';
 import StudyAreaContent from './StudyAreaContent';
 
-export default function ActivitesTimeLine({ activities }) {
+export default function Activities({ activities }) {
   const [act, setAct] = useState('');
   const [activity, setActivity] = useState('');
   useEffect(() => {

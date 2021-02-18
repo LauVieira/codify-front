@@ -5,14 +5,13 @@ import { useParams } from 'react-router-dom';
 import axios from '../services/api';
 
 import {
-  StudyAreaHeader, ActivitesTimeLine,
+  StudyAreaHeader, Activities,
 } from '../components';
 
 export default function StudyArea() {
   const [activities, setActivities] = useState('');
   const [courseInfo, setCourseInfo] = useState('');
   const { topicId } = useParams();
-  console.log(courseInfo);
   useEffect(() => {
     axios.get(`/courses/topics/${topicId}`)
       .then((response) => {
@@ -29,7 +28,7 @@ export default function StudyArea() {
   return (
     <>
       <StudyAreaHeader courseInfo={courseInfo || ''} />
-      <ActivitesTimeLine activities={activities || []} />
+      <Activities activities={activities || []} />
     </>
   );
 }
