@@ -1,13 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useContext} from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { RiArrowDownSLine } from 'react-icons/ri';
+import axios from '../services/api';
 
 import Logo from './Logo';
 import ProfilePicture from './ProfilePicture';
+import UserContext from '../contexts/UserContext';
 
 export default function Header() {
+  const { setUser } = useContext(UserContext);
   const [expand, setExpand] = useState(false);
+  const history = useHistory();
+
+  async function handleSignOut() {
+    try {
+      await axios.post('/users/sign-out');
+      setUser(null);
+
+      localStorage.clear();
+      history.push('/entrar');
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <StyledHeader>
