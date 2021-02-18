@@ -11,7 +11,6 @@ export default function Course() {
   useEffect(() => {
     axios.get(`/courses/${id}`)
       .then((response) => {
-        console.log(response.data);
         setCourseData(response.data);
       })
       .catch((error) => {
@@ -19,7 +18,7 @@ export default function Course() {
         console.log(error);
       });
   }, []);
-  console.log(courseData.course);
+
   return (
     <>
       <Header />
@@ -32,7 +31,7 @@ export default function Course() {
                   <p>{courseData.course.description}</p>
                   <Summary />
                 </Details>
-                <StudyProgram />
+                <StudyProgram program={courseData.program} />
               </>
             )}
       </Container>
@@ -42,6 +41,7 @@ export default function Course() {
 
 const Container = styled.div`
   width: 100vw;
+  height: 100vh;
   background-color: #F9F9F9;
   margin-top: 100px;
 `;
