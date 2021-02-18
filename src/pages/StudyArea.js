@@ -12,6 +12,7 @@ export default function StudyArea() {
   const [activities, setActivities] = useState('');
   const [courseInfo, setCourseInfo] = useState('');
   const { topicId } = useParams();
+  console.log(courseInfo);
   useEffect(() => {
     axios.get(`/courses/topics/${topicId}`)
       .then((response) => {

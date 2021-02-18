@@ -10,8 +10,8 @@ export default function ActivitesTimeLine({ activities }) {
   const [activity, setActivity] = useState('');
   useEffect(() => {
     const arrayActivities = activities.map((activityItem) => {
-      activityItem.doing = false;
-      activityItem.done = false;
+      activityItem.doing = true;
+      activityItem.done = true;
       return activityItem;
     });
     setAct(arrayActivities);
@@ -80,7 +80,7 @@ const StyledHeader = styled.header`
 
 const Container = styled.section`
   height: 50%;
-  width: 50%;
+  max-width: 50%;
   display: flex;
   align-items: center;
   justify-content: space-between;
