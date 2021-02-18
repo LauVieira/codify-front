@@ -30,7 +30,7 @@ export default function Course() {
                 <Details>
                   <h1>{courseData.course.title}</h1>
                   <p>{courseData.course.description}</p>
-                  <Summary />
+                  <Summary id={id} />
                 </Details>
                 <StudyProgram />
               </>
