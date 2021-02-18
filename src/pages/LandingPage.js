@@ -17,7 +17,7 @@ export default function LandingPage() {
   return (
     <>
       <Header />
-      {/*<button type="submit" onClick={toggleTheresCourse}>change</button>
+      <button type="submit" onClick={toggleTheresCourse}>change</button>
       <UserLandingPageContainer>
         { theresCourse
           ? (
@@ -46,7 +46,7 @@ export default function LandingPage() {
               <CourseRecommendations />
             </>
           )}
-          </UserLandingPageContainer>*/}
+        </UserLandingPageContainer>
     </>
   );
 }

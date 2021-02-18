@@ -10,19 +10,20 @@ import UserContext from '../contexts/UserContext';
 
 export default function Header() {
   const { setUser } = useContext(UserContext);
-  const [expand, setExpand] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
   const history = useHistory();
 
-  async function handleSignOut() {
-    try {
-      await axios.post('/users/sign-out');
-      setUser(null);
+  function handleSignOut() {
+    axios.post('/users/sign-out')
+      .then(() => {
+        setUser(null);
 
-      localStorage.clear();
-      history.push('/entrar');
-    } catch (error) {
-      console.error(error);
-    }
+        localStorage.clear();
+        history.push('/entrar');
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
   return (
@@ -39,13 +40,13 @@ export default function Header() {
         <NavLink to="#" onClick={() => alert('Em construção')}> cursos </NavLink>
 
       </Navigation>
-      <Container onClick={() => setExpand(!expand)}>
-        <ArrowIcon expand={expand} />
+      <Container showMenu={showMenu} onClick={() => setShowMenu(!showMenu)}>
+        <RiArrowDownSLine />
         <ProfilePicture
           existPhoto={false}
         />
-        {expand && (
-          <DropDown expand={expand}>
+        {showMenu && (
+          <DropDown showMenu={showMenu}>
             <DropLink to="#" onClick={() => alert('Em construção')}>
               Perfil
             </DropLink>
@@ -115,13 +116,6 @@ const DropLink = styled(NavLink)`
   align-items: center;
 `;
 
-const ArrowIcon = styled(RiArrowDownSLine)`
-  color: #3d3d3d;
-  font-size: 4rem;
-  margin-right: 1rem;
-  transform: ${(props) => (props.expand ? 'rotate(180deg)' : '0')};
-`;
-
 const Container = styled.div`
   height: 100%;
 
@@ -129,6 +123,13 @@ const Container = styled.div`
   align-items: center;
 
   cursor: pointer;
+
+  svg {
+    color: #3d3d3d;
+    font-size: 4rem;
+    margin-right: 1rem;
+    transform: ${(props) => (props.showMenu ? 'rotate(180deg)' : '0')};
+  }
 `;
 
 const DropDown = styled.div`
