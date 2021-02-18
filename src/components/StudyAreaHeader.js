@@ -5,22 +5,8 @@ import { IoIosArrowDown } from 'react-icons/io';
 import axios from '../services/api';
 import ArrowBackButton from './ArrowBackButton';
 
-export default function StudyAreaHeader() {
-  const [courseInfo, setCourseInfo] = useState('');
-  const {id, topicId } = useParams();
-  useEffect(() => {
-    axios
-      .get(`/courses/topics/${topicId}`)
-      .then(({ data }) => {
-        setCourseInfo(data);
-      })
-      .catch(({ response }) => {
-        console.error(response);
-
-        alert(response.data);
-      });
-  }, []);
-
+export default function StudyAreaHeader({ courseInfo }) {
+  const { id, topicId } = useParams();
   return (
     <StyledHeader>
       <ArrowBackButton

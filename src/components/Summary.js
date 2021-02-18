@@ -22,7 +22,7 @@ export default function Summary() {
   }, []);
 
   function redirect() {
-    history.push('/curso/2/capitulo/1/topico/1');
+    history.push('/curso/2/capitulo/1/topico/1/atividade/1');
   }
 
   return (
