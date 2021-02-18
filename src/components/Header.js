@@ -1,4 +1,4 @@
-import React, { useState, useContext} from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import { useHistory, Link } from 'react-router-dom';
 import { RiArrowDownSLine } from 'react-icons/ri';
