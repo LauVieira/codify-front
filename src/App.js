@@ -5,7 +5,6 @@ import {
   Switch,
   Redirect,
 } from 'react-router-dom';
-import { CookiesProvider, useCookies } from 'react-cookie';
 
 import GlobalStyle from './assets/GlobalStyles';
 import UserContext, { UserProvider } from './contexts/UserContext';
@@ -15,7 +14,6 @@ import Dashboard from './pages/Admin/Dashboard';
 
 export default function App() {
   return (
-    <CookiesProvider>
       <UserProvider>
         <CourseProvider>
           <Router>
@@ -34,7 +32,6 @@ export default function App() {
           </Router>
         </CourseProvider>
       </UserProvider>
-    </CookiesProvider>
   );
 }
 

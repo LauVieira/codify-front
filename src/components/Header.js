@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useHistory, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { RiArrowDownSLine } from 'react-icons/ri';
 
 import Logo from './Logo';
 import ProfilePicture from './ProfilePicture';
 
 export default function Header() {
-  const history = useHistory();
+  const [expand, setExpand] = useState(false);
 
   return (
     <StyledHeader>
@@ -18,15 +19,28 @@ export default function Header() {
           onClick={() => history.push('/')}
         />
 
-        <NavLink to="/"> Home </NavLink>
-        <NavLink to="#" onClick={() => alert('Em construção')}> Cursos </NavLink>
-        <NavLink to="#" onClick={() => alert('Em construção')}> Perfil </NavLink>
-      </Navigation>
+        <NavLink to="/"> home </NavLink>
+        <NavLink to="#" onClick={() => alert('Em construção')}> cursos </NavLink>
 
-      <ProfilePicture
-        onClick={() => alert('Em construção')}
-        existPhoto={false}
-      />
+      </Navigation>
+      <Container onClick={() => setExpand(!expand)}>
+        <ArrowIcon expand={expand} />
+        <ProfilePicture
+          existPhoto={false}
+        />
+        {expand && (
+          <DropDown expand={expand}>
+            <DropLink to="#" onClick={() => alert('Em construção')}>
+              Perfil
+            </DropLink>
+            <Line />
+            <DropLink to="#" onClick={handleSignOut}>
+              Sair
+            </DropLink>
+          </DropDown>
+        )}
+      </Container>
+
     </StyledHeader>
   );
 }
@@ -60,17 +74,67 @@ const Navigation = styled.nav`
 
 const NavLink = styled(Link)`
   margin: 0 0 0 40px;
-  font-size: 2rem;
+  font-size: 2.5rem;
   color: var(--color-subtitle);
 
   transition: 0.1s;
-  text-transform: lowercase;
 
   &:hover, &:focus {
     color: var(--color-blue);
   }
   
-  &::first-letter {
+  &:first-letter {
     text-transform: uppercase;
   }
+`;
+
+const DropLink = styled(NavLink)`
+  margin: 0;
+  display: flex;
+  width: 100%;
+  line-height: 4.5rem;
+  font-size: 2rem;
+
+  justify-content: center;
+  align-items: center;
+`;
+
+const ArrowIcon = styled(RiArrowDownSLine)`
+  color: #3d3d3d;
+  font-size: 4rem;
+  margin-right: 1rem;
+  transform: ${(props) => (props.expand ? 'rotate(180deg)' : '0')};
+`;
+
+const Container = styled.div`
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+
+  cursor: pointer;
+`;
+
+const DropDown = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  right: 0px;
+  top: 100px;
+  position: fixed;
+
+  width: 150px;
+  padding: 0 8px;
+
+  z-index: 1;
+
+  border-radius: 0px 0px 10px 20px;
+  background: var(--color-white);
+  box-shadow: var(--shadow-regular);
+`;
+
+const Line = styled.div`
+  width: 100%;
+  height: 1px;
+  background: #D7D7D7;
 `;
