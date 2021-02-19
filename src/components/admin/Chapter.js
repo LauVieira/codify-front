@@ -36,7 +36,7 @@ export const ChapterCreate = (props) => (
       <ReferenceInput source="courseId" reference="courses" label="Curso">
         <SelectInput optionText="title" />
       </ReferenceInput>
-      <DeleteButton basePath="chapters" />
+      <DeleteButton basePath="/chapters" />
     </SimpleForm>
   </Create>
 );
@@ -49,7 +49,7 @@ export const ChapterEdit = (props) => (
       <ReferenceInput source="courseId" reference="courses" label="Curso">
         <SelectInput optionText="title" />
       </ReferenceInput>
-      <DeleteButton basePath="chapters" />
+      <DeleteButton basePath="/chapters" />
     </SimpleForm>
   </Edit>
 );

@@ -33,10 +33,10 @@ export const ActivityCreate = (props) => (
     <SimpleForm>
       <TextInput disabled source="id" />
       <TextInput source="title" />
-      <ReferenceInput source="topicoId" reference="topicos" label="Tópico">
+      <ReferenceInput source="topicId" reference="topics" label="Tópico">
         <SelectInput optionText="title" />
       </ReferenceInput>
-      <DeleteButton basePath="Activities" />
+      <DeleteButton basePath="/Activities" />
     </SimpleForm>
   </Create>
 );
@@ -46,10 +46,10 @@ export const ActivityEdit = (props) => (
     <SimpleForm>
       <TextInput disabled source="id" />
       <TextInput source="title" />
-      <ReferenceInput source="topicoId" reference="topicos" label="Tópico">
+      <ReferenceInput source="topicId" reference="topics" label="Tópico">
         <SelectInput optionText="title" />
       </ReferenceInput>
-      <DeleteButton basePath="Activities" />
+      <DeleteButton basePath="/Activities" />
     </SimpleForm>
   </Edit>
 );
