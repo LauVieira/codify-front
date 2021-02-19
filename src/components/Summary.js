@@ -8,13 +8,12 @@ import UserContext from '../contexts/UserContext';
 import Button from './Button';
 import ProfilePicture from './ProfilePicture';
 
-export default function Summary() {
-  const { courseData, setCourseData } = useContext(CourseContext);
+export default function Summary({ courseData }) {
   const { user, setUser } = useContext(UserContext);
   const [percentage, setPercentage] = useState(99);
   const [usedValue, setUsedValue] = useState(percentage);
   const history = useHistory();
-
+  const { course, program } = courseData;
   useEffect(() => {
     if (percentage <= 8) {
       setUsedValue(8);
@@ -22,7 +21,7 @@ export default function Summary() {
   }, []);
 
   function redirect() {
-    history.push('/curso/2/capitulo/1/topico/1/atividade/1');
+    history.push(`/curso/${course.id}/capitulo/${program[0].id}/topico/${program[0].topics[0].id}/atividade/${program[0].topics[0].activities[0].id}`);
   }
 
   return (

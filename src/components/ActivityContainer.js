@@ -1,17 +1,18 @@
 /* eslint-disable no-nested-ternary */
 import React from 'react';
 import styled from 'styled-components';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 export default function ActivityContainer(props) {
   const {
     done, doing, type, acti, setActivity,
   } = props;
   const history = useHistory();
+  const { id, chapterId, topicId } = useParams();
 
   function handleClick(activity) {
     setActivity(activity);
-    history.push(`/curso/2/capitulo/1/topico/1/atividade/${activity.id}`);
+    history.push(`/curso/${id}/capitulo/${chapterId}/topico/${topicId}/atividade/${activity.id}`);
   }
 
   return (

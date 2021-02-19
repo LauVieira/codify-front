@@ -1,5 +1,6 @@
+/* eslint-disable react/button-has-type */
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { RiCheckboxBlankCircleFill, RiCheckboxCircleFill } from 'react-icons/ri';
 
@@ -7,9 +8,13 @@ export default function Topic(props) {
   const [checked, setChecked] = useState(false);
   const { topic, courseId } = props;
   const link = `/curso/${courseId}/capitulo/${topic.chapterId}/topico/${topic.id}`;
+  const history = useHistory();
 
   function stopPropagation(event) {
     event.stopPropagation();
+  }
+  function handleClick() {
+    history.push(`/curso/${courseId}/capitulo/${topic.chapterId}/topico/${topic.id}/atividade/${topic.activities[0].id}`);
   }
 
   return (
@@ -20,7 +25,7 @@ export default function Topic(props) {
         {topic.title}
       </p>
 
-      <Link to={link}>Visualizar</Link>
+      <button onClick={handleClick}>Visualizar</button>
 
     </Li>
   );

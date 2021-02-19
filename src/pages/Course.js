@@ -29,7 +29,7 @@ export default function Course() {
                 <Details>
                   <h1>{courseData.course.title}</h1>
                   <p>{courseData.course.description}</p>
-                  <Summary id={id} />
+                  <Summary courseData={courseData} />
                 </Details>
                 <StudyProgram program={courseData.program} />
               </>
