@@ -100,7 +100,7 @@ const NavLink = styled(Link)`
     color: var(--color-blue);
   }
   
-  &:first-letter {
+  &::first-letter {
     text-transform: uppercase;
   }
 `;
