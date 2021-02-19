@@ -7,7 +7,6 @@ import {
   TextField,
   DateField,
   EditButton,
-  DeleteButton,
   SimpleForm,
   TextInput,
   DateInput,
@@ -25,7 +24,6 @@ export const CourseList = (props) => (
       <DateField source="createdAt" />
       <DateField source="updatedAt" />
       <EditButton basePath="/courses" />
-      <DeleteButton basePath="/courses" />
     </Datagrid>
   </List>
 );
@@ -41,7 +39,6 @@ export const CourseCreate = (props) => (
       <TextInput source="background" />
       <DateInput source="createdAt" />
       <DateInput source="updatedAt" />
-      <DeleteButton basePath="courses" />
     </SimpleForm>
   </Create>
 );
@@ -56,8 +53,7 @@ export const CourseEdit = (props) => (
       <TextInput source="alt" />
       <TextInput source="background" />
       <DateInput disabled source="createdAt" />
-      <DateInput disabled source="updatedAt" />
-      <DeleteButton basePath="courses" />
+      <DateInput source="updatedAt" />
     </SimpleForm>
   </Edit>
 );
