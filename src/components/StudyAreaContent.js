@@ -1,15 +1,32 @@
 /* eslint-disable no-nested-ternary */
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import { useHistory, Link } from 'react-router-dom';
+import styled, { css } from 'styled-components';
+import { useHistory, Link, useParams } from 'react-router-dom';
 import { IoIosArrowDown } from 'react-icons/io';
 import axios from '../services/api';
-import Button from './Button';
 import YoutubePlayer from './YoutubePlayer';
 import CheckBox from './CheckBox';
 
-export default function StudyAreaContent({ activity }) {
+export default function StudyAreaContent({
+  activity, setActivity, activities,
+}) {
   const [isChecked, setIsChecked] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const history = useHistory();
+  const { id, chapterId, topicId } = useParams();
+
+  function handleClick() {
+    setIsLoading(true);
+    const index = activities.indexOf(activity);
+    if (index === activities.length - 1) {
+      console.log('ultimo');
+    } else {
+      setActivity(activities[index + 1]);
+      setIsLoading(false);
+      history.push(`/curso/${id}/capitulo/${chapterId}/topico/${topicId}/atividade/${activities[index + 1].id}`);
+    }
+    setIsLoading(false);
+  }
   return (
     <Container>
       {activity
@@ -26,7 +43,10 @@ export default function StudyAreaContent({ activity }) {
                 setIsChecked={setIsChecked}
                 activity={activity.id}
               />
-              <Button>Avançar</Button>
+              <Button onClick={handleClick} isLoading={isLoading}>
+                Avançar
+                {' >>'}
+              </Button>
             </ContainerBox>
           </Box>
         )
@@ -55,15 +75,6 @@ const Box = styled.section`
   align-items: center;
   justify-content: center;
   flex-direction:column;
-  button{
-        width: 25%;
-        font-size: 18px;
-        color:white-space;
-        span::after{
-            font-size: 30px;
-            top: -5px;
-        }
-    }
 `;
 const ContainerBox = styled.section`
   display: flex;
@@ -74,4 +85,24 @@ const ContainerBox = styled.section`
 `;
 const Word = styled.h1`
   color: red;
+`;
+const Button = styled.button`
+    border-radius: var(--radius-thin);
+    background-color: ${({ isLoading }) => (isLoading ? '#FFFFFF' : '#46A7D4')};
+    border: ${({ isLoading }) => (isLoading ? '3px solid #46A7D4' : 'none')};
+
+    color: var(--color-white);
+    font-size: 2.4rem;
+    line-height: 2.8rem;
+    font-weight: bold;
+
+    width: 30%;
+    height: 50px;
+
+    margin-bottom: 10px;
+
+    text-align: center;
+    position: relative;
+
+    transition: background-color border color 0.5s linear;
 `;

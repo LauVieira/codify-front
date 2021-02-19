@@ -56,7 +56,11 @@ export default function Activities({ activities }) {
             : <p>Not activities</p>}
         </Container>
       </StyledHeader>
-      <StudyAreaContent activity={activity} />
+      <StudyAreaContent
+        activity={activity}
+        setActivity={setActivity}
+        activities={act}
+      />
     </>
   );
 }
