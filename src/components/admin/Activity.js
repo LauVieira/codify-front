@@ -18,10 +18,10 @@ export const ActivityList = (props) => (
   <List {...props}>
     <Datagrid rowClick="edit">
       <TextField source="id" />
-      <TextField source="title" />
       <ReferenceField source="topicId" reference="topics" label="Tópico">
         <TextField source="title" />
       </ReferenceField>
+      <TextField source="type" />
       <EditButton basePath="/Activities" />
       <DeleteButton basePath="/Activities" />
     </Datagrid>
@@ -32,10 +32,10 @@ export const ActivityCreate = (props) => (
   <Create {...props}>
     <SimpleForm>
       <TextInput disabled source="id" />
-      <TextInput source="title" />
       <ReferenceInput source="topicId" reference="topics" label="Tópico">
         <SelectInput optionText="title" />
       </ReferenceInput>
+      <TextField source="type" />
       <DeleteButton basePath="/Activities" />
     </SimpleForm>
   </Create>
@@ -45,10 +45,10 @@ export const ActivityEdit = (props) => (
   <Edit {...props}>
     <SimpleForm>
       <TextInput disabled source="id" />
-      <TextInput source="title" />
       <ReferenceInput source="topicId" reference="topics" label="Tópico">
         <SelectInput optionText="title" />
       </ReferenceInput>
+      <TextField source="type" />
       <DeleteButton basePath="/Activities" />
     </SimpleForm>
   </Edit>
