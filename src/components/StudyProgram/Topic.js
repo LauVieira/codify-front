@@ -14,7 +14,11 @@ export default function Topic(props) {
     event.stopPropagation();
   }
   function handleClick() {
-    history.push(`/curso/${courseId}/capitulo/${topic.chapterId}/topico/${topic.id}/atividade/${topic.activities[0].id}`);
+    if (topic.activities[0].id !== undefined) {
+      history.push(`/curso/${courseId}/capitulo/${topic.chapterId}/topico/${topic.id}/atividade/${topic.activities[0].id}`);
+    } else {
+      alert('topic nao tem activities');
+    }
   }
 
   return (

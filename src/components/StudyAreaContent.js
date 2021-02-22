@@ -1,15 +1,39 @@
 /* eslint-disable no-nested-ternary */
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useHistory, Link } from 'react-router-dom';
-import { IoIosArrowDown } from 'react-icons/io';
-import axios from '../services/api';
+import { useHistory, useParams } from 'react-router-dom';
 import Button from './Button';
 import YoutubePlayer from './YoutubePlayer';
 import CheckBox from './CheckBox';
+import CourseContext from '../contexts/CourseContext';
 
-export default function StudyAreaContent({ activity }) {
+export default function StudyAreaContent({ activity, setActivity }) {
   const [isChecked, setIsChecked] = useState(false);
+  const history = useHistory();
+  const { id, chapterId, topicId } = useParams();
+  const {
+    activities, program, setChapter, setTopic, chapter,
+  } = useContext(CourseContext);
+
+  useEffect(() => {
+    const c = program.find((cap) => cap.id == chapterId);
+    setChapter(c);
+    const t = c.topics.find((top) => top.id == topicId);
+    setTopic(t);
+  }, []);
+  
+  function handleClick(act) {
+    const i = activities.findIndex((a) => a.id == act.id);
+    if (i === activities.length - 1) {
+      const j = chapter.topics.findIndex((t) => t.id == topicId);
+      setTopic(chapter.topics[j + 1]);
+      setActivity(chapter.topics[j + 1].activities[0]);
+      history.push(`/curso/${id}/capitulo/${chapterId}/topico/${chapter.topics[j + 1].id}/atividade/${chapter.topics[j + 1].activities[0].id}`);
+    } else {
+      setActivity(activities[i + 1]);
+      history.push(`/curso/${id}/capitulo/${chapterId}/topico/${topicId}/atividade/${activities[i + 1].id}`);
+    }
+  }
   return (
     <Container>
       {activity
@@ -26,7 +50,7 @@ export default function StudyAreaContent({ activity }) {
                 setIsChecked={setIsChecked}
                 activity={activity.id}
               />
-              <Button>Avançar</Button>
+              <Button onClick={() => handleClick(activity)}>Avançar</Button>
             </ContainerBox>
           </Box>
         )

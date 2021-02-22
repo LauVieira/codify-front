@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { IoIosArrowDown } from 'react-icons/io';
-import axios from '../services/api';
 import ArrowBackButton from './ArrowBackButton';
 
 export default function StudyAreaHeader({ courseInfo }) {
-  const { id, topicId } = useParams();
+  const { id } = useParams();
   return (
     <StyledHeader>
       <ArrowBackButton
