@@ -23,7 +23,6 @@ export const ChapterList = (props) => (
         <TextField source="title" />
       </ReferenceField>
       <EditButton basePath="/chapters" />
-      <DeleteButton basePath="/chapters" />
     </Datagrid>
   </List>
 );
@@ -36,7 +35,6 @@ export const ChapterCreate = (props) => (
       <ReferenceInput source="courseId" reference="courses" label="Curso">
         <SelectInput optionText="title" />
       </ReferenceInput>
-      <DeleteButton basePath="/chapters" />
     </SimpleForm>
   </Create>
 );
@@ -49,7 +47,6 @@ export const ChapterEdit = (props) => (
       <ReferenceInput source="courseId" reference="courses" label="Curso">
         <SelectInput optionText="title" />
       </ReferenceInput>
-      <DeleteButton basePath="/chapters" />
     </SimpleForm>
   </Edit>
 );
