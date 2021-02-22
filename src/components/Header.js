@@ -22,6 +22,7 @@ export default function Header() {
         history.push('/entrar');
       })
       .catch((error) => {
+        alert(error.response.data.message);
         console.error(error);
       });
   }
