@@ -5,7 +5,7 @@ import { useHistory, useParams } from 'react-router-dom';
 
 export default function ActivityContainer(props) {
   const {
-    done, doing, type, acti, setActivity,
+    done, doing, type, activityItem, setActivity,
   } = props;
   const history = useHistory();
   const { id, chapterId, topicId } = useParams();
@@ -17,7 +17,7 @@ export default function ActivityContainer(props) {
 
   return (
     <>
-      <Container onClick={() => handleClick(acti)}>
+      <Container onClick={() => handleClick(activityItem)}>
         <Activity isDone={done} isDoing={doing} />
         <ActivityName isDone={done} isDoing={doing}>{(type === 'theory') ? 'Teoria' : 'Exercicio'}</ActivityName>
       </Container>

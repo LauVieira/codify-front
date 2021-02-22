@@ -21,7 +21,6 @@ export default function StudyAreaContent({ activity, setActivity }) {
     const t = c.topics.find((top) => top.id == topicId);
     setTopic(t);
   }, []);
-  
   function handleClick(act) {
     const i = activities.findIndex((a) => a.id == act.id);
     if (i === activities.length - 1) {

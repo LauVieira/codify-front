@@ -32,7 +32,7 @@ export default function Activities({ activities }) {
                       done={a.done}
                       type={a.type}
                       key={a.id}
-                      acti={a}
+                      activityItem={a}
                       setActivity={setActivity}
                     />
                   );
@@ -45,7 +45,7 @@ export default function Activities({ activities }) {
                       done={a.done}
                       type={a.type}
                       key={a.id}
-                      acti={a}
+                      activityItem={a}
                       setActivity={setActivity}
                     />
                     <ActivityLine doing={a.doing} done={a.done} />
