@@ -19,7 +19,7 @@ import CourseRecommendations from './CourseRecommendations';
 import YoutubePlayer from './YoutubePlayer';
 import ArrowBackButton from './ArrowBackButton';
 import CheckBox from './CheckBox';
-import ActivitesTimeLine from './ActivitesTimeLine';
+import Activities from './Activities';
 
 export {
   Logo,
@@ -42,6 +42,6 @@ export {
   YoutubePlayer,
   ArrowBackButton,
   CheckBox,
-  ActivitesTimeLine,
+  Activities,
   StudyAreaContent,
 };

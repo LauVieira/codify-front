@@ -5,13 +5,13 @@ import ActivityContainer from './ActivityContainer';
 import ActivityLine from './ActivityLine';
 import StudyAreaContent from './StudyAreaContent';
 
-export default function ActivitesTimeLine({ activities }) {
+export default function Activities({ activities }) {
   const [act, setAct] = useState('');
   const [activity, setActivity] = useState('');
   useEffect(() => {
     const arrayActivities = activities.map((activityItem) => {
-      activityItem.doing = false;
-      activityItem.done = false;
+      activityItem.doing = true;
+      activityItem.done = true;
       return activityItem;
     });
     setAct(arrayActivities);
@@ -32,7 +32,7 @@ export default function ActivitesTimeLine({ activities }) {
                       done={a.done}
                       type={a.type}
                       key={a.id}
-                      acti={a}
+                      activityItem={a}
                       setActivity={setActivity}
                     />
                   );
@@ -45,7 +45,7 @@ export default function ActivitesTimeLine({ activities }) {
                       done={a.done}
                       type={a.type}
                       key={a.id}
-                      acti={a}
+                      activityItem={a}
                       setActivity={setActivity}
                     />
                     <ActivityLine doing={a.doing} done={a.done} />
@@ -56,7 +56,7 @@ export default function ActivitesTimeLine({ activities }) {
             : <p>Not activities</p>}
         </Container>
       </StyledHeader>
-      <StudyAreaContent activity={activity} />
+      <StudyAreaContent activity={activity} setActivity={setActivity} />
     </>
   );
 }
@@ -80,7 +80,7 @@ const StyledHeader = styled.header`
 
 const Container = styled.section`
   height: 50%;
-  width: 50%;
+  max-width: 50%;
   display: flex;
   align-items: center;
   justify-content: space-between;
