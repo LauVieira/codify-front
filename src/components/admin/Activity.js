@@ -6,7 +6,6 @@ import {
   Datagrid,
   TextField,
   EditButton,
-  DeleteButton,
   SimpleForm,
   TextInput,
   ReferenceField,
@@ -34,7 +33,7 @@ export const ActivityCreate = (props) => (
       <ReferenceInput source="topicId" reference="topics" label="Tópico">
         <SelectInput optionText="title" />
       </ReferenceInput>
-      <TextField source="type" />
+      <TextInput source="type" />
     </SimpleForm>
   </Create>
 );
@@ -46,7 +45,7 @@ export const ActivityEdit = (props) => (
       <ReferenceInput source="topicId" reference="topics" label="Tópico">
         <SelectInput optionText="title" />
       </ReferenceInput>
-      <TextField source="type" />
+      <TextInput source="type" />
     </SimpleForm>
   </Edit>
 );

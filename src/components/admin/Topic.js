@@ -6,7 +6,6 @@ import {
   Datagrid,
   TextField,
   EditButton,
-  DeleteButton,
   SimpleForm,
   TextInput,
   ReferenceField,
