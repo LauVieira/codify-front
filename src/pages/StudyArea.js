@@ -3,17 +3,18 @@ import React, { useState, useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import axios from '../services/api';
+import CourseContext from '../contexts/CourseContext';
 
 import {
-  StudyAreaHeader, ActivitesTimeLine,
+  StudyAreaHeader, Activities,
 } from '../components';
 
 export default function StudyArea() {
-  const [activities, setActivities] = useState('');
   const [courseInfo, setCourseInfo] = useState('');
-  const { topicId } = useParams();
+  const { chapterId, topicId } = useParams();
+  const { activities, setActivities } = useContext(CourseContext);
   useEffect(() => {
-    axios.get(`/courses/topics/${topicId}`)
+    axios.get(`/courses/chapters/${chapterId}/topics/${topicId}/activities`)
       .then((response) => {
         setCourseInfo(response.data);
         setActivities(response.data.topic.activities);
@@ -23,12 +24,12 @@ export default function StudyArea() {
 
         alert(response.data);
       });
-  }, []);
+  }, [topicId]);
 
   return (
     <>
       <StudyAreaHeader courseInfo={courseInfo || ''} />
-      <ActivitesTimeLine activities={activities || []} />
+      <Activities activities={activities || []} />
     </>
   );
 }
