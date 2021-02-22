@@ -1,6 +1,6 @@
 /* eslint-disable no-nested-ternary */
-import React, { useState } from 'react';
-import styled, { css } from 'styled-components';
+import React from 'react';
+import styled from 'styled-components';
 
 export default function ActivityLine(props) {
   const { done, doing } = props;

@@ -3,7 +3,7 @@ import axios from '../../services/api';
 const authProvider = {
   login: ({ username, password }) => axios.post('admin/users/login', { username, password })
     .then((response) => {
-      localStorage.setItem('auth', response.data.token);
+      localStorage.setItem('auth', JSON.stringify(response.data));
     })
     .catch((err) => {
       throw new Error(err.response.data.error);

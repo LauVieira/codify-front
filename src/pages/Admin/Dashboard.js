@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import {
   Admin, Resource, fetchUtils, Title,
 } from 'react-admin';
@@ -22,7 +23,6 @@ const dataProvider = simpleRestProvider(`${process.env.API_BASE_URL}/admin`, htt
 export default function Dashboard() {
   return (
     <Admin authProvider={authProvider} dataProvider={dataProvider}>
-      <Title title="Codify - Admin - " />
       <Resource name="courses" list={CourseList} create={CourseCreate} edit={CourseEdit} />
       <Resource name="chapters" list={ChapterList} create={ChapterCreate} edit={ChapterEdit} />
       <Resource name="topics" list={TopicList} create={TopicCreate} edit={TopicEdit} />

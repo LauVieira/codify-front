@@ -15,7 +15,7 @@ export default function LandingPage() {
   }
 
   return (
-    <> 
+    <>
       <Header />
       <button type="submit" onClick={toggleTheresCourse}>change</button>
       <UserLandingPageContainer>

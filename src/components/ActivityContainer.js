@@ -1,15 +1,23 @@
 /* eslint-disable no-nested-ternary */
 import React from 'react';
 import styled from 'styled-components';
+import { useHistory, useParams } from 'react-router-dom';
 
 export default function ActivityContainer(props) {
   const {
-    done, doing, type, acti, setActivity
+    done, doing, type, activityItem, setActivity,
   } = props;
+  const history = useHistory();
+  const { id, chapterId, topicId } = useParams();
+
+  function handleClick(activity) {
+    setActivity(activity);
+    history.push(`/curso/${id}/capitulo/${chapterId}/topico/${topicId}/atividade/${activity.id}`);
+  }
 
   return (
     <>
-      <Container onClick={() => setActivity(acti)}>
+      <Container onClick={() => handleClick(activityItem)}>
         <Activity isDone={done} isDoing={doing} />
         <ActivityName isDone={done} isDoing={doing}>{(type === 'theory') ? 'Teoria' : 'Exercicio'}</ActivityName>
       </Container>
