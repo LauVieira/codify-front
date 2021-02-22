@@ -8,12 +8,18 @@ import {
 import CourseContext from '../contexts/CourseContext';
 
 export default function Course() {
-  const { courseData, setCourseData } = useContext(CourseContext);
+  const {
+    courseData,
+    setCourseData,
+    setProgram,
+    program,
+  } = useContext(CourseContext);
   const { id } = useParams();
   useEffect(() => {
     axios.get(`/courses/${id}`)
       .then((response) => {
         setCourseData(response.data);
+        setProgram(response.data.program);
       })
       .catch((error) => {
         alert('Erro ao buscar o curso selecionado');
@@ -39,7 +45,7 @@ export default function Course() {
                   />
                   <h1>{courseData.course.title}</h1>
                   <p>{courseData.course.description}</p>
-                  <Summary />
+                  <Summary courseData={courseData} />
                 </Details>
                 <StudyProgram program={courseData.program} />
               </>
