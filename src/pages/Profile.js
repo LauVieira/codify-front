@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 
 import axios from '../services/api';
-import { Header, ProfilePicture, Input } from '../components';
+import { Header, ProfilePicture, Input, Label, Error, Button } from '../components';
 import UserContext from '../contexts/UserContext';
 
 import Patterns from '../utils/PatternsHtml';
@@ -12,6 +12,8 @@ export default function Profile() {
   const { user } = useContext(UserContext);
   const [name, setName] = useState(user.name || '');
   const [email, setEmail] = useState(user.email || '');
+  const [error, setError] = useState('');
+  const [disabled, setDisabled] = useState(false);
 
   return (
     <ProfilePageWrapper>
@@ -27,7 +29,7 @@ export default function Profile() {
         </Name>
         <ProfileForm>
           <LeftSide>
-            <Label htmlFor='name'> Nome completo </Label>
+            <Label htmlFor="name"> Nome completo </Label>
             <Input
               type="text"
               placeholder="Digite seu nome completo"
@@ -53,11 +55,27 @@ export default function Profile() {
           </LeftSide>
           <RightSide>
             <ProfilePicture 
-              width="80px" 
-              height="80px" 
+              width="150px" 
+              height="150px" 
               existPhoto={false} 
             />
           </RightSide>
+          { error && <Error> { error } </Error> }
+          <Container>
+            <Button
+              type="button"
+              isLoading={false}
+            >
+              Trocar senha
+            </Button>
+            <Button
+              type="submit"
+              disabled={disabled}
+              isLoading={disabled}
+            >
+              {disabled ? '' : 'Salvar'}
+            </Button>
+          </Container>
         </ProfileForm>
       </UserDetails>
 
@@ -95,17 +113,35 @@ const Name = styled.h1`
 `;
 
 const LeftSide = styled.div`
-  width: 70%; 
+  width: 70%;
+
+  input::placeholder {
+    font-weight: 300;
+  }
+`;
+
+const Container = styled.div`
+  display: flex;
+
+  &:first-child {
+    margin-right: 10px;
+  }
+`;
+
+const RightSide = styled.div`
+  width: 30%;
+
+  figure {
+    margin: 0 auto;
+  }
 `;
 
 const ProfileForm = styled.form`
   display: flex; 
-  align-items: center;
-  justify-content: space-between;
 
   position: absolute;
   width: 70%;
-  padding: 0 5%;
+  padding: 5%;
   left: 10%;
   top: 75%;
 

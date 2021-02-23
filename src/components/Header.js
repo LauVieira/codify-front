@@ -9,7 +9,7 @@ import ProfilePicture from './ProfilePicture';
 import UserContext from '../contexts/UserContext';
 
 export default function Header() {
-  const { user, setUser } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
   const [showMenu, setShowMenu] = useState(false);
   const history = useHistory();
 
