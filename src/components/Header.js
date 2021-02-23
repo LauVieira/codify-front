@@ -9,7 +9,7 @@ import ProfilePicture from './ProfilePicture';
 import UserContext from '../contexts/UserContext';
 
 export default function Header() {
-  const { setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const [showMenu, setShowMenu] = useState(false);
   const history = useHistory();
 
@@ -44,11 +44,13 @@ export default function Header() {
       <Container showMenu={showMenu} onClick={() => setShowMenu(!showMenu)}>
         <RiArrowDownSLine />
         <ProfilePicture
+          width="70px"
+          height="70px"
           existPhoto={false}
         />
         {showMenu && (
           <DropDown showMenu={showMenu}>
-            <DropLink to="#" onClick={() => alert('Em construção')}>
+            <DropLink to="/perfil">
               Perfil
             </DropLink>
             <Line />

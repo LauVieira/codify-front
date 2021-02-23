@@ -3,14 +3,14 @@ import styled from 'styled-components';
 
 import UserContext from '../contexts/UserContext';
 
-export default function ProfilePicture({ existPhoto, ...props }) {
+export default function ProfilePicture({ existPhoto, width, height, ...props }) {
   const { user } = useContext(UserContext);
   const words = user.name.split(' ');
 
   const initialLetters = `${words[0].charAt()}. ${words[1].charAt()}.`;
 
   return (
-    <Photo existPhoto={existPhoto} {...props}>
+    <Photo width={width} height={height} existPhoto={existPhoto} {...props}>
       {(existPhoto)
         ? <img alt="" />
         : initialLetters}
@@ -19,11 +19,11 @@ export default function ProfilePicture({ existPhoto, ...props }) {
 }
 
 const Photo = styled.figure`
-  width: 70px;
-  height: 70px;
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
 
   border-radius: 50%;
-  border: ${({ existPhoto }) => (existPhoto ? 'none' : '3px solid #46A7D4')};
+  border: ${({ existPhoto }) => (existPhoto ? '2px solid #fff' : '2px solid #46A7D4')};
 
   display: flex;
   align-items: center;

@@ -22,6 +22,7 @@ export default function App() {
             <ProtectedRoute path="/curso/topico" />
             <ProtectedRoute path="/curso/:id/capitulo/:chapterId/topico/:topicId/atividade/:activityId" component={Pages.StudyArea} />
             <ProtectedRoute path="/curso/:id" component={Pages.Course} />
+            <ProtectedRoute path="/perfil" component={Pages.Profile} />
             <UnprotectedRoute path="/cadastrar" component={Pages.SignUp} />
             <UnprotectedRoute path="/entrar" component={Pages.SignIn} />
             <UnprotectedRoute path="/esqueci-senha" component={Pages.ForgotPassword} />
