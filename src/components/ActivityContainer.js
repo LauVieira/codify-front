@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 export default function ActivityContainer(props) {
   const {
-    done, doing, type, acti, setActivity
+    done, doing, type, acti, setActivity,
   } = props;
 
   return (
