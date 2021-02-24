@@ -29,3 +29,5 @@ export default function Dashboard() {
     </Admin>
   );
 }
+
+//authProvider={authProvider}

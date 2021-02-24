@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from '../services/api';
@@ -8,6 +8,7 @@ import {
 import CourseContext from '../contexts/CourseContext';
 
 export default function Course() {
+  const [background, setBackground] = useState('');
   const {
     courseData,
     setCourseData,
@@ -19,6 +20,7 @@ export default function Course() {
     axios.get(`/courses/${id}`)
       .then((response) => {
         setCourseData(response.data);
+        setBackground(response.data.course.background);
         setProgram(response.data.program);
       })
       .catch((error) => {
@@ -26,6 +28,8 @@ export default function Course() {
         console.log(error);
       });
   }, []);
+
+  console.log(background);
 
   return (
     <>
@@ -64,7 +68,8 @@ const Container = styled.div`
 
 const Details = styled.div`
   height: 200px;
-  background: linear-gradient(180deg, #EFDA4F 0%, rgba(239, 218, 79, 0.56) 100%);
+  background: ${(props) => props.background ? `url(${props.background}) no-repeat top center` : 'linear-gradient(180deg, #EFDA4F 0%, rgba(239, 218, 79, 0.56) 100%)'};
+  background-size: cover;
   display: flex;
   flex-direction: column;
   align-items: center;

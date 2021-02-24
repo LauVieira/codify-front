@@ -1,16 +1,12 @@
 /* eslint-disable no-nested-ternary */
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import { mockedUser } from '../utils/mockedCourses';
-import CourseContext from '../contexts/CourseContext';
-import UserContext from '../contexts/UserContext';
 import Button from './Button';
 import ProfilePicture from './ProfilePicture';
 
 export default function Summary({ courseData }) {
-  const { user, setUser } = useContext(UserContext);
-  const [percentage, setPercentage] = useState(99);
+  const [percentage] = useState(99);
   const [usedValue, setUsedValue] = useState(percentage);
   const history = useHistory();
   const { course, program } = courseData;

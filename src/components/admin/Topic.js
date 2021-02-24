@@ -6,6 +6,7 @@ import {
   Datagrid,
   TextField,
   EditButton,
+  DeleteButton,
   SimpleForm,
   TextInput,
   ReferenceField,
@@ -22,6 +23,7 @@ export const TopicList = (props) => (
         <TextField source="title" />
       </ReferenceField>
       <EditButton basePath="/topics" />
+      <DeleteButton basePath="/topics" />
     </Datagrid>
   </List>
 );
@@ -34,6 +36,7 @@ export const TopicCreate = (props) => (
       <ReferenceInput source="chapterId" reference="chapters" label="Capítulo">
         <SelectInput optionText="title" />
       </ReferenceInput>
+      <DeleteButton basePath="topics" />
     </SimpleForm>
   </Create>
 );
@@ -46,6 +49,7 @@ export const TopicEdit = (props) => (
       <ReferenceInput source="chapterId" reference="chapters" label="Capítulo">
         <SelectInput optionText="title" />
       </ReferenceInput>
+      <DeleteButton basePath="topics" />
     </SimpleForm>
   </Edit>
 );
