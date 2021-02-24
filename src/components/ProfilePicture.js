@@ -24,7 +24,6 @@ const Photo = styled.figure`
 
   border-radius: 50%;
   border: ${({ existPhoto }) => (existPhoto ? 'none' : '3px solid #46A7D4')};
-  cursor: pointer;
 
   display: flex;
   align-items: center;
@@ -42,6 +41,6 @@ const Photo = styled.figure`
   }
 
   &:hover {
-    filter: brightness(120%);
+    filter: brightness(110%);
   }
 `;

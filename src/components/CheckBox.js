@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { IoCheckmark } from 'react-icons/io5';
 
-export default function CheckBox({ isChecked, setIsChecked, activity }) {
+export default function CheckBox({ isChecked, setIsChecked }) {
   function handleClick() {
     setIsChecked(!isChecked);
   }

@@ -27,5 +27,6 @@ module.exports = {
     'no-restricted-globals': 'off',
     'consistent-return': 'off',
     'no-confusing-arrow': 'off',
+    'no-trailing-spaces': 'off',
   },
 };

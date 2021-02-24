@@ -2,18 +2,33 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from '../services/api';
-import { Header, Summary, StudyProgram } from '../components';
+import {
+  Header, Summary, StudyProgram, ArrowBackButton, 
+} from '../components';
 import CourseContext from '../contexts/CourseContext';
 
 export default function Course() {
+<<<<<<< HEAD
   const { courseData, setCourseData } = useContext(CourseContext);
   const [background, setBackground] = useState('');
+=======
+  const {
+    courseData,
+    setCourseData,
+    setProgram,
+    program,
+  } = useContext(CourseContext);
+>>>>>>> main
   const { id } = useParams();
   useEffect(() => {
     axios.get(`/courses/${id}`)
       .then((response) => {
         setCourseData(response.data);
+<<<<<<< HEAD
         setBackground(response.data.course.background);
+=======
+        setProgram(response.data.program);
+>>>>>>> main
       })
       .catch((error) => {
         alert('Erro ao buscar o curso selecionado');
@@ -30,10 +45,18 @@ export default function Course() {
         {courseData.length !== 0
             && (
               <>
-                <Details background={background}>
+                <Details>
+                  <ArrowBackButton
+                    to="/"
+                    width="50px"
+                    height="50px"
+                    left="15px"
+                    top="20px"
+                    fontSize="40px"
+                  />
                   <h1>{courseData.course.title}</h1>
                   <p>{courseData.course.description}</p>
-                  <Summary />
+                  <Summary courseData={courseData} />
                 </Details>
                 <StudyProgram program={courseData.program} />
               </>
