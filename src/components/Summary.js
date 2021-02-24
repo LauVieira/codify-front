@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Button from './Button';
 import ProfilePicture from './ProfilePicture';
 
-export default function Summary() {
+export default function Summary({ courseData }) {
   const [percentage] = useState(99);
   const [usedValue, setUsedValue] = useState(percentage);
   const history = useHistory();
