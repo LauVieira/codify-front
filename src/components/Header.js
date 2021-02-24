@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import { useHistory, Link } from 'react-router-dom';
 import { RiArrowDownSLine } from 'react-icons/ri';
+
 import axios from '../services/api';
 
 import Logo from './Logo';
@@ -81,7 +82,7 @@ const StyledHeader = styled.header`
   top: 0;
   left: 0;
 
-  z-index: 1;
+  z-index: 10;
 `;
 
 const Navigation = styled.nav`

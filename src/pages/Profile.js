@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
-import { BsPencil } from 'react-icons/bs';
+import { BsPencil, BsArrowLeftShort } from 'react-icons/bs';
 
 import axios from '../services/api';
 import { Header, ProfilePicture, Input, Label, Error, Button } from '../components';
@@ -13,9 +13,12 @@ export default function Profile() {
   const { user } = useContext(UserContext);
   const [name, setName] = useState(user.name || '');
   const [email, setEmail] = useState(user.email || '');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const [disabled, setDisabled] = useState(false);
   const [onHover, setOnHover] = useState(false);
+  const [changePassword, setChangePassword] = useState(false);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -25,13 +28,21 @@ export default function Profile() {
 
     const nameCapitalized = Helpers.capitalizeAllAndTrim(name);
     if (nameCapitalized.split(' ').length === 1) {
-      setError('Digite o nome completo por favor !');
+      setError('Digite o nome completo, por favor!');
       setDisabled(false);
 
       return;
     }
 
-    const body = { name: nameCapitalized, email };
+    if (password !== confirmPassword && changePassword) {
+      setError('As senhas digitadas não batem.');
+
+      setDisabled(false);
+      return;
+    }
+    
+    const bodyObj = { name: nameCapitalized, email };
+    const body = changePassword ? { ...bodyObj } : { ...bodyObj, password, confirmPassword };
 
     axios
       .put(`/users/${user.id}`, body)
@@ -64,7 +75,7 @@ export default function Profile() {
             <Label htmlFor="name"> Nome completo </Label>
             <Input
               type="text"
-              placeholder="Digite seu nome completo"
+              placeholder="nome completo"
               value={name}
               onChange={(event) => setName(event.target.value)}
               autoFocus
@@ -76,7 +87,7 @@ export default function Profile() {
             <Label htmlFor="e-mail"> E-mail </Label>
             <Input
               type="email"
-              placeholder="Digite seu e-mail"
+              placeholder="e-mail"
               value={email}
               onChange={(event) => setEmail(event.target.value)}
               pattern={Patterns.email.regex}
@@ -84,6 +95,33 @@ export default function Profile() {
               required
               id="e-mail"
             />
+            {changePassword && (
+              <>
+                <Label htmlFor="password"> Senha </Label>
+                <Input
+                  type="password"
+                  placeholder="nova senha"
+                  value={password}
+                  onChange={(event) => setPassword(event.target.value)}
+                  pattern={Patterns.password.regex}
+                  title={Patterns.password.helper}
+                  id="password"
+                  width="50%"
+                  required
+                />
+                <Label htmlFor="passwordRef"> Repita a senha </Label>
+                <Input
+                  type="password"
+                  placeholder="repetir senha"
+                  value={confirmPassword}
+                  onChange={(event) => setConfirmPassword(event.target.value)}
+                  title="Preencha o campo"
+                  id="passwordRef"
+                  required
+                  width="50%"
+                />
+              </>
+            )}
           </LeftSide>
           <RightSide>
             <ProfilePicture 
@@ -107,23 +145,37 @@ export default function Profile() {
             )}
           </SpaceArea>
           <WrapperButton>
-            <Button
-              type="button"
-              isLoading={false}
-            >
-              Trocar senha
-            </Button>
-            <Button
-              type="submit"
-              disabled={disabled}
-              isLoading={disabled}
-            >
-              {disabled ? '' : 'Salvar'}
-            </Button>
+            <div>
+              {!changePassword && (
+                <Button
+                  type="button"
+                  isLoading={false}
+                  onClick={() => setChangePassword(!changePassword)}
+                  width="180px"
+                >
+                  Trocar senha
+                </Button>
+              )}
+              <Button
+                type="submit"
+                disabled={disabled}
+                isLoading={disabled}
+                width="120px"
+              >
+                {disabled ? '' : 'Salvar'}
+              </Button>
+            </div>
+            {changePassword && (
+              <BsArrowLeftShort 
+                fontSize="40px" 
+                color="#2C8396" 
+                cursor="pointer"
+                onClick={() => setChangePassword(!changePassword)}
+              />
+            )}
           </WrapperButton>
         </ProfileForm>
       </UserDetails>
-
     </ProfilePageWrapper>
   );
 }
@@ -135,7 +187,8 @@ const WhiteProfilePicture = styled(ProfilePicture)`
 
 const ProfilePageWrapper = styled.main`
   width: 100%;
-  height: 100vh;
+  min-height: calc(100vh + 175px);
+  height: auto;
 
   background-color: var(--background-color);
   padding-top: 100px;
@@ -173,6 +226,15 @@ const LeftSide = styled.section`
 
 const WrapperButton = styled.footer`
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  width: 100%;
+  padding-right: 10%;
+
+  & > div {
+    display: flex;
+  }
 
   button {
     height: 40px;
@@ -181,16 +243,8 @@ const WrapperButton = styled.footer`
     font-size: 1.8rem;
 
     span::after {
-        font-size: 3rem;
-        top: -5px;
-    }
-    
-    &:first-child {
-      width: 180px;
-    }
-
-    &:last-child {
-      width: 120px;
+      font-size: 3rem;
+      top: -5px;
     }
   }
 `;
