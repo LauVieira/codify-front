@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import UserContext from '../contexts/UserContext';
 
-export default function ProfilePicture({ existPhoto, width, height, ...props }) {
+export default function ProfilePicture({ children, existPhoto, width, height, ...props }) {
   const { user } = useContext(UserContext);
   const words = user.name.split(' ');
 
@@ -11,9 +11,12 @@ export default function ProfilePicture({ existPhoto, width, height, ...props }) 
 
   return (
     <Photo width={width} height={height} existPhoto={existPhoto} {...props}>
-      {(existPhoto)
-        ? <img alt="" />
-        : initialLetters}
+      { 
+        (existPhoto)
+          ? <img alt="" />
+          : initialLetters
+      }
+      {children}
     </Photo>
   );
 }
@@ -33,6 +36,8 @@ const Photo = styled.figure`
   color: var(--color-blue);
   font-size: 2.5rem;
   letter-spacing: -1.5px;
+
+  cursor: pointer;
 
   img {
     width: 100%;

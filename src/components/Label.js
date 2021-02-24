@@ -16,6 +16,5 @@ const StyledLabel = styled.label`
 
   font-weight: bold;
   color: var(--color-grey-light);
-  font-size: 2.4rem;
-  line-height: 2.8rem;
+  font-size: 2rem;
 `;

@@ -20,6 +20,8 @@ import YoutubePlayer from './YoutubePlayer';
 import ArrowBackButton from './ArrowBackButton';
 import CheckBox from './CheckBox';
 import Activities from './Activities';
+import Label from './Label';
+import Error from './Error';
 
 export {
   Logo,
@@ -44,4 +46,6 @@ export {
   CheckBox,
   Activities,
   StudyAreaContent,
+  Label,
+  Error,
 };

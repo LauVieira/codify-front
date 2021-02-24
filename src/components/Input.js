@@ -14,7 +14,7 @@ const StyledInput = styled.input`
     border: 2px solid #B4B4B4;
     border-radius: var(--radius-thin);
 
-    color: var(--color-black-light);
+    color: var(--color-grey-light);
     font-size: 2rem;
     line-height: 2.4rem;
 
