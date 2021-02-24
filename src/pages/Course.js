@@ -2,7 +2,9 @@ import React, { useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from '../services/api';
-import { Header, Summary, StudyProgram } from '../components';
+import {
+  Header, Summary, StudyProgram, ArrowBackButton, 
+} from '../components';
 import CourseContext from '../contexts/CourseContext';
 
 export default function Course() {
@@ -33,6 +35,14 @@ export default function Course() {
             && (
               <>
                 <Details>
+                  <ArrowBackButton
+                    to="/"
+                    width="50px"
+                    height="50px"
+                    left="15px"
+                    top="20px"
+                    fontSize="40px"
+                  />
                   <h1>{courseData.course.title}</h1>
                   <p>{courseData.course.description}</p>
                   <Summary courseData={courseData} />
