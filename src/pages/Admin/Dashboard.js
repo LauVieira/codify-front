@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import {
   Admin, Resource, fetchUtils, Title,
 } from 'react-admin';

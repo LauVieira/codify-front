@@ -9,7 +9,7 @@ export default function Summary() {
   const [percentage] = useState(99);
   const [usedValue, setUsedValue] = useState(percentage);
   const history = useHistory();
-
+  const { course, program } = courseData;
   useEffect(() => {
     if (percentage <= 8) {
       setUsedValue(8);
@@ -17,7 +17,7 @@ export default function Summary() {
   }, []);
 
   function redirect() {
-    history.push('/curso/2/capitulo/1/topico/1');
+    history.push(`/curso/${course.id}/capitulo/${program[0].id}/topico/${program[0].topics[0].id}/atividade/${program[0].topics[0].activities[0].id}`);
   }
 
   return (
