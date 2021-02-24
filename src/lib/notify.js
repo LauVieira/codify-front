@@ -27,7 +27,7 @@ const Toast = styled(ToastContainer)`
     }
 
     h1 {
-      color: #008E16;
+      color: var(--color-darkgreen);
     }
 
     h2 {

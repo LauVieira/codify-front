@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import axios from '../services/api';
 
@@ -13,6 +14,7 @@ import {
   LayoutInitialPage,
   Anchor,
   Form,
+  Error,
 } from '../components';
 
 export default function SignIn() {
@@ -20,33 +22,28 @@ export default function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [disabled, setDisabled] = useState(false);
+  const [error, setError] = useState('');
 
   const history = useHistory();
 
-  function handleSubmit(event) {
-    event.preventDefault();
+  async function handleSubmit(event) {
+    try {
+      event.preventDefault();
 
-    if (disabled) return;
-    setDisabled(true);
+      if (disabled) return;
+      setDisabled(true);
+  
+      const body = { email, password };
+      const { data } = await axios.post('/users/sign-in', body);
 
-    const body = { email, password };
-    axios
-      .post('/users/sign-in', body)
-      .then(({ data }) => {
-        setUser({ ...data });
+      setUser({ ...data });
+      history.push('/');
+    } catch (err) {
+      console.error(err);
+      setDisabled(false);
 
-        if (confirm('Login feito com sucesso! Redirecionando para a página inicial ...')) {
-          history.push('/');
-        } else {
-          setDisabled(false);
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-        setDisabled(false);
-
-        alert(error.response.data.message);
-      });
+      setError(err.response.data.message);
+    }
   }
 
   return (
@@ -79,6 +76,13 @@ export default function SignIn() {
           title={Patterns.password.helper}
           required
         />
+        <SpaceArea>
+          { error && (
+            <Error> 
+              { error } 
+            </Error> 
+          )}
+        </SpaceArea>
         <Button
           type="submit"
           disabled={disabled}
@@ -93,3 +97,12 @@ export default function SignIn() {
     </LayoutInitialPage>
   );
 }
+
+const SpaceArea = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 4px 0px;
+`;

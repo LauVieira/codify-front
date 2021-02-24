@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
-import axios from '../services/api';
 
+import axios from '../services/api';
+import { success } from '../lib/notify';
 import Patterns from '../utils/PatternsHtml';
 import Helpers from '../utils/Helpers';
 
@@ -13,6 +15,7 @@ import {
   LayoutInitialPage,
   Anchor,
   Form,
+  Error,
 } from '../components';
 
 export default function SignUp() {
@@ -21,47 +24,45 @@ export default function SignUp() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [disabled, setDisabled] = useState(false);
+  const [error, setError] = useState('');
 
   const history = useHistory();
 
-  function handleSubmit(event) {
-    event.preventDefault();
+  async function handleSubmit(event) {
+    try {
+      event.preventDefault();
 
-    if (disabled) return;
-    setDisabled(true);
+      if (disabled) return;
+      setDisabled(true);
 
-    if (password !== confirmPassword) {
-      alert('Os campos "senha" e "confirmar senha" devem ser idênticos');
-      setDisabled(false);
-
-      return;
-    }
-    const nameCapitalized = Helpers.capitalizeAllAndTrim(name);
-    if (nameCapitalized.split(' ').length === 1) {
-      alert('Digite o nome completo (nome e sobrenome)');
-      setDisabled(false);
-
-      return;
-    }
-    const body = {
-      name: nameCapitalized, email, password, confirmPassword,
-    };
-
-    axios
-      .post('/users/sign-up', body)
-      .then(() => {
-        if (confirm('Cadastro feito com sucesso! Redirecionando para tela de login ...')) {
-          history.push('/entrar');
-        } else {
-          setDisabled(false);
-        }
-      })
-      .catch((error) => {
-        console.error(error);
+      const nameCapitalized = Helpers.capitalizeAllAndTrim(name);
+      if (nameCapitalized.split(' ').length === 1) {
+        setError('Digite o nome completo, por favor!');
         setDisabled(false);
+  
+        return;
+      }
 
-        alert(error.response.data.message);
-      });
+      if (password !== confirmPassword) {
+        setError('As senhas digitadas não batem.');
+        setDisabled(false);
+  
+        return;
+      }
+
+      const body = {
+        name: nameCapitalized, email, password, confirmPassword,
+      };
+      await axios.post('/users/sign-up', body);
+
+      success(['Cadastro concluído com sucesso!', 'Faça login para continuar']);
+      history.push('/entrar');
+    } catch (err) {
+      console.error(err);
+      setDisabled(false);
+
+      setError(err.response.data.message);
+    }
   }
 
   return (
@@ -112,6 +113,13 @@ export default function SignUp() {
           title="Preencha o campo"
           required
         />
+        <SpaceArea>
+          { error && (
+            <Error> 
+              { error } 
+            </Error> 
+          )}
+        </SpaceArea>
         <Button
           type="submit"
           disabled={disabled}
@@ -126,3 +134,10 @@ export default function SignUp() {
     </LayoutInitialPage>
   );
 }
+
+const SpaceArea = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;

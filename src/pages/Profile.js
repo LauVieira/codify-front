@@ -22,8 +22,6 @@ export default function Profile() {
   const [mouse, setMouse] = useState(false);
   const [changePassword, setChangePassword] = useState(false);
 
-  success(['Cadastro concluído com sucesso!', 'Faça login para continuar']);
-
   function handleSubmit(event) {
     event.preventDefault();
 
