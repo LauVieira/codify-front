@@ -1,11 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { IoIosArrowDown } from 'react-icons/io';
 import ArrowBackButton from './ArrowBackButton';
+import axios from '../services/api';
+import CourseContext from '../contexts/CourseContext';
 
-export default function StudyAreaHeader({ courseInfo }) {
-  const { id } = useParams();
+export default function StudyAreaHeader() {
+  const [courseInfo, setCourseInfo] = useState('');
+  const { id, chapterId, topicId } = useParams();
+  const {
+    activities, setActivities, chapter, setTopic, setChapter,
+  } = useContext(CourseContext);
+  useEffect(() => {
+    axios.get(`/courses/chapters/${chapterId}/topics/${topicId}/activities`)
+      .then((response) => {
+        console.log(response.data);
+        setCourseInfo(response.data);
+        setActivities(response.data.topic.activities);
+      })
+      .catch(({ response }) => {
+        console.error(response);
+
+        alert(response.data);
+      });
+  }, [topicId]);
   return (
     <StyledHeader>
       <ArrowBackButton
@@ -31,7 +50,7 @@ export default function StudyAreaHeader({ courseInfo }) {
 }
 
 const StyledHeader = styled.header`
-  background-color: #292929;
+  background-color: #161616;
   box-shadow: var(--shadow-black);
 
   height: 64px;
