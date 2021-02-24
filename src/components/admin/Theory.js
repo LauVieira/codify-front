@@ -22,10 +22,10 @@ export const TheoryList = (props) => (
         <TextField source="title" />
       </ReferenceField>
       <ReferenceField source="chapterId" reference="chapters" label="Capítulo">
-        <TextField optionText="title" />
+        <TextField source="title" />
       </ReferenceField>
       <ReferenceField source="topicId" reference="topics" label="Tópico">
-        <TextField optionText="title" />
+        <TextField source="title" />
       </ReferenceField>
       <TextField source="youtubeLink" />
       <EditButton basePath="/Theories" />
