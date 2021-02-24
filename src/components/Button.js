@@ -2,7 +2,9 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import Spinner from './Spinner';
 
-export default function Button({ width, children, isLoading, ...props }) {
+export default function Button({
+  spinner, width, children, isLoading, ...props 
+}) {
   return (
     <StyledButton width={width} isLoading={isLoading} {...props}>
       {isLoading
@@ -11,8 +13,8 @@ export default function Button({ width, children, isLoading, ...props }) {
             <Spinner
               type="Oval"
               color="#46A7D4"
-              width={35}
-              height={35}
+              width={spinner.tamX || 35}
+              height={spinner.tamY || 35}
             />
           </SpinnerContainer>
         )

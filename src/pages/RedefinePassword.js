@@ -4,12 +4,11 @@ import Patterns from '../utils/PatternsHtml';
 
 import {
   Logo,
-  Headline,
   Input,
   Button,
-  LayoutInitialPage,
-  Form,
 } from '../components';
+
+import { Form, Headline, LayoutInitialPage } from '../components/InitialPage';
 
 export default function ForgotPassword() {
   const [password, setPassword] = useState('');

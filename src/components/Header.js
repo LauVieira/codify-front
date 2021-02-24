@@ -4,6 +4,7 @@ import { useHistory, Link } from 'react-router-dom';
 import { RiArrowDownSLine } from 'react-icons/ri';
 
 import axios from '../services/api';
+import { error } from '../lib/notify';
 
 import Logo from './Logo';
 import ProfilePicture from './ProfilePicture';
@@ -14,18 +15,17 @@ export default function Header() {
   const [showMenu, setShowMenu] = useState(false);
   const history = useHistory();
 
-  function handleSignOut() {
-    axios.post('/users/sign-out')
-      .then(() => {
-        setUser(null);
+  async function handleSignOut() {
+    try {
+      await axios.post('/users/sign-out');
 
-        localStorage.clear();
-        history.push('/entrar');
-      })
-      .catch((error) => {
-        alert(error.response.data.message);
-        console.error(error);
-      });
+      setUser(null);
+      localStorage.clear();
+      history.push('/entrar');
+    } catch (err) {
+      error(err.response.data.message);
+      console.error(err);
+    }
   }
 
   return (

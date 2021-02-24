@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 
 import axios from '../services/api';
@@ -9,14 +8,14 @@ import Helpers from '../utils/Helpers';
 
 import {
   Logo,
-  Headline,
   Input,
   Button,
-  LayoutInitialPage,
-  Anchor,
-  Form,
   Error,
 } from '../components';
+
+import {
+  Anchor, Form, Headline, LayoutInitialPage, 
+} from '../components/InitialPage';
 
 export default function SignUp() {
   const [name, setName] = useState('');
@@ -37,14 +36,14 @@ export default function SignUp() {
 
       const nameCapitalized = Helpers.capitalizeAllAndTrim(name);
       if (nameCapitalized.split(' ').length === 1) {
-        setError('Digite o nome completo, por favor!');
+        setError('Digite o nome completo');
         setDisabled(false);
   
         return;
       }
 
       if (password !== confirmPassword) {
-        setError('As senhas digitadas não batem.');
+        setError('As senhas digitadas não batem');
         setDisabled(false);
   
         return;
@@ -113,13 +112,9 @@ export default function SignUp() {
           title="Preencha o campo"
           required
         />
-        <SpaceArea>
-          { error && (
-            <Error> 
-              { error } 
-            </Error> 
-          )}
-        </SpaceArea>
+        <Error align="center"> 
+          { error || ''} 
+        </Error>
         <Button
           type="submit"
           disabled={disabled}
@@ -134,10 +129,3 @@ export default function SignUp() {
     </LayoutInitialPage>
   );
 }
-
-const SpaceArea = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;

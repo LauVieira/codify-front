@@ -3,7 +3,9 @@ import styled from 'styled-components';
 
 import UserContext from '../contexts/UserContext';
 
-export default function ProfilePicture({ children, existPhoto, width, height, ...props }) {
+export default function ProfilePicture({
+  children, existPhoto, width, height, ...props 
+}) {
   const { user } = useContext(UserContext);
   const words = user.name.split(' ');
 

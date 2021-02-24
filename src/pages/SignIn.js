@@ -1,21 +1,20 @@
 import React, { useState, useContext } from 'react';
-import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import axios from '../services/api';
 
 import Patterns from '../utils/PatternsHtml';
 import UserContext from '../contexts/UserContext';
-
+import { success } from '../lib/notify';
 import {
   Logo,
-  Headline,
   Input,
   Button,
-  LayoutInitialPage,
-  Anchor,
-  Form,
   Error,
 } from '../components';
+
+import {
+  Anchor, Form, Headline, LayoutInitialPage, 
+} from '../components/InitialPage';
 
 export default function SignIn() {
   const { setUser } = useContext(UserContext);
@@ -37,6 +36,7 @@ export default function SignIn() {
       const { data } = await axios.post('/users/sign-in', body);
 
       setUser({ ...data });
+      success(['Bem-vindo de volta! Bons estudos']);
       history.push('/');
     } catch (err) {
       console.error(err);
@@ -76,13 +76,9 @@ export default function SignIn() {
           title={Patterns.password.helper}
           required
         />
-        <SpaceArea>
-          { error && (
-            <Error> 
-              { error } 
-            </Error> 
-          )}
-        </SpaceArea>
+        <Error align="center"> 
+          { error || ''} 
+        </Error>
         <Button
           type="submit"
           disabled={disabled}
@@ -97,12 +93,3 @@ export default function SignIn() {
     </LayoutInitialPage>
   );
 }
-
-const SpaceArea = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 4px 0px;
-`;

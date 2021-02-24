@@ -15,5 +15,5 @@ export {
   Course,
   LandingPage,
   StudyArea,
-  Profile
+  Profile,
 };

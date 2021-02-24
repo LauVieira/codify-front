@@ -4,25 +4,29 @@ import Patterns from '../utils/PatternsHtml';
 
 import {
   Logo,
-  Headline,
   Input,
   Button,
-  LayoutInitialPage,
-  Anchor,
-  Form,
+  Error,
 } from '../components';
+
+import {
+  Anchor, Form, Headline, LayoutInitialPage, 
+} from '../components/InitialPage';
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState('');
   const [disabled, setDisabled] = useState(false);
+  const [error, setError] = useState('');
 
-  function handleSubmit(event) {
-    event.preventDefault();
+  async function handleSubmit(event) {
+    try {
+      event.preventDefault();
 
-    if (disabled) return;
-    setDisabled(true);
+      if (disabled) return;
+      setDisabled(true);
+    } catch {
 
-    alert('Em construção');
+    }
   }
 
   return (
@@ -46,6 +50,9 @@ export default function ForgotPassword() {
           autoFocus
           autocomplete="on"
         />
+        <Error align="center"> 
+          { error || ''} 
+        </Error>
         <Button
           type="submit"
           disabled={disabled}

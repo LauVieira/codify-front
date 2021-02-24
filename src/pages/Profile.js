@@ -3,7 +3,9 @@ import styled from 'styled-components';
 import { BsPencil, BsArrowLeftShort } from 'react-icons/bs';
 
 import axios from '../services/api';
-import { Header, ProfilePicture, Input, Label, Error, Button } from '../components';
+import {
+  Header, ProfilePicture, Input, Label, Error, Button, 
+} from '../components';
 import UserContext from '../contexts/UserContext';
 
 import Patterns from '../utils/PatternsHtml';
@@ -12,7 +14,7 @@ import Helpers from '../utils/Helpers';
 import { success } from '../lib/notify';
 
 export default function Profile() {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const [name, setName] = useState(user.name || '');
   const [email, setEmail] = useState(user.email || '');
   const [password, setPassword] = useState('');
@@ -22,42 +24,50 @@ export default function Profile() {
   const [mouse, setMouse] = useState(false);
   const [changePassword, setChangePassword] = useState(false);
 
-  function handleSubmit(event) {
-    event.preventDefault();
+  async function handleSubmit(event) {
+    try {
+      event.preventDefault();
 
-    if (disabled) return;
-    setDisabled(true);
+      if (disabled) return;
+      setDisabled(true);
 
-    const nameCapitalized = Helpers.capitalizeAllAndTrim(name);
-    if (nameCapitalized.split(' ').length === 1) {
-      setError('Digite o nome completo, por favor!');
-      setDisabled(false);
-
-      return;
-    }
-
-    if (password !== confirmPassword && changePassword) {
-      setError('As senhas digitadas não batem.');
-
-      setDisabled(false);
-      return;
-    }
-    
-    const bodyObj = { name: nameCapitalized, email };
-    const body = changePassword ? { ...bodyObj } : { ...bodyObj, password, confirmPassword };
-
-    axios
-      .put(`/users/${user.id}`, body)
-      .then(() => {
-        alert('sucesso');
-        setDisabled(false);
-      })
-      .catch(({ response }) => {
-        console.error(response);
+      if (name === user.name && email === user.email) {
+        setError('Não ocorrerão mudanças!');
         setDisabled(false);
 
-        setError(response.data.message);
-      });
+        return;
+      }
+
+      const nameCapitalized = Helpers.capitalizeAllAndTrim(name);
+      if (nameCapitalized.split(' ').length === 1) {
+        setError('Digite o nome completo');
+        setDisabled(false);
+
+        return;
+      }
+
+      if (password !== confirmPassword && changePassword) {
+        setError('As senhas digitadas não batem!');
+
+        setDisabled(false);
+        return;
+      }
+      
+      const bodyObj = { name: nameCapitalized, email };
+      const body = changePassword ? { ...bodyObj, password, confirmPassword } : { ...bodyObj };
+      
+      const { data } = await axios.put(`/users/${user.id}`, body);
+
+      console.log(data);
+      setUser({ ...data });
+      setDisabled(false);
+      success(['Perfil atualizado com sucesso!']);
+    } catch (err) {
+      console.error(err);
+      setDisabled(false);
+
+      setError(err.response.data.message);
+    }
   }
 
   return (
@@ -139,13 +149,9 @@ export default function Profile() {
               </WrapperIcon>
             </ProfilePicture>
           </RightSide>
-          <SpaceArea>
-            { error && (
-              <Error> 
-                { error } 
-              </Error> 
-            )}
-          </SpaceArea>
+          <Error aling="left"> 
+            { error || ''} 
+          </Error> 
           <WrapperButton>
             <div>
               {!changePassword && (
@@ -162,6 +168,7 @@ export default function Profile() {
                 type="submit"
                 disabled={disabled}
                 isLoading={disabled}
+                spinner={{ tamX: 30, tamY: 30 }}
                 width="120px"
               >
                 {disabled ? '' : 'Salvar'}
@@ -249,12 +256,6 @@ const WrapperButton = styled.footer`
       top: -5px;
     }
   }
-`;
-
-const SpaceArea = styled.div`
-  width: 100%;
-
-  padding: 15px 0px;
 `;
 
 const WrapperIcon = styled.div`
