@@ -9,6 +9,8 @@ import UserContext from '../contexts/UserContext';
 import Patterns from '../utils/PatternsHtml';
 import Helpers from '../utils/Helpers';
 
+import { success } from '../lib/notify';
+
 export default function Profile() {
   const { user } = useContext(UserContext);
   const [name, setName] = useState(user.name || '');
@@ -17,8 +19,10 @@ export default function Profile() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const [disabled, setDisabled] = useState(false);
-  const [onHover, setOnHover] = useState(false);
+  const [mouse, setMouse] = useState(false);
   const [changePassword, setChangePassword] = useState(false);
+
+  success(['Cadastro concluído com sucesso!', 'Faça login para continuar']);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -128,10 +132,10 @@ export default function Profile() {
               width="150px" 
               height="150px" 
               existPhoto={false}
-              onMouseOver={() => setOnHover(!onHover)}
-              onMouseOut={() => setOnHover(!onHover)}
+              onMouseOver={() => setMouse(!mouse)}
+              onMouseOut={() => setMouse(!mouse)}
             > 
-              <WrapperIcon onHover={onHover}>
+              <WrapperIcon mouse={mouse}>
                 <BsPencil color="#2C8396" fontSize="30px" />
                 <p> editar </p>
               </WrapperIcon>
@@ -260,7 +264,7 @@ const WrapperIcon = styled.div`
   top: 31.5%;
   right: 31.5%;
 
-  display: ${(props) => props.onHover ? 'flex' : 'none'};
+  display: ${(props) => props.mouse ? 'flex' : 'none'};
   flex-direction: column;
   align-items: center;
   z-index: 2;

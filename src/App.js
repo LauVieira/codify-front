@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+
 
 import {
   BrowserRouter as Router,
@@ -9,6 +8,7 @@ import {
   Redirect,
 } from 'react-router-dom';
 
+import ToastProvider from './lib/notify';
 import GlobalStyle from './assets/GlobalStyles';
 import UserContext, { UserProvider } from './contexts/UserContext';
 import { CourseProvider } from './contexts/CourseContext';
@@ -33,7 +33,7 @@ export default function App() {
             <ProtectedRoute path="/" exact component={Pages.LandingPage} />
             <Route path="/admin" component={Dashboard} />
           </Switch>
-          <ToastContainer />
+          <ToastProvider />
         </Router>
       </CourseProvider>
     </UserProvider>
