@@ -4,7 +4,6 @@ import axios from '../services/api';
 
 import Patterns from '../utils/PatternsHtml';
 import UserContext from '../contexts/UserContext';
-import { success } from '../lib/notify';
 import {
   Logo,
   Input,
@@ -36,7 +35,6 @@ export default function SignIn() {
       const { data } = await axios.post('/users/sign-in', body);
 
       setUser({ ...data });
-      success(['Bem-vindo de volta! Bons estudos']);
       history.push('/');
     } catch (err) {
       console.error(err);
@@ -88,7 +86,7 @@ export default function SignIn() {
         </Button>
 
         <Anchor to="/cadastrar"> primeira vez ? crie uma conta ! </Anchor>
-        <Anchor to="#" onClick={() => alert('Em construção')}> esqueceu sua senha ? </Anchor>
+        <Anchor to="/esqueci-senha"> esqueceu sua senha ? </Anchor>
       </Form>
     </LayoutInitialPage>
   );

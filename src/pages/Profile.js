@@ -31,7 +31,7 @@ export default function Profile() {
       if (disabled) return;
       setDisabled(true);
 
-      if (name === user.name && email === user.email) {
+      if (name === user.name && email === user.email && !changePassword) {
         setError('Não ocorrerão mudanças!');
         setDisabled(false);
 
@@ -61,6 +61,7 @@ export default function Profile() {
       console.log(data);
       setUser({ ...data });
       setDisabled(false);
+      setError('');
       success(['Perfil atualizado com sucesso!']);
     } catch (err) {
       console.error(err);
@@ -315,5 +316,9 @@ const ProfileForm = styled.form`
   input {
     margin-bottom: 25px;
     margin-top: 5px;
+
+    &:last-child {
+      margin-bottom: 15px;
+    }
   }
 `;

@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import Patterns from '../utils/PatternsHtml';
+import axios from '../services/api';
+import { success } from '../lib/notify';
 
 import {
   Logo,
@@ -17,6 +20,7 @@ export default function ForgotPassword() {
   const [email, setEmail] = useState('');
   const [disabled, setDisabled] = useState(false);
   const [error, setError] = useState('');
+  const history = useHistory();
 
   async function handleSubmit(event) {
     try {
@@ -24,8 +28,16 @@ export default function ForgotPassword() {
 
       if (disabled) return;
       setDisabled(true);
-    } catch {
 
+      await axios.post('users/forgot-password', { email });
+
+      success(['Se este email estiver associado', 'Você receberá um e-mail']);
+      history.push('/entrar');
+    } catch (err) {
+      console.error(err);
+
+      setError(err.response.data.message);
+      setDisabled(false);
     }
   }
 

@@ -124,7 +124,7 @@ export default function SignUp() {
         </Button>
 
         <Anchor to="/entrar"> já tem conta ? Faça login </Anchor>
-        <Anchor to="#" onClick={() => alert('Em construção')}> esqueceu sua senha ? </Anchor>
+        <Anchor to="/esqueci-senha"> esqueceu sua senha ? </Anchor>
       </Form>
     </LayoutInitialPage>
   );

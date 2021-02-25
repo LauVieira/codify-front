@@ -13,8 +13,8 @@ export default function Button({
             <Spinner
               type="Oval"
               color="#46A7D4"
-              width={spinner.tamX || 35}
-              height={spinner.tamY || 35}
+              width={spinner?.tamX || 35}
+              height={spinner?.tamY || 35}
             />
           </SpinnerContainer>
         )

@@ -69,15 +69,11 @@ export function success(message, options = {}) {
   return toast.success(
     <Wrapper> 
       <h1> 
-        {' '}
         { message[0] }
-        {' '}
       </h1>
       { message[1] && (
       <h2> 
-        {' '}
         { message[1] }
-        {' '}
       </h2>
       ) }
     </Wrapper>, 
