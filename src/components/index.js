@@ -20,6 +20,7 @@ import YoutubePlayer from './YoutubePlayer';
 import ArrowBackButton from './ArrowBackButton';
 import CheckBox from './CheckBox';
 import Activities from './Activities';
+import StudyAreaExercice from './StudyAreaExercice'
 
 export {
   Logo,
@@ -44,4 +45,5 @@ export {
   CheckBox,
   Activities,
   StudyAreaContent,
+  StudyAreaExercice,
 };

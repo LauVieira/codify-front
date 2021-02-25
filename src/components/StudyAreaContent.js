@@ -6,13 +6,16 @@ import Button from './Button';
 import YoutubePlayer from './YoutubePlayer';
 import CheckBox from './CheckBox';
 import CourseContext from '../contexts/CourseContext';
+import StudyAreaExercice from './StudyAreaExercice';
 
 export default function StudyAreaContent({ activity, setActivity }) {
   const [isLastChapter, setIsLastChapter] = useState(false);
   const history = useHistory();
   const { id, chapterId, topicId } = useParams();
   const {
-    activities, program, chapter, setTopic, setChapter, setActivityIndex, isChecked, setIsChecked, setActivities
+    activities,
+    program,
+    chapter, setTopic, setChapter, setActivityIndex, isChecked, setIsChecked, setActivities,
   } = useContext(CourseContext);
 
   function handleClick(act) {
@@ -49,22 +52,33 @@ export default function StudyAreaContent({ activity, setActivity }) {
           <Box>
             {activity.type === 'theory'
               ? (activity.theory
-                ? <YoutubePlayer link={activity.theory.youtubeLink} />
-                : <YoutubePlayer link="https://www.youtube.com/watch?v=BN_8bCfVp88" />)
-              : <Word>{activity.id}</Word>}
-            <ContainerBox>
-              <CheckBox
-                isChecked={isChecked}
-                setIsChecked={setIsChecked}
-                activity={activity}
-                setActivityIndex={setActivityIndex}
-                setActivities={setActivities}
-                activities={activities}
-              />
-              {(!isLastChapter)
-                ? <Button onClick={() => handleClick(activity)}>Avançar</Button>
-                : <div />}
-            </ContainerBox>
+                ? (
+                  <>
+                    <YoutubePlayer link={activity.theory.youtubeLink} />
+                    <ContainerBox>
+                      <CheckBox
+                        isChecked={isChecked}
+                        setIsChecked={setIsChecked}
+                        activity={activity}
+                        setActivityIndex={setActivityIndex}
+                        setActivities={setActivities}
+                        activities={activities}
+                      />
+                      {(!isLastChapter)
+                        ? <Button onClick={() => handleClick(activity)}>Avançar</Button>
+                        : <div />}
+                    </ContainerBox>
+                  </>
+                )
+                : <Word>No video</Word>)
+              : (
+                <StudyAreaExercice
+                  activity={activity}
+                  setActivity={setActivity}
+                >
+                  oi
+                </StudyAreaExercice>
+              )}
           </Box>
         )
         : <Word>Nao tem atividade</Word>}
@@ -92,6 +106,15 @@ const Box = styled.section`
   align-items: center;
   justify-content: center;
   flex-direction:column;
+  height: 82.1vh;
+  width: 100%;
+`;
+const ContainerBox = styled.section`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+  width: 59%;
   button{
         width: 25%;
         font-size: 18px;
@@ -102,13 +125,5 @@ const Box = styled.section`
         }
     }
 `;
-const ContainerBox = styled.section`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  padding-top: 10px;
-`;
 const Word = styled.h1`
-  color: red;
 `;

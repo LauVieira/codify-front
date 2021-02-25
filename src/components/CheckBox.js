@@ -14,14 +14,11 @@ export default function CheckBox({
     } else {
       setIsChecked(false);
     }
-    console.log(activity);
   }, [activity]);
 
   function handleClick() {
     axios.post(`/courses/activities/${activity.id}`)
       .then((response) => {
-        console.log(response.data);
-        console.log(activities);
         const newActivities = activities;
         const index = newActivities.findIndex((n) => n.id === parseInt(response.data.activityId));
         newActivities[index].activityUsers[0].done = response.data.done;
@@ -33,7 +30,6 @@ export default function CheckBox({
         console.log(error);
       });
   }
-  console.log(isChecked);
   return (
     <Label htmlFor="concluded" isChecked={isChecked}>
       <Check
