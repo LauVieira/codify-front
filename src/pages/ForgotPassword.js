@@ -30,6 +30,7 @@ export default function ForgotPassword() {
       await axios.post('users/forgot-password', { email });
 
       success(['Se este email estiver associado', 'Você receberá um e-mail de redefinição']);
+      setError('');
       setDisabled(false);
     } catch (err) {
       console.error(err);
