@@ -8,6 +8,7 @@ import {
 } from 'react-router-dom';
 
 import ToastProvider from './lib/notify';
+import usePageTracking from './hooks/usePageTracking';
 import GlobalStyle from './assets/GlobalStyles';
 import UserContext, { UserProvider } from './contexts/UserContext';
 import { CourseProvider } from './contexts/CourseContext';
@@ -15,6 +16,8 @@ import * as Pages from './pages';
 import Dashboard from './pages/Admin/Dashboard';
 
 export default function App() {
+  usePageTracking();
+
   return (
     <UserProvider>
       <CourseProvider>
