@@ -9,7 +9,7 @@ import {
   Logo,
   Input,
   Button,
-  Error
+  Error,
 } from '../components';
 
 import { Form, Headline, LayoutInitialPage } from '../components/InitialPage';
@@ -36,7 +36,7 @@ export default function ForgotPassword() {
         return;
       }
 
-      await axios.post('users/redefine-password', { token });
+      await axios.post('users/redefine-password', { token, password, confirmPassword });
 
       success(['Senha redefinida com sucesso', 'Faça login para continuar']);
       history.push('/entrar');
