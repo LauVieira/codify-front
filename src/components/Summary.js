@@ -2,118 +2,156 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
+
 import Button from './Button';
 import ProfilePicture from './ProfilePicture';
+import axios from '../services/api';
+import { error } from '../lib/notify';
 
 export default function Summary({ courseData }) {
+  const { course, program } = courseData;
+  const history = useHistory();
+
+  const [disabled, setDisabled] = useState(false);
   const [percentage] = useState(99);
   const [usedValue, setUsedValue] = useState(percentage);
-  const history = useHistory();
-  const { course, program } = courseData;
+  
   useEffect(() => {
     if (percentage <= 8) {
       setUsedValue(8);
     }
   }, []);
 
-  function redirect() {
-    history.push(`/curso/${course.id}/capitulo/${program[0].id}/topico/${program[0].topics[0].id}/atividade/${program[0].topics[0].activities[0].id}`);
+  async function handleInitializeCourse() {
+    try {
+      if (disabled) return;
+      setDisabled(true);
+
+      await axios.post(`/courses/${course.id}`);
+      history.push(`/curso/${course.id}/capitulo/${program[0].id}/topico/${program[0].topics[0].id}/atividade/${program[0].topics[0].activities[0].id}`);
+    } catch (err) {
+      setDisabled(false);
+      error(err.response.data.message);
+      console.error(err);
+    }
   }
 
   return (
-    <Container>
-      <div>
+    <StyledSummary>
+      <Wrapper>
         <ProfilePicture
-          onClick={() => alert('Em construção')}
+          onClick={() => history.push('/profile')}
           existPhoto={false}
         />
-        <Advance>
-          <p className="title">Você não iniciou esse curso ainda</p>
+
+        <Container>
+          <Title> Você não iniciou esse curso ainda </Title>
           <div>
-            <progress id="progress" value={usedValue} max="100" />
-            <P percentage={percentage}>
+            <Progress id="progress" value={usedValue} max="100" />
+            <Percentage percentage={percentage}>
               {percentage}
               %
-            </P>
+            </Percentage>
           </div>
-        </Advance>
-      </div>
-      <Button onClick={redirect}>Iniciar curso</Button>
-    </Container>
+        </Container>
+      </Wrapper>
+
+      <Button
+        type="button"
+        isLoading={disabled} 
+        disabled={disabled}
+        onClick={handleInitializeCourse}
+      > 
+        Iniciar curso 
+      </Button>
+    </StyledSummary>
   );
 }
 
+const StyledSummary = styled.section`
+  display: flex; 
+  align-items: center;
+  justify-content: space-between;
+
+  width: 80%;
+  height: 180px;
+
+  margin: 0 auto;
+  padding: 0 5%;
+  
+  position: absolute;
+  left: 10%;
+  top: 75%;
+  
+  background: #FFF;
+  border-radius: 15px;
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.15);
+  
+  button {
+    width: 25%;
+    font-size: 18px;
+
+    span::after {
+      font-size: 30px;
+      top: -5px;
+    }
+  }
+
+  figure {
+    width: 60px;
+    height: 60px;
+    margin-right: 25px;
+  }
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: left;
+  align-items: center;
+`;
+
 const Container = styled.div`
-    display: flex; 
-    align-items: center;
-    justify-content: space-between;
-    width: 80%;
-    margin: 0 auto;
-    background: #FFF;
-    position: absolute;
-    left: 10%;
-    top: 75%;
-    height: 180px;
-    border-radius: 15px;
-    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.15);
-    padding: 0 5%;
-    & > div {
-        display: flex;
-        justify-content: left;
-        align-items: center;
-    }
-    button{
-        width: 25%;
-        font-size: 18px;
-        span::after{
-            font-size: 30px;
-            top: -5px;
-        }
-    }
-    figure{
-        width: 60px;
-        height: 60px;
-        margin-right: 25px;
-    }
+  font-size: 15px;  
+  margin-bottom: 10px;
+
+  & > div {
+    height: 20px;
+    position: relative;
+  }
 `;
 
-const P = styled.p`
-    left: ${(props) => (props.percentage <= 10 ? '1.5%' : props.percentage > 99 ? `${props.percentage - 11}%` : `${props.percentage - 8}%`)};
+const Title = styled.h2`
+  font-weight: 400;
+  color: #000;
+  padding-bottom: 10px;
 `;
 
-const Advance = styled.div`
-    font-size: 15px;  
-    margin-bottom: 10px;
-    .title {
-        font-weight: 400;
-        color: #000;
-        padding-bottom: 10px;
-    }
-    & > div {
-        height: 20px;
-        position: relative;
-        p{
-            position: absolute;
-            bottom: 12%;
-            font-size: 10px;
-            color: white;
-            font-weight: bold;
-        }
-    }
-    progress {
-        border-radius: 7px; 
-        width: 100%;
-        height: 15px;
-        box-shadow: 1px 1px 4px rgba( 0, 0, 0, 0.2 );
-        margin: 4px 0px;
-    }
-    progress::-webkit-progress-bar {
-      background-color: #EAEAEA;
-      border-radius: 7px;
-    }
-    progress::-webkit-progress-value {
-      background-color: #76DF93;
-      border-radius: 7px;
-      color: white;
-    }
+const Progress = styled.progress`
+  width: 100%;
+  height: 15px;
+  
+  box-shadow: 1px 1px 4px rgba( 0, 0, 0, 0.2 );
+  border-radius: 7px; 
+  margin: 4px 0px;
+
+  &::-webkit-progress-bar {
+    background-color: #EAEAEA;
+    border-radius: 7px;
+  }
+
+  &::-webkit-progress-value {
+    background-color: #76DF93;
+    border-radius: 7px;
+    color: white;
+  }
+`;
+
+const Percentage = styled.p`
+  position: absolute;
+  left: ${(props) => (props.percentage <= 10 ? '1.5%' : props.percentage > 99 ? `${props.percentage - 11}%` : `${props.percentage - 8}%`)};
+  bottom: 12%;
+
+  font-size: 10px;
+  color: white;
+  font-weight: bold;
 `;

@@ -58,7 +58,6 @@ export default function Profile() {
       
       const { data } = await axios.put(`/users/${user.id}`, body);
 
-      console.log(data);
       setUser({ ...data });
       setDisabled(false);
       setError('');
