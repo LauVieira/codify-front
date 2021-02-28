@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import Button from './Button';
 
 export default function LastCourse({ courseData, firstEntry }) {
-
   return (
     <Section firstEntry={firstEntry}>
       <Title> Continue seu curso atual </Title>

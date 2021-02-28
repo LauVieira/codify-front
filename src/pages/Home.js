@@ -10,6 +10,8 @@ import { error } from '../lib/notify';
 
 export default function Home() {
   const [lastCourseData, setLastCourseData] = useState(null);
+  const [coursesSuggestions, setCoursesSugesstions] = useState(null);
+
   const { user, firstEntry, setFirstEntry } = useContext(UserContext);
 
   const message = (user.lastCourse !== 0)  
@@ -26,9 +28,19 @@ export default function Home() {
     }
   }
 
-  console.log(lastCourseData);
+  async function getSuggestion() {
+    try {
+      const { data } = await axios.get('/courses/suggestions');
+      setCoursesSugesstions(data);
+    } catch (err) {
+      console.error(err);
+      error(err.response.data.message);
+    }
+  }
+
   useEffect(async () => {
     await getLastCourse();
+    await getSuggestion();
 
     return () => setFirstEntry(false);
   }, []);
@@ -50,7 +62,7 @@ export default function Home() {
               <LastCourse courseData={lastCourseData} firstEntry={firstEntry} />
               <UserCourses />
               <Title><h1>Experimente nossos outros cursos </h1></Title>
-              <CourseRecommendations />
+              <CourseRecommendations coursesData={coursesSuggestions} />
             </>
           )
           : (
