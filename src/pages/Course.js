@@ -30,8 +30,6 @@ export default function Course() {
       });
   }, []);
 
-  console.log(background);
-
   return (
     <>
       <Header />

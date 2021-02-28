@@ -6,19 +6,14 @@ import {
 } from '../components';
 import UserContext from '../contexts/UserContext';
 
-export default function LandingPage() {
+export default function Home() {
   const { user } = useContext(UserContext);
-  const [theresCourse, setTheresCourse] = useState(false);
-
-  function toggleTheresCourse() {
-    setTheresCourse(!theresCourse);
-  }
+  const [theresCourse, setTheresCourse] = useState(true);
 
   return (
     <>
       <Header />
-      <button type="submit" onClick={toggleTheresCourse}>change</button>
-      <UserLandingPageContainer>
+      <HomePage>
         { theresCourse
           ? (
             <>
@@ -46,37 +41,43 @@ export default function LandingPage() {
               <CourseRecommendations />
             </>
           )}
-      </UserLandingPageContainer>
+      </HomePage>
     </>
   );
 }
 
 const Message = styled.article`
-    margin-top:80px;
-    background-color: var(--color-blue);
-    height: 131px;
-    width: 100%;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-left: 50px;
-    font-size: 30px;
-    .bold{
-      font-weight: bold;
-    }
+  padding-left: 50px;
+  background-color: var(--color-blue);
+
+  height: 100px;
+  width: 100%;
+
+  color: white;
+  font-size: 24px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .bold {
+    font-weight: bold;
+  }
 `;
-const UserLandingPageContainer = styled.main`
-    background-color: #E5E5E5;
-    padding-bottom: 50px;
+
+const HomePage = styled.main`
+  background-color: #E5E5E5;
+  padding: 100px 10% 0 10%;
 `;
+
 const Title = styled.article`
-    width: 75%;
-    margin: 0 auto;
-    h1{
-      margin-top: 50px;
-      font-size: 3rem;
-      color: var(--color-black);
-      font-weight: normal;
-    }
+  width: 75%;
+  margin: 0 auto;
+
+  h1 {
+    margin-top: 50px;
+    font-size: 3rem;
+    color: var(--color-black);
+    font-weight: normal;
+  }
 `;

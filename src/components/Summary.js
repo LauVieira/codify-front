@@ -1,14 +1,16 @@
 /* eslint-disable no-nested-ternary */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Button from './Button';
 import ProfilePicture from './ProfilePicture';
 import axios from '../services/api';
+import UserContext from '../contexts/UserContext';
 import { error } from '../lib/notify';
 
 export default function Summary({ courseData }) {
+  const { setUser } = useContext(UserContext);
   const { course, program } = courseData;
   const history = useHistory();
 
@@ -27,7 +29,9 @@ export default function Summary({ courseData }) {
       if (disabled) return;
       setDisabled(true);
 
-      await axios.post(`/courses/${course.id}`);
+      const { data } = await axios.post(`/courses/${course.id}`);
+
+      setUser({ ...data.user });
       history.push(`/curso/${course.id}/capitulo/${program[0].id}/topico/${program[0].topics[0].id}/atividade/${program[0].topics[0].activities[0].id}`);
     } catch (err) {
       setDisabled(false);

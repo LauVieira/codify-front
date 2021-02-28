@@ -24,7 +24,7 @@ export default function App() {
           <UnprotectedRoute path="/entrar" component={Pages.SignIn} />
           <UnprotectedRoute path="/esqueci-senha" component={Pages.ForgotPassword} />
           <UnprotectedRoute path="/redefinir-senha/:token" component={Pages.RedefinePassword} />
-          <ProtectedRoute path="/" exact component={Pages.LandingPage} />
+          <ProtectedRoute path="/" exact component={Pages.Home} />
           <Route path="/admin" component={Dashboard} />
         </Switch>
         <ToastProvider />
