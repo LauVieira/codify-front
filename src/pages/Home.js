@@ -1,32 +1,53 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import styled from 'styled-components';
 
 import {
   Header, CourseRecommendations, LastCourse, UserCourses,
 } from '../components';
 import UserContext from '../contexts/UserContext';
+import axios from '../services/api';
+import { error } from '../lib/notify';
 
 export default function Home() {
-  const { user } = useContext(UserContext);
-  const [theresCourse, setTheresCourse] = useState(true);
+  const [lastCourseData, setLastCourseData] = useState(null);
+  const { user, firstEntry, setFirstEntry } = useContext(UserContext);
+
+  const message = (user.lastCourse !== 0)  
+    ? 'Bem-vindo de volta! Continue seu curso atual abaixo :)' 
+    : 'Você não começou nenhum curso ainda. Experimente um! :)'; 
+
+  async function getLastCourse() {
+    try {
+      const { data } = await axios.get(`/courses/${user.lastCourse}`);
+      setLastCourseData({ ...data.course });
+    } catch (err) {
+      console.error(err);
+      error(err.response.data.message);
+    }
+  }
+
+  console.log(lastCourseData);
+  useEffect(async () => {
+    await getLastCourse();
+
+    return () => setFirstEntry(false);
+  }, []);
 
   return (
     <>
       <Header />
       <HomePage>
-        { theresCourse
+        {firstEntry && (
+          <Message>
+            <p> {user.name} </p>
+            <p className="bold"> {message} </p>
+          </Message>
+        )}
+
+        { user.lastCourse !== 0
           ? (
             <>
-              <Message>
-                <p>{user.name}</p>
-                <p className="bold">Bem-vindo de volta! Continue seu curso atual abaixo :)</p>
-              </Message>
-              <LastCourse
-                title="Javascript do zero!"
-                subtitle="Aprenda Javascript do zero ao avançado, com muita prática!"
-                image="https://sep.yimg.com/ty/cdn/madisonartshop/most-famous-paintings-2.jpg"
-                imageDescription="Picasso"
-              />
+              <LastCourse courseData={lastCourseData} firstEntry={firstEntry} />
               <UserCourses />
               <Title><h1>Experimente nossos outros cursos </h1></Title>
               <CourseRecommendations />
@@ -34,10 +55,6 @@ export default function Home() {
           )
           : (
             <>
-              <Message>
-                <p>{user.name}</p>
-                <p className="bold">Você não começou nenhum curso ainda. Experimente um! :)</p>
-              </Message>
               <CourseRecommendations />
             </>
           )}
@@ -47,8 +64,13 @@ export default function Home() {
 }
 
 const Message = styled.article`
-  padding-left: 50px;
+  padding-left: 25px;
   background-color: var(--color-blue);
+
+  position: fixed;
+  left: 0;
+  top: 100px;
+  z-index: 10;
 
   height: 100px;
   width: 100%;
@@ -67,7 +89,7 @@ const Message = styled.article`
 
 const HomePage = styled.main`
   background-color: #E5E5E5;
-  padding: 100px 10% 0 10%;
+  padding: 100px 8% 0 8%;
 `;
 
 const Title = styled.article`

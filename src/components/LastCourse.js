@@ -1,25 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import Button from './Button';
 
-export default function LastCourse(props) {
-  const {
-    title, subtitle, image, imageDescription,
-  } = props;
+export default function LastCourse({ courseData, firstEntry }) {
 
   return (
-    <Section>
+    <Section firstEntry={firstEntry}>
       <Title> Continue seu curso atual </Title>
       <Card>
         <Figure>
-          <Image src={image} alt={imageDescription} />
+          <Image src={courseData?.photo} alt={courseData?.alt} />
         </Figure>
         <Container>
           <CourseInformation>
-            <h1>{title}</h1>
-            <p>{subtitle}</p>
-            <MoreInfoButton> Ver mais </MoreInfoButton>
+            <h1> {courseData?.title} </h1>
+            <p> {courseData?.description} </p>
+            <LinkMoreInfo to={`/curso/${courseData.id}`}> Ver mais </LinkMoreInfo>
           </CourseInformation>
           <Button
             className="btn" 
@@ -34,6 +32,7 @@ export default function LastCourse(props) {
     </Section>
   );
 }
+
 const Title = styled.h1`
   margin-bottom: 20px;
 
@@ -61,7 +60,7 @@ const Container = styled.div`
 
 const Card = styled.article`
   width: 100%;
-  height: 180px;
+  height: 190px;
 
   border-radius: 20px;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
@@ -72,7 +71,8 @@ const Card = styled.article`
 `;
 
 const Section = styled.section`
-  padding: 50px 0px;
+  padding-top: ${(props) => props.firstEntry ? '150px' : '50px'};
+  padding-bottom: 50px;
   width: 100%;
 `;
 
@@ -108,7 +108,7 @@ const CourseInformation = styled.div`
   }
 `;
 
-const MoreInfoButton = styled.button`
+const LinkMoreInfo = styled(Link)`
   font-size: 16px;
   font-weight: bold;
   color: var(--color-grey-thin);
