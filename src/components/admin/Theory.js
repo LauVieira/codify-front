@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   List,
   Create,
@@ -18,8 +18,14 @@ export const TheoryList = (props) => (
   <List {...props}>
     <Datagrid rowClick="edit">
       <TextField source="id" />
-      <ReferenceField source="activityId" reference="activities" label="Atividade">
-        <TextField source="type" />
+      <ReferenceField source="courseId" reference="courses" label="Curso">
+        <TextField source="title" />
+      </ReferenceField>
+      <ReferenceField source="chapterId" reference="chapters" label="Capítulo">
+        <TextField source="title" />
+      </ReferenceField>
+      <ReferenceField source="topicId" reference="topics" label="Tópico">
+        <TextField source="title" />
       </ReferenceField>
       <TextField source="youtubeLink" />
       <EditButton basePath="/Theories" />
@@ -28,28 +34,48 @@ export const TheoryList = (props) => (
   </List>
 );
 
-export const TheoryCreate = (props) => (
-  <Create {...props}>
-    <SimpleForm>
-      <TextInput disabled source="id" />
-      <ReferenceInput source="activityId" reference="activities" label="Atividade">
-        <SelectInput optionText="type" />
-      </ReferenceInput>
-      <TextInput source="youtubeLink" />
-      <DeleteButton basePath="/Theories" />
-    </SimpleForm>
-  </Create>
-);
+export function TheoryCreate(props) {
+  const [courseId, setCourseId] = useState(null);
+  const [chapterId, setChapterId] = useState(null);
+  return (
+    <Create {...props}>
+      <SimpleForm>
+        <TextInput disabled source="id" />
+        <ReferenceInput source="courseId" reference="courses" label="Curso" onChange={(e) => setCourseId(e.target.value)}>
+          <SelectInput optionText="title" />
+        </ReferenceInput>
+        <ReferenceInput filter={{ courseId }} source="chapterId" reference="chapters" label="Capítulo" onChange={(e) => setChapterId(e.target.value)}>
+          <SelectInput optionText="title" />
+        </ReferenceInput>
+        <ReferenceInput filter={{ chapterId }} source="topicId" reference="topics" label="Tópico">
+          <SelectInput optionText="title" />
+        </ReferenceInput>
+        <TextInput source="youtubeLink" />
+        <DeleteButton basePath="/Theories" />
+      </SimpleForm>
+    </Create>
+  );
+}
 
-export const TheoryEdit = (props) => (
-  <Edit {...props}>
-    <SimpleForm>
-      <TextInput disabled source="id" />
-      <ReferenceInput source="activityId" reference="activities" label="Atividade">
-        <SelectInput optionText="type" />
-      </ReferenceInput>
-      <TextInput source="youtubeLink" />
-      <DeleteButton basePath="/Theories" />
-    </SimpleForm>
-  </Edit>
-);
+export function TheoryEdit(props) {
+  const [courseId, setCourseId] = useState(null);
+  const [chapterId, setChapterId] = useState(null);
+  return (
+    <Edit {...props}>
+      <SimpleForm>
+        <TextInput disabled source="id" />
+        <ReferenceInput source="courseId" reference="courses" label="Curso" onChange={(e) => setCourseId(e.target.value)}>
+          <SelectInput optionText="title" />
+        </ReferenceInput>
+        <ReferenceInput filter={{ courseId }} source="chapterId" reference="chapters" label="Capítulo" onChange={(e) => setChapterId(e.target.value)}>
+          <SelectInput optionText="title" />
+        </ReferenceInput>
+        <ReferenceInput filter={{ chapterId }} source="topicId" reference="topics" label="Tópico">
+          <SelectInput optionText="title" />
+        </ReferenceInput>
+        <TextInput source="youtubeLink" />
+        <DeleteButton basePath="/Theories" />
+      </SimpleForm>
+    </Edit>
+  );
+}

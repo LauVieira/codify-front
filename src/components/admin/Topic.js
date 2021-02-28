@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   List,
   Create,
@@ -18,6 +18,9 @@ export const TopicList = (props) => (
     <Datagrid rowClick="edit">
       <TextField source="id" />
       <TextField source="title" />
+      <ReferenceField source="courseId" reference="courses" label="Curso">
+        <TextField source="title" />
+      </ReferenceField>
       <ReferenceField source="chapterId" reference="chapters" label="Capítulo">
         <TextField source="title" />
       </ReferenceField>
@@ -26,26 +29,38 @@ export const TopicList = (props) => (
   </List>
 );
 
-export const TopicCreate = (props) => (
-  <Create {...props}>
-    <SimpleForm>
-      <TextInput disabled source="id" />
-      <TextInput source="title" />
-      <ReferenceInput source="chapterId" reference="chapters" label="Capítulo">
-        <SelectInput optionText="title" />
-      </ReferenceInput>
-    </SimpleForm>
-  </Create>
-);
+export function TopicCreate(props) {
+  const [courseId, setCourseId] = useState(null);
+  return (
+    <Create {...props}>
+      <SimpleForm>
+        <TextInput disabled source="id" />
+        <ReferenceInput source="courseId" reference="courses" label="Curso" onChange={(e) => setCourseId(e.target.value)}>
+          <SelectInput optionText="title" />
+        </ReferenceInput>
+        <ReferenceInput filter={{ courseId }} source="chapterId" reference="chapters" label="Capítulo">
+          <SelectInput optionText="title" />
+        </ReferenceInput>
+        <TextInput source="title" label="Tópico" />
+      </SimpleForm>
+    </Create>
+  );
+}
 
-export const TopicEdit = (props) => (
-  <Edit {...props}>
-    <SimpleForm>
-      <TextInput disabled source="id" />
-      <TextInput source="title" />
-      <ReferenceInput source="chapterId" reference="chapters" label="Capítulo">
-        <SelectInput optionText="title" />
-      </ReferenceInput>
-    </SimpleForm>
-  </Edit>
-);
+export function TopicEdit(props) {
+  const [courseId, setCourseId] = useState(null);
+  return (
+    <Edit {...props}>
+      <SimpleForm>
+        <TextInput disabled source="id" />
+        <ReferenceInput source="courseId" reference="courses" label="Curso" onChange={(e) => setCourseId(e.target.value)}>
+          <SelectInput optionText="title" />
+        </ReferenceInput>
+        <ReferenceInput filter={{ courseId }} source="chapterId" reference="chapters" label="Capítulo">
+          <SelectInput optionText="title" />
+        </ReferenceInput>
+        <TextInput source="title" label="Tópico" />
+      </SimpleForm>
+    </Edit>
+  );
+}
