@@ -10,7 +10,8 @@ import { error } from '../lib/notify';
 
 export default function Home() {
   const [lastCourseData, setLastCourseData] = useState(null);
-  const [coursesSuggestions, setCoursesSugesstions] = useState(null);
+  const [coursesSuggestions, setCoursesSuggestions] = useState(null);
+  const [initializedCourses, setInitiliazedCourses] = useState(null);
 
   const { user, firstEntry, setFirstEntry } = useContext(UserContext);
 
@@ -31,7 +32,17 @@ export default function Home() {
   async function getSuggestion() {
     try {
       const { data } = await axios.get('/courses/suggestions');
-      setCoursesSugesstions(data);
+      setCoursesSuggestions({ ...data });
+    } catch (err) {
+      console.error(err);
+      error(err.response.data.message);
+    }
+  }
+
+  async function getInitializedCourses() {
+    try {
+      const { data } = await axios.get('/courses/initialized');
+      setInitiliazedCourses({ ...data });
     } catch (err) {
       console.error(err);
       error(err.response.data.message);
@@ -41,6 +52,7 @@ export default function Home() {
   useEffect(async () => {
     await getLastCourse();
     await getSuggestion();
+    await getInitializedCourses();
 
     return () => setFirstEntry(false);
   }, []);
@@ -60,7 +72,7 @@ export default function Home() {
           ? (
             <>
               <LastCourse courseData={lastCourseData} firstEntry={firstEntry} />
-              <UserCourses />
+              <UserCourses coursesData={initializedCourses} />
               <Title><h1>Experimente nossos outros cursos </h1></Title>
               <CourseRecommendations coursesData={coursesSuggestions} />
             </>
