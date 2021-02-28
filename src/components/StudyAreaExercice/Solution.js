@@ -2,7 +2,7 @@
 import React, { useContext } from 'react';
 import styled, { css } from 'styled-components';
 import Editor, { DiffEditor, useMonaco, loader } from '@monaco-editor/react';
-import { HiOutlineLightBulb } from 'react-icons/hi';
+import { BsPencil } from 'react-icons/bs';
 import CheckBox from '../CheckBox';
 import CourseContext from '../../contexts/CourseContext';
 
@@ -14,14 +14,14 @@ export default function StudyAreaExercice({ activity }) {
   return (
     <Box>
       <UpBar>
-        <Text>Seu Código</Text>
+        <Text>Nossa solução</Text>
         <Button>
-          <p>Ver solução</p>
-          <HiOutlineLightBulb />
+          <p>Seu código</p>
+          <BsPencil />
         </Button>
       </UpBar>
       <Editor
-        height="40vh"
+        height="80vh"
         defaultLanguage="javascript"
         defaultValue="// some comment"
         theme="vs-dark"

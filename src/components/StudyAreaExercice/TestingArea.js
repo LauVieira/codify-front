@@ -2,8 +2,7 @@
 import React, { useContext } from 'react';
 import styled, { css } from 'styled-components';
 import Editor, { DiffEditor, useMonaco, loader } from '@monaco-editor/react';
-import { HiOutlineLightBulb } from 'react-icons/hi';
-import CheckBox from '../CheckBox';
+import { BsPlay } from 'react-icons/bs';
 import CourseContext from '../../contexts/CourseContext';
 
 export default function StudyAreaExercice({ activity }) {
@@ -14,22 +13,23 @@ export default function StudyAreaExercice({ activity }) {
   return (
     <Box>
       <UpBar>
-        <Text>Seu Código</Text>
+        <Text>Console</Text>
         <Button>
-          <p>Ver solução</p>
-          <HiOutlineLightBulb />
+          <p>Rodar testes</p>
+          <BsPlay />
         </Button>
       </UpBar>
-      <Editor
-        height="40vh"
-        defaultLanguage="javascript"
-        defaultValue="// some comment"
-        theme="vs-dark"
-      />
+      <Console >
+        oasdkaspodka
+      </Console>
     </Box>
   );
 }
-
+const Console = styled.div`
+  width: 100%;
+  height: 80%;
+  background-color: #1E1E1E;
+`;
 const Box = styled.div`
   width: 100%;
   height: 80vh;

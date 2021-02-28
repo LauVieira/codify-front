@@ -25,6 +25,8 @@ export default function StudyAreaContent({ activity, setActivity }) {
       if (j === chapter.topics.length - 1) {
         const k = program.findIndex((c) => c.id == chapterId);
         if (k === program.length - 1) {
+          console.log(k);
+          console.log(program.length);
           setIsLastChapter(true);
         } else {
           setChapter(program[k + 1]);
@@ -90,9 +92,8 @@ const Container = styled.section`
   background-color: #2e2e2e;
   box-shadow: var(--shadow-black);
 
-  height: 82.1vh;
+  height: 84.1vh;
   width: 100%;
-  padding: 0 20px;
 
   display: flex;
   align-items: center;
@@ -106,7 +107,7 @@ const Box = styled.section`
   align-items: center;
   justify-content: center;
   flex-direction:column;
-  height: 82.1vh;
+  height: 100%;
   width: 100%;
 `;
 const ContainerBox = styled.section`

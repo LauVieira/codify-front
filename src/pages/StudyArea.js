@@ -49,7 +49,5 @@ export default function StudyArea() {
   );
 }
 
-const UserLandingPageContainer = styled.main`
-    background-color: #E5E5E5;
-    padding-bottom: 50px;
+const Container = styled.main`
 `;
