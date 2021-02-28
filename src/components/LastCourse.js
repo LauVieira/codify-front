@@ -5,18 +5,19 @@ import { Link } from 'react-router-dom';
 import Button from './Button';
 
 export default function LastCourse({ courseData, firstEntry }) {
+  const { photo, alt, title, description, id } = courseData;
   return (
     <Section firstEntry={firstEntry}>
       <Title> Continue seu curso atual </Title>
       <Card>
         <Figure>
-          <Image src={courseData?.photo} alt={courseData?.alt} />
+          <Image src={photo} alt={alt} />
         </Figure>
         <Container>
           <CourseInformation>
-            <h1> {courseData?.title} </h1>
-            <p> {courseData?.description} </p>
-            <LinkMoreInfo to={`/curso/${courseData.id}`}> Ver mais </LinkMoreInfo>
+            <h1> {title} </h1>
+            <p> {description} </p>
+            <LinkMoreInfo to={`/curso/${id}`}> Ver mais </LinkMoreInfo>
           </CourseInformation>
           <Button
             className="btn" 

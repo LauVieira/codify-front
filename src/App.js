@@ -1,6 +1,9 @@
 import React, { useContext } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
+import 'react-toastify/dist/ReactToastify.css';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+
 import ToastProvider from './lib/notify';
 import usePageTracking from './hooks/usePageTracking';
 import GlobalStyle from './assets/GlobalStyles';

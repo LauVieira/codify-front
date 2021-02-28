@@ -6,19 +6,6 @@ import CardCourse from './CardCourse';
 export default function UserCourses() {
   const [courses, setCourses] = useState([]);
 
-  useEffect(() => {
-    axios
-      .get('/courses/suggestions')
-      .then((response) => {
-        setCourses(response.data);
-      })
-      .catch(({ response }) => {
-        console.error(response);
-
-        alert(response.data.message);
-      });
-  }, []);
-
   return (
     <RecommendationsContainer>
       {(courses.length)

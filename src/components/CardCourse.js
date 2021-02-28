@@ -2,15 +2,16 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
-export default function CardCourse(props) {
+export default function CardCourse({ course }) {
   const {
     title, subtitle, image, imageDescription, id,
-  } = props;
+  } = course;
   const history = useHistory();
 
   function handleClick() {
     history.push(`/curso/${id}`);
   }
+  
   return (
     <StyledCourse onClick={handleClick}>
       <Figure>
@@ -40,6 +41,7 @@ const Figure = styled.figure`
   height: 50%;
   vertical-align:top;
 `;
+
 const Image = styled.img`
   width: 100%;
   height: 100%;
@@ -47,16 +49,19 @@ const Image = styled.img`
   border-top-right-radius: 20px;
   object-fit: cover;
 `;
+
 const CourseInformation = styled.article`
   width: 100%;
   height: 50%;
   color: black;
   font-size: 2rem;
-  h1{
+
+  h1 {
     margin: 20px 0 0 20px;
     font-weight: bold;
   }
-  p{
+
+  p {
     margin: 20px 0 0 20px;
     color: var(--color-grey-regular);
   }
