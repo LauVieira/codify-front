@@ -17,10 +17,6 @@ export default function Home() {
 
   const { user, firstEntry, setFirstEntry } = useContext(UserContext);
 
-  const message = (user.lastCourse !== 0)  
-    ? 'Bem-vindo de volta! Continue seu curso atual abaixo :)' 
-    : 'Você não começou nenhum curso ainda. Experimente um! :)'; 
-
   async function getLastCourse() {
     try {
       const { data } = await axios.get(`/courses/${user.lastCourse}`);
@@ -80,12 +76,7 @@ export default function Home() {
     <>
       <Header />
       <HomePage>
-        {firstEntry && (
-          <Message>
-            <p> {user.name} </p>
-            <p className="bold"> {message} </p>
-          </Message>
-        )}
+        {firstEntry && <Message user={user} /> }
 
         { user.lastCourse !== 0
           ? (
@@ -102,29 +93,6 @@ export default function Home() {
     </>
   );
 }
-
-const Message = styled.article`
-  padding-left: 25px;
-  background-color: var(--color-blue);
-
-  position: absolute;
-  left: 0;
-  top: 100px;
-
-  height: 100px;
-  width: 100%;
-
-  color: white;
-  font-size: 24px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  .bold {
-    font-weight: bold;
-  }
-`;
 
 const HomePage = styled.main`
   background-color: #E5E5E5;
