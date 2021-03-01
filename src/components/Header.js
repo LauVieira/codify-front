@@ -94,7 +94,7 @@ const Navigation = styled.nav`
 `;
 
 const NavLink = styled(Link)`
-  margin: 0 0 0 40px;
+  margin-left: 40px;
   font-size: 2.5rem;
   color: var(--color-subtitle);
 

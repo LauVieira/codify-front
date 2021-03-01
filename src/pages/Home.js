@@ -76,8 +76,6 @@ export default function Home() {
     );
   }
 
-  console.log(initializedCourses);
-
   return (
     <>
       <Header />
@@ -94,14 +92,11 @@ export default function Home() {
             <>
               <LastCourse courseData={lastCourseData} firstEntry={firstEntry} />
               <UserCourses coursesData={initializedCourses} />
-              <Title><h1>Experimente nossos outros cursos </h1></Title>
-              <CourseRecommendations coursesData={coursesSuggestions} />
+              <CourseRecommendations coursesData={coursesSuggestions} firstTime={false} />
             </>
           )
           : (
-            <>
-              <CourseRecommendations />
-            </>
+            <CourseRecommendations firstTime />
           )}
       </HomePage>
     </>
@@ -112,10 +107,9 @@ const Message = styled.article`
   padding-left: 25px;
   background-color: var(--color-blue);
 
-  position: fixed;
+  position: absolute;
   left: 0;
   top: 100px;
-  z-index: 10;
 
   height: 100px;
   width: 100%;
@@ -141,16 +135,4 @@ const HomePage = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
-
-const Title = styled.article`
-  width: 75%;
-  margin: 0 auto;
-
-  h1 {
-    margin-top: 50px;
-    font-size: 3rem;
-    color: var(--color-black);
-    font-weight: normal;
-  }
 `;

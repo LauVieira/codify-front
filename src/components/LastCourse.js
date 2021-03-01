@@ -62,8 +62,8 @@ const Card = styled.article`
   width: 100%;
   height: 190px;
 
-  border-radius: 20px;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
+  border-radius: var(--radius-strong);
+  box-shadow: var(--shadow-strong);
   background: var(--color-white);
   
   display: flex;
@@ -72,7 +72,7 @@ const Card = styled.article`
 
 const Section = styled.section`
   padding-top: ${(props) => props.firstEntry ? '150px' : '50px'};
-  padding-bottom: 50px;
+  margin-bottom: 50px;
   width: 100%;
 `;
 
@@ -86,8 +86,9 @@ const Image = styled.img`
   width: 100%;
   height: 100%;
 
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
+  border-top-left-radius: var(--radius-strong);
+  border-bottom-left-radius: var(--radius-strong);
+  object-fit: cover;
 `;
 
 const CourseInformation = styled.div`
@@ -109,8 +110,17 @@ const CourseInformation = styled.div`
 `;
 
 const LinkMoreInfo = styled(Link)`
-  font-size: 16px;
+  display: inline-block;
+  margin-top: 15px;
+
+  font-size: 1.6rem;
   font-weight: bold;
   color: var(--color-grey-thin);
-  margin-top: 12px;
+  
+
+  transition: 0.1s;
+
+  &:hover, &:focus {
+    color: var(--color-blue);
+  }
 `;

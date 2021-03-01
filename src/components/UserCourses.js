@@ -1,21 +1,28 @@
-import React from 'react';
+/* eslint-disable no-param-reassign */
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import CardCourse from './CardCourse';
 
+import UserContext from '../contexts/UserContext';
+
 export default function UserCourses({ coursesData }) {
-  console.log(coursesData);
+  if (coursesData.length === 1) return;
+  const { user } = useContext(UserContext);
+
+  coursesData = coursesData.filter((course) => course.id !== user.lastCourse);
   
   return (
     <Section>
       <Title> Meus cursos em andamento </Title>
-      <CourseContainer>
+      <Container>
         {coursesData.map((course) => (
           <CardCourse
             course={course}
+            withButton
             key={course.id}
           />
         ))}
-      </CourseContainer>
+      </Container>
     </Section>
   );
 }
@@ -28,15 +35,11 @@ const Title = styled.h1`
 `;
 
 const Section = styled.section`
-  padding: 50px 0px;
+  margin-bottom: 50px;
   width: 100%;
 `;
 
-const CourseContainer = styled.article`
-  width: 75%;
-  height: 100%;
+const Container = styled.div`
   display: flex;
-  margin: 0 auto;
   flex-wrap: wrap;
-  justify-content: space-between;
 `;
