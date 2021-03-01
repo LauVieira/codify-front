@@ -3,10 +3,10 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import CardCourse from './CardCourse';
 
-import UserContext from '../contexts/UserContext';
+import UserContext from '../../contexts/UserContext';
 
 export default function UserCourses({ coursesData }) {
-  if (coursesData.length === 1) return;
+  if (coursesData.length === 1) return null;
   const { user } = useContext(UserContext);
 
   coursesData = coursesData.filter((course) => course.id !== user.lastCourse);

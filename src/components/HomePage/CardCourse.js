@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
-import Button from './Button';
+import Button from '../Button';
 
 export default function CardCourse({ course, withButton }) {
   const {
@@ -20,8 +20,16 @@ export default function CardCourse({ course, withButton }) {
         <Image src={photo} alt={alt} />
       </Figure>
       <CourseInformation>
-        <h1> {title} </h1>
-        <p> {description} </p>
+        <h1> 
+          {' '}
+          {title}
+          {' '}
+        </h1>
+        <p> 
+          {' '}
+          {description}
+          {' '}
+        </p>
       
         {withButton && (
           <Button

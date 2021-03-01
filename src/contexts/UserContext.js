@@ -10,7 +10,10 @@ export function UserProvider({ children }) {
   const [firstEntry, setFirstEntry] = useState(true);
 
   return (
-    <UserContext.Provider value={{ user, setUser, firstEntry, setFirstEntry }}>
+    <UserContext.Provider value={{
+      user, setUser, firstEntry, setFirstEntry, 
+    }}
+    >
       {children}
     </UserContext.Provider>
   );

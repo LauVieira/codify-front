@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import CardCourse from './CardCourse';
 
 export default function UserCourses({ coursesData, firstTime }) {
+  if (coursesData.length === 0) return null;
+
   return (
     <Section>
       {!firstTime && <Title> Experimente nossos outros cursos </Title>}

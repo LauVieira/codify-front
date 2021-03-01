@@ -2,10 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import Button from './Button';
+import Button from '../Button';
 
 export default function LastCourse({ courseData, firstEntry }) {
-  const { photo, alt, title, description, id } = courseData;
+  const {
+    photo, alt, title, description, id, 
+  } = courseData;
   return (
     <Section firstEntry={firstEntry}>
       <Title> Continue seu curso atual </Title>
@@ -15,8 +17,12 @@ export default function LastCourse({ courseData, firstEntry }) {
         </Figure>
         <Container>
           <CourseInformation>
-            <h1> {title} </h1>
-            <p> {description} </p>
+            <SubTitle> 
+              {title} 
+            </SubTitle>
+            <Description> 
+              {description} 
+            </Description>
             <LinkMoreInfo to={`/curso/${id}`}> Ver mais </LinkMoreInfo>
           </CourseInformation>
           <Button
@@ -95,18 +101,18 @@ const CourseInformation = styled.div`
   width: 50%;
 
   font-size: 2rem;
+`;
 
-  h1 {
-    font-size: 2.25rem;
-    color: black;
-    font-weight: bold;
-  }
+const SubTitle = styled.h1`
+  font-size: 2.25rem;
+  color: black;
+  font-weight: bold;
+`;
 
-  p {
-    font-size: 2rem;
-    color: var(--color-default);
-    margin-top: 12px;
-  }
+const Description = styled.p`
+  font-size: 2rem;
+  color: var(--color-default);
+  margin-top: 12px;
 `;
 
 const LinkMoreInfo = styled(Link)`

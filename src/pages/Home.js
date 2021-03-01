@@ -1,10 +1,13 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, {
+  useState, useContext, useEffect, useLayoutEffect, 
+} from 'react';
 import styled from 'styled-components';
 
 import {
-  Header, CourseRecommendations, LastCourse, UserCourses, Spinner
-} from '../components';
+  CourseRecommendations, LastCourse, UserCourses, Message,
+} from '../components/HomePage';
 
+import { Spinner, Header } from '../components';
 import UserContext from '../contexts/UserContext';
 import axios from '../services/api';
 import { error } from '../lib/notify';
@@ -53,9 +56,11 @@ export default function Home() {
     await getInitializedCourses();
 
     setLoading(false);
+
     return () => setFirstEntry(false);
   }, []);
 
+  console.log(firstEntry);
   if (loading) {
     return (
       <>

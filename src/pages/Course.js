@@ -17,6 +17,7 @@ export default function Course() {
     program,
   } = useContext(CourseContext);
   const { id } = useParams();
+
   useEffect(() => {
     axios.get(`/courses/${id}`)
       .then((response) => {

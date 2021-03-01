@@ -3,9 +3,7 @@ import styled from 'styled-components';
 
 export default function DropTopics() {
   return (
-    <StyledDropTopics>
-
-    </StyledDropTopics>
+    <StyledDropTopics />
   );
 }
 
