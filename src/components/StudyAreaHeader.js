@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { IoIosArrowDown } from 'react-icons/io';
 import ArrowBackButton from './ArrowBackButton';
+import DropDownTopics from './DropDownTopics';
 
 export default function StudyAreaHeader({ courseInfo }) {
+  const [showMenu, setShowMenu] = useState(false);
   const { id } = useParams();
+
   return (
     <StyledHeader>
       <ArrowBackButton
@@ -16,7 +19,7 @@ export default function StudyAreaHeader({ courseInfo }) {
         top="12px"
         fontSize="30px"
       />
-      <ChapterTopicInformation>
+      <ChapterTopicInformation showMenu={showMenu} onClick={() => setShowMenu(!showMenu)}>
         {courseInfo
           ? (
             <h1>
@@ -25,6 +28,7 @@ export default function StudyAreaHeader({ courseInfo }) {
           )
           : <h1>nada</h1>}
         <IoIosArrowDown className="icon" />
+        {showMenu && <DropDownTopics />}
       </ChapterTopicInformation>
     </StyledHeader>
   );
@@ -50,22 +54,24 @@ const ChapterTopicInformation = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;
+
   height: 100%;
   font-size: 2rem;
-  font-weight:bold;
+  font-weight: bold;
+
   color: var(--color-grey-study-area);
   font-family: var(--font-roboto);
-  
   line-height: 29px;
+
+  cursor: pointer;
 
   h1 {
     margin-right: 10px;
   }
 
-  .icon{
+  .icon {
     top: 38%;
-    transform: rotate(0.11deg);
+    transform: ${(props) => (props.showMenu ? 'rotate(180deg)' : '0')};
     font-size: 2.5rem;
   }
-  
 `;

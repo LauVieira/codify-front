@@ -50,7 +50,7 @@ export default function Header() {
           existPhoto={false}
         />
         {showMenu && (
-          <DropDown showMenu={showMenu}>
+          <DropDown>
             <DropLink to="/perfil">
               Perfil
             </DropLink>

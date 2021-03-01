@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function DropTopics() {
+export default function DropDownTopics({ courseInfo }) {
+  console.log(courseInfo);
   return (
     <StyledDropTopics />
   );
