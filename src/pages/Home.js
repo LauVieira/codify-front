@@ -1,5 +1,6 @@
+/* eslint-disable no-nested-ternary */
 import React, {
-  useState, useContext, useEffect, useLayoutEffect, 
+  useState, useContext, useEffect,
 } from 'react';
 import styled from 'styled-components';
 
@@ -7,7 +8,7 @@ import {
   CourseRecommendations, LastCourse, UserCourses, Message,
 } from '../components/HomePage';
 
-import { Spinner, Header } from '../components';
+import { Spinner, Header, Error } from '../components';
 import UserContext from '../contexts/UserContext';
 import axios from '../services/api';
 import { error } from '../lib/notify';
@@ -92,7 +93,9 @@ export default function Home() {
             </>
           )
           : (
-            <CourseRecommendations firstTime />
+            coursesSuggestions.length !== 0
+              ? <CourseRecommendations coursesData={coursesSuggestions} firstTime />
+              : <Error> Nenhum curso foi encontrado :( </Error>
           )}
       </HomePage>
     </>

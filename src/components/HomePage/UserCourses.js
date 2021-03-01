@@ -6,7 +6,7 @@ import CardCourse from './CardCourse';
 import UserContext from '../../contexts/UserContext';
 
 export default function UserCourses({ coursesData }) {
-  if (coursesData.length === 1) return null;
+  if (coursesData.length < 2) return null;
   const { user } = useContext(UserContext);
 
   coursesData = coursesData.filter((course) => course.id !== user.lastCourse);
@@ -35,7 +35,7 @@ const Title = styled.h1`
 `;
 
 const Section = styled.section`
-  margin-bottom: 50px;
+  margin-bottom: 5px;
   width: 100%;
 `;
 

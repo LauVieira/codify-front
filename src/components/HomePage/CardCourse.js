@@ -21,14 +21,10 @@ export default function CardCourse({ course, withButton }) {
       </Figure>
       <CourseInformation>
         <h1> 
-          {' '}
           {title}
-          {' '}
         </h1>
         <p> 
-          {' '}
           {description}
-          {' '}
         </p>
       
         {withButton && (
@@ -53,6 +49,7 @@ const StyledCourse = styled.article`
   background-color: var(--color-white);
 
   margin-right: 45px;
+  margin-bottom: 45px;
 
   flex-shrink: 0;
   cursor: pointer;

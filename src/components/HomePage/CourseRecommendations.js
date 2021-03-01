@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import CardCourse from './CardCourse';
 
-export default function UserCourses({ coursesData, firstTime }) {
+export default function CourseRecommendations({ coursesData, firstTime }) {
   if (coursesData.length === 0) return null;
 
   return (
@@ -24,6 +24,10 @@ export default function UserCourses({ coursesData, firstTime }) {
 const Section = styled.section`
   margin-bottom: 50px;
   width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Container = styled.div`
