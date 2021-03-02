@@ -19,7 +19,7 @@ export default function Home() {
   const [initializedCourses, setInitiliazedCourses] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const { user, firstEntry, setFirstEntry } = useContext(UserContext);
+  const { user, firstEntry } = useContext(UserContext);
 
   async function getLastCourse() {
     try {
@@ -58,11 +58,8 @@ export default function Home() {
     await getInitializedCourses();
 
     setLoading(false);
-
-    return () => setFirstEntry(false);
   }, []);
 
-  console.log(firstEntry);
   if (loading) {
     return (
       <>
@@ -110,7 +107,7 @@ export default function Home() {
 }
 
 const HomePage = styled.main`
-  background-color: #E5E5E5;
+  background-color: var(--background-color);
   padding: 100px 8% 0 8%;
   min-height: 100vh;
   height: auto;
