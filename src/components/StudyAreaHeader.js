@@ -40,14 +40,16 @@ export default function StudyAreaHeader() {
       <ChapterTopicInformation showMenu={showMenu} onClick={() => setShowMenu(!showMenu)}>
         {courseInfo
           ? (
-            <h1>
-              {`${courseInfo.chapter.title} - ${courseInfo.topic.title}`}
-            </h1>
+            <>
+              <h1>
+                {`${courseInfo.chapter.title} - ${courseInfo.topic.title}`}
+              </h1>
+              <IoIosArrowDown className="icon" />
+            </>
           )
           : <h1>nada</h1>}
-        <IoIosArrowDown className="icon" />
-        {showMenu && <DropDownTopics />}
       </ChapterTopicInformation>
+      {showMenu && <DropDownTopics />}
     </StyledHeader>
   );
 }
@@ -64,7 +66,6 @@ const StyledHeader = styled.header`
   align-items: center;
   justify-content: center;
 
-  z-index: 1;
   position: relative;
 `;
 
@@ -88,7 +89,6 @@ const ChapterTopicInformation = styled.section`
   }
 
   .icon {
-    top: 38%;
     transform: ${(props) => (props.showMenu ? 'rotate(180deg)' : '0')};
     font-size: 2.5rem;
   }

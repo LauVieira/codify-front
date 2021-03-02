@@ -51,7 +51,6 @@ export default function StudyArea() {
 }
 
 const MainPage = styled.main`
-  width: 100%;
-  min-height: calc(100vh + 100px);
   background-color: #2e2e2e;
+  height: calc(100vh + 100px);
 `;

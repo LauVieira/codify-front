@@ -66,24 +66,18 @@ const Square = styled.div`
     height: 23px;
     cursor: pointer;
 
-    background: ${(props) => props.isChecked ? '#76DF93' : 'transparent'};
-    border: 1px solid #9D9D9D;
+    transition: all 0.2s linear;
+    border: 2px solid ${(props) => props.isChecked ? '#76DF93' : '#9D9D9D'};
     margin-right: 10px;
 `;
 
 const Check = styled.input`
     display: none;
-
-    &:checked + div {
-        transition: all 0.2s linear;
-        background: #76DF93;
-        border: 1px solid green;
-    }
 `;
 
 const IconCheck = styled(IoCheckmark)`
     transition: all 0.2s linear;
-    color: green;
+    color: #76DF93;
     opacity: ${(props) => props.isChecked ? 1 : 0};
     z-index: 1;
 `;
