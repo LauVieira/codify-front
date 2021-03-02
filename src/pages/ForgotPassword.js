@@ -1,28 +1,43 @@
 import React, { useState } from 'react';
 
 import Patterns from '../utils/PatternsHtml';
+import axios from '../services/api';
+import { success } from '../lib/notify';
 
 import {
   Logo,
-  Headline,
   Input,
   Button,
-  LayoutInitialPage,
-  Anchor,
-  Form,
+  Error,
 } from '../components';
+
+import {
+  Anchor, Form, Headline, LayoutInitialPage, 
+} from '../components/InitialPage';
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState('');
   const [disabled, setDisabled] = useState(false);
+  const [error, setError] = useState('');
 
-  function handleSubmit(event) {
-    event.preventDefault();
+  async function handleSubmit(event) {
+    try {
+      event.preventDefault();
 
-    if (disabled) return;
-    setDisabled(true);
+      if (disabled) return;
+      setDisabled(true);
 
-    alert('Em construção');
+      await axios.post('users/forgot-password', { email });
+
+      success(['Se este email estiver associado', 'Você receberá um e-mail de redefinição']);
+      setError('');
+      setDisabled(false);
+    } catch (err) {
+      console.error(err);
+
+      setError(err.response.data.message);
+      setDisabled(false);
+    }
   }
 
   return (
@@ -46,6 +61,9 @@ export default function ForgotPassword() {
           autoFocus
           autocomplete="on"
         />
+        <Error align="center"> 
+          { error || ''} 
+        </Error>
         <Button
           type="submit"
           disabled={disabled}

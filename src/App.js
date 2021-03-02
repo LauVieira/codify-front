@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+
 import {
   BrowserRouter as Router,
   Route,
@@ -6,6 +7,7 @@ import {
   Redirect,
 } from 'react-router-dom';
 
+import ToastProvider from './lib/notify';
 import GlobalStyle from './assets/GlobalStyles';
 import UserContext, { UserProvider } from './contexts/UserContext';
 import { CourseProvider } from './contexts/CourseContext';
@@ -19,16 +21,17 @@ export default function App() {
         <Router>
           <GlobalStyle />
           <Switch>
-            <ProtectedRoute path="/curso/topico" />
             <ProtectedRoute path="/curso/:id/capitulo/:chapterId/topico/:topicId/atividade/:activityId" component={Pages.StudyArea} />
             <ProtectedRoute path="/curso/:id" component={Pages.Course} />
+            <ProtectedRoute path="/perfil" component={Pages.Profile} />
             <UnprotectedRoute path="/cadastrar" component={Pages.SignUp} />
             <UnprotectedRoute path="/entrar" component={Pages.SignIn} />
             <UnprotectedRoute path="/esqueci-senha" component={Pages.ForgotPassword} />
-            <UnprotectedRoute path="/redefinir-senha" component={Pages.RedefinePassword} />
+            <UnprotectedRoute path="/redefinir-senha/:token" component={Pages.RedefinePassword} />
             <ProtectedRoute path="/" exact component={Pages.LandingPage} />
             <Route path="/admin" component={Dashboard} />
           </Switch>
+          <ToastProvider />
         </Router>
       </CourseProvider>
     </UserProvider>
