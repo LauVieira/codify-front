@@ -6,17 +6,19 @@ import { useParams } from 'react-router-dom';
 import axios from '../services/api';
 import CourseContext from '../contexts/CourseContext';
 import UserContext from '../contexts/UserContext';
-import { error } from '../lib/notify'
+import { error } from '../lib/notify';
 
 import {
-  StudyAreaHeader, Activities,
+  StudyAreaHeader, Activities, Spinner
 } from '../components';
 
 export default function StudyArea() {
+  const [loading, setLoading] = useState(true);
   const { setUser } = useContext(UserContext);
   const { id, chapterId, topicId } = useParams();
   const {
     activities,
+    setActivities,
     setCourseData,
     setProgram,
     setChapter,
@@ -26,6 +28,7 @@ export default function StudyArea() {
 
   async function changeLastCourse() {
     try {
+      console.log(id, 'ID');
       const { data } = await axios.post(`/users/last-course/${id}`);
 
       setUser({ ...data });
@@ -35,37 +38,70 @@ export default function StudyArea() {
     }
   }
 
-  function findTopicsActivities(courseProgram) {
-    const chapter = courseProgram.find((cap) => cap.id === chapterId);
+  function findChapter(courseProgram) {
+    const chapter = courseProgram.find((cap) => cap.id === Number(chapterId));
     setChapter({ ...chapter });
-    const topic = chapter.topics.find((top) => top.id === topicId);
-    setTopic({ ...topic });
+  }
+
+  async function getCourse() {
+    try {
+      const { data } = await axios.get(`/courses/${id}`);
+      setCourseData({ ...data.course });
+      setProgram([...data.program]);
+      findChapter(data.program);
+      setActivityIndex(0);
+    } catch (err) {
+      console.error(err);
+      error(err.response.data.message);
+    }
+  }
+
+  async function getChapterTopicAndActivities() {
+    try {
+      const { data } = await axios.get(`/courses/chapters/${chapterId}/topics/${topicId}/activities`);
+      setTopic({ ...data.topic });
+      setActivities([...data.topic.activities]);
+      setActivityIndex(0);
+    } catch (err) {
+      console.error(err);
+      error(err.response.data.message);
+    }
   }
 
   useEffect(async () => {
     await changeLastCourse();
-    axios.get(`/courses/${id}`)
-      .then((response) => {
-        setCourseData(response.data);
-        setProgram(response.data.program);
-        findTopicsActivities(response.data.program);
-        setActivityIndex(0);
-      })
-      .catch((err) => {
-        error(err.response.data.message);
-        console.error(err);
-      });
+    await getCourse();
+    await getChapterTopicAndActivities();
+
+    setLoading(false);
   }, [topicId]);
 
+  if (loading) {
+    return (
+      <StudyAreaPage>
+        <Spinner
+          type="ThreeDots"
+          height={150}
+          width={150}
+          color="#000000"
+        />
+      </StudyAreaPage>
+    );
+  }
+
   return (
-    <MainPage>
+    <StudyAreaPage>
       <StudyAreaHeader />
-      <Activities activities={activities || []} />
-    </MainPage>
+      <Activities activities={activities} />
+    </StudyAreaPage>
   );
 }
 
-const MainPage = styled.main`
+const StudyAreaPage = styled.main`
   background-color: #2e2e2e;
-  height: calc(100vh + 100px);
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;

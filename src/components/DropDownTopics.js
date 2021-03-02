@@ -1,17 +1,17 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { RiCheckboxBlankCircleFill, RiCheckboxCircleFill } from 'react-icons/ri';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 import CourseContext from '../contexts/CourseContext';
 
 export default function DropDownTopics() {
   const { program } = useContext(CourseContext);
-  console.log(program);
+  const { id } = useParams();
   const history = useHistory();
 
   function redirect(chapterId, topicId, activityId) {
-    history.push(`/curso/:id/capitulo/${chapterId}/topico/${topicId}/atividade/${activityId}`);
+    history.push(`/curso/${id}/capitulo/${chapterId}/topico/${topicId}/atividade/${activityId}`);
   }
   
   return (

@@ -1,32 +1,17 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { IoIosArrowDown } from 'react-icons/io';
 import ArrowBackButton from './ArrowBackButton';
 import DropDownTopics from './DropDownTopics';
-import axios from '../services/api';
+
 import CourseContext from '../contexts/CourseContext';
 
 export default function StudyAreaHeader() {
+  const { chapter, topic } = useContext(CourseContext);
   const [showMenu, setShowMenu] = useState(false);
-  const [courseInfo, setCourseInfo] = useState('');
-  const { id, chapterId, topicId } = useParams();
-  const {
-    activities, setActivities, chapter, setTopic, setChapter,
-  } = useContext(CourseContext);
-  useEffect(() => {
-    axios.get(`/courses/chapters/${chapterId}/topics/${topicId}/activities`)
-      .then((response) => {
-        console.log(response.data);
-        setCourseInfo(response.data);
-        setActivities(response.data.topic.activities);
-      })
-      .catch(({ response }) => {
-        console.error(response);
+  const { id } = useParams();
 
-        alert(response.data);
-      });
-  }, [topicId]);
   return (
     <StyledHeader>
       <ArrowBackButton
@@ -38,16 +23,10 @@ export default function StudyAreaHeader() {
         fontSize="30px"
       />
       <ChapterTopicInformation showMenu={showMenu} onClick={() => setShowMenu(!showMenu)}>
-        {courseInfo
-          ? (
-            <>
-              <h1>
-                {`${courseInfo.chapter.title} - ${courseInfo.topic.title}`}
-              </h1>
-              <IoIosArrowDown className="icon" />
-            </>
-          )
-          : <h1>nada</h1>}
+        <h1>
+          {`${chapter.title} - ${topic.title}`}
+        </h1>
+        <IoIosArrowDown className="icon" />
       </ChapterTopicInformation>
       {showMenu && <DropDownTopics />}
     </StyledHeader>
