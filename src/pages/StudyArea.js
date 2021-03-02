@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 /* eslint-disable no-unused-vars */
 import React, { useState, useContext, useEffect } from 'react';
 import styled from 'styled-components';
@@ -10,31 +11,47 @@ import {
 } from '../components';
 
 export default function StudyArea() {
-  const [courseInfo, setCourseInfo] = useState('');
-  const { chapterId, topicId } = useParams();
-  const { activities, setActivities } = useContext(CourseContext);
-  useEffect(() => {
-    axios.get(`/courses/chapters/${chapterId}/topics/${topicId}/activities`)
-      .then((response) => {
-        setCourseInfo(response.data);
-        setActivities(response.data.topic.activities);
-      })
-      .catch(({ response }) => {
-        console.error(response);
+  const { id, chapterId, topicId } = useParams();
+  const {
+    activities,
+    setCourseData,
+    setProgram,
+    program,
+    setChapter,
+    setTopic,
+    setActivityIndex,
+  } = useContext(CourseContext);
 
-        alert(response.data);
+  function findTopicsActivities(courseProgram) {
+    const c = courseProgram.find((cap) => cap.id == chapterId);
+    setChapter(c);
+    const t = c.topics.find((top) => top.id == topicId);
+    setTopic(t);
+  }
+  useEffect(() => {
+    axios.get(`/courses/${id}`)
+      .then((response) => {
+        setCourseData(response.data);
+        setProgram(response.data.program);
+        findTopicsActivities(response.data.program);
+        setActivityIndex(0);
+      })
+      .catch((error) => {
+        alert('Erro ao buscar o curso selecionado');
+        console.log(error);
       });
   }, [topicId]);
 
   return (
-    <>
-      <StudyAreaHeader courseInfo={courseInfo || ''} />
+    <MainPage>
+      <StudyAreaHeader />
       <Activities activities={activities || []} />
-    </>
+    </MainPage>
   );
 }
 
-const UserLandingPageContainer = styled.main`
-    background-color: #E5E5E5;
-    padding-bottom: 50px;
+const MainPage = styled.main`
+  width: 100%;
+  min-height: calc(100vh + 100px);
+  background-color: #2e2e2e;
 `;

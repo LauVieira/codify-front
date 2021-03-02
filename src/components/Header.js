@@ -11,7 +11,7 @@ import ProfilePicture from './ProfilePicture';
 import UserContext from '../contexts/UserContext';
 
 export default function Header() {
-  const { setUser } = useContext(UserContext);
+  const { setUser, setFirstEntry } = useContext(UserContext);
   const [showMenu, setShowMenu] = useState(false);
   const history = useHistory();
 
@@ -21,6 +21,7 @@ export default function Header() {
 
       setUser(null);
       localStorage.clear();
+      setFirstEntry(true);
       history.push('/entrar');
     } catch (err) {
       error(err.response.data.message);

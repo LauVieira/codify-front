@@ -1,10 +1,34 @@
-import React from 'react';
+/* eslint-disable max-len */
+/* eslint-disable radix */
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { IoCheckmark } from 'react-icons/io5';
+import axios from '../services/api';
 
-export default function CheckBox({ isChecked, setIsChecked }) {
+export default function CheckBox({
+  isChecked, setIsChecked, activity, setActivities , setActivityIndex, activities,
+}) {
+  useEffect(() => {
+    if (activity.done) {
+      setIsChecked(true);
+    } else {
+      setIsChecked(false);
+    }
+  }, [activity]);
+
   function handleClick() {
-    setIsChecked(!isChecked);
+    axios.post(`/courses/activities/${activity.id}`)
+      .then((response) => {
+        const newActivities = activities;
+        const index = newActivities.findIndex((n) => n.id === parseInt(response.data.activityId));
+        newActivities[index].activityUsers[0].done = response.data.done;
+        setActivities(newActivities);
+        setIsChecked(response.data.done);
+      })
+      .catch((error) => {
+        alert('Erro ao postar atividade feita');
+        console.log(error);
+      });
   }
   return (
     <Label htmlFor="concluded" isChecked={isChecked}>
@@ -14,7 +38,7 @@ export default function CheckBox({ isChecked, setIsChecked }) {
         value={isChecked}
         onChange={() => handleClick()}
       />
-      <Square>
+      <Square isChecked={isChecked}>
         <IconCheck isChecked={isChecked} />
       </Square>
       <p> Marcar como concluído </p>
@@ -42,7 +66,7 @@ const Square = styled.div`
     height: 23px;
     cursor: pointer;
 
-    background: transparent;
+    background: ${(props) => props.isChecked ? '#76DF93' : 'transparent'};
     border: 1px solid #9D9D9D;
     margin-right: 10px;
 `;

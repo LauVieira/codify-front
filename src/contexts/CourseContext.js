@@ -10,6 +10,8 @@ export function CourseProvider({ children }) {
   const [topic, setTopic] = useState('');
   const [chapter, setChapter] = useState('');
   const [program, setProgram] = useState('');
+  const [activityIndex, setActivityIndex] = useState(0);
+  const [isChecked, setIsChecked] = useState(false);
 
   return (
     <CourseContext.Provider value={{
@@ -23,6 +25,10 @@ export function CourseProvider({ children }) {
       setChapter,
       program,
       setProgram,
+      activityIndex,
+      setActivityIndex,
+      isChecked,
+      setIsChecked,
     }}
     >
       {children}

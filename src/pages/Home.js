@@ -23,6 +23,7 @@ export default function Home() {
 
   async function getLastCourse() {
     try {
+      if (user.lastCourse === 0) return;
       const { data } = await axios.get(`/courses/${user.lastCourse}`);
       setLastCourseData({ ...data.course });
     } catch (err) {
@@ -94,7 +95,13 @@ export default function Home() {
           )
           : (
             coursesSuggestions.length !== 0
-              ? <CourseRecommendations coursesData={coursesSuggestions} firstTime />
+              ? ( 
+                <CourseRecommendations 
+                  coursesData={coursesSuggestions} 
+                  firstEntry={firstEntry}
+                  firstTime 
+                />
+              )
               : <Error> Nenhum curso foi encontrado :( </Error>
           )}
       </HomePage>
@@ -106,6 +113,7 @@ const HomePage = styled.main`
   background-color: #E5E5E5;
   padding: 100px 8% 0 8%;
   min-height: 100vh;
+  height: auto;
   width: 100%;
   
   display: flex;

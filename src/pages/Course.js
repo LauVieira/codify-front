@@ -7,8 +7,10 @@ import {
   Header, Summary, StudyProgram, ArrowBackButton, 
 } from '../components';
 import CourseContext from '../contexts/CourseContext';
+import UserContext from '../contexts/UserContext';
 
 export default function Course() {
+  const { setFirstEntry } = useContext(UserContext);
   const [background, setBackground] = useState('');
   const {
     courseData,
@@ -19,6 +21,7 @@ export default function Course() {
   const { id } = useParams();
 
   useEffect(() => {
+    setFirstEntry(false);
     axios.get(`/courses/${id}`)
       .then((response) => {
         setCourseData(response.data);
@@ -61,6 +64,7 @@ export default function Course() {
 
 const Container = styled.div`
   min-height: 100vh;
+  height: auto;
   background-color: #F9F9F9;
   margin-top: 100px;
   padding-bottom: 80px;

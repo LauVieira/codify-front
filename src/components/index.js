@@ -14,6 +14,7 @@ import CheckBox from './CheckBox';
 import Activities from './Activities';
 import Label from './Label';
 import Error from './Error';
+import StudyAreaExercice from './StudyAreaExercice';
 
 export {
   Logo,
@@ -32,4 +33,5 @@ export {
   StudyAreaContent,
   Label,
   Error,
+  StudyAreaExercice,
 };

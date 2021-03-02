@@ -42,14 +42,14 @@ export default function CardCourse({ course, withButton }) {
 }
 
 const StyledCourse = styled.article`
-  width: 315px;
+  width: 310px;
 
   border-radius: var(--radius-strong);;
   box-shadow: var(--shadow-strong);
   background-color: var(--color-white);
 
-  margin-right: 45px;
-  margin-bottom: 45px;
+  margin-right: 40px;
+  margin-bottom: 40px;
 
   flex-shrink: 0;
   cursor: pointer;

@@ -14,7 +14,7 @@ import Helpers from '../utils/Helpers';
 import { success } from '../lib/notify';
 
 export default function Profile() {
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser, setFirstEntry } = useContext(UserContext);
   const [name, setName] = useState(user.name || '');
   const [email, setEmail] = useState(user.email || '');
   const [password, setPassword] = useState('');
@@ -24,6 +24,8 @@ export default function Profile() {
   const [mouse, setMouse] = useState(false);
   const [changePassword, setChangePassword] = useState(false);
 
+  setFirstEntry(false);
+  
   async function handleSubmit(event) {
     try {
       event.preventDefault();
