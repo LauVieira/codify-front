@@ -6,12 +6,9 @@ import styled from 'styled-components';
 import Button from './Button';
 import ProfilePicture from './ProfilePicture';
 import axios from '../services/api';
-import UserContext from '../contexts/UserContext';
 import { error } from '../lib/notify';
 
-export default function Summary({ courseData }) {
-  const { setUser } = useContext(UserContext);
-  const { course, program } = courseData;
+export default function Summary({ courseData, program }) {
   const history = useHistory();
 
   const [disabled, setDisabled] = useState(false);
@@ -29,10 +26,9 @@ export default function Summary({ courseData }) {
       if (disabled) return;
       setDisabled(true);
 
-      const { data } = await axios.post(`/courses/${course.id}`);
+      await axios.post(`/courses/${courseData.id}`);
 
-      setUser({ ...data.user });
-      history.push(`/curso/${course.id}/capitulo/${program[0].id}/topico/${program[0].topics[0].id}/atividade/${program[0].topics[0].activities[0].id}`);
+      history.push(`/curso/${courseData.id}/capitulo/${program[0].id}/topico/${program[0].topics[0].id}/atividade/${program[0].topics[0].activities[0].id}`);
     } catch (err) {
       setDisabled(false);
       error(err.response.data.message);

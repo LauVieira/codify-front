@@ -5,30 +5,45 @@ import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import axios from '../services/api';
 import CourseContext from '../contexts/CourseContext';
+import UserContext from '../contexts/UserContext';
+import { error } from '../lib/notify'
 
 import {
   StudyAreaHeader, Activities,
 } from '../components';
 
 export default function StudyArea() {
+  const { setUser } = useContext(UserContext);
   const { id, chapterId, topicId } = useParams();
   const {
     activities,
     setCourseData,
     setProgram,
-    program,
     setChapter,
     setTopic,
     setActivityIndex,
   } = useContext(CourseContext);
 
-  function findTopicsActivities(courseProgram) {
-    const c = courseProgram.find((cap) => cap.id == chapterId);
-    setChapter(c);
-    const t = c.topics.find((top) => top.id == topicId);
-    setTopic(t);
+  async function changeLastCourse() {
+    try {
+      const { data } = await axios.post(`/users/last-course/${id}`);
+
+      setUser({ ...data });
+    } catch (err) {
+      console.error(err);
+      error(err.response.data.message);
+    }
   }
-  useEffect(() => {
+
+  function findTopicsActivities(courseProgram) {
+    const chapter = courseProgram.find((cap) => cap.id === chapterId);
+    setChapter({ ...chapter });
+    const topic = chapter.topics.find((top) => top.id === topicId);
+    setTopic({ ...topic });
+  }
+
+  useEffect(async () => {
+    await changeLastCourse();
     axios.get(`/courses/${id}`)
       .then((response) => {
         setCourseData(response.data);
@@ -36,9 +51,9 @@ export default function StudyArea() {
         findTopicsActivities(response.data.program);
         setActivityIndex(0);
       })
-      .catch((error) => {
-        alert('Erro ao buscar o curso selecionado');
-        console.log(error);
+      .catch((err) => {
+        error(err.response.data.message);
+        console.error(err);
       });
   }, [topicId]);
 

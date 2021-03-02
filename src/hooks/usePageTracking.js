@@ -9,9 +9,9 @@ export default function usePageTracking() {
   useEffect(() => {
     if (!window.location.href.includes('localhost')) {
       ReactGA.initialize(process.env.TRACKING_ID);
-    }
 
-    setInitialized(true);
+      setInitialized(true);
+    }
   }, []);
 
   useEffect(() => {

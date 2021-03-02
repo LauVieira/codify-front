@@ -76,7 +76,7 @@ export default function Course() {
           <p> 
             {courseData.description} 
           </p>
-          <Summary courseData={courseData} />
+          <Summary courseData={courseData} program={program} />
         </Details>
         <StudyProgram program={program} />
       </CoursePage>
