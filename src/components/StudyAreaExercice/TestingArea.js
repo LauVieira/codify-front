@@ -35,19 +35,24 @@ export default function TestingArea({ tests, resolution }) {
               testResults={testResults}
             />
           )
-          : <p>NO test yet</p>}
+          : <TestText>Rode os testes para verificar seu código</TestText>}
       </Console>
     </Box>
   );
 }
 const Console = styled.div`
   width: 100%;
-  height: 65%;
+  height: 37vh;
   background-color: #1E1E1E;
+
+`;
+const TestText = styled.p`
+  color: white;
+  font-size: 17px;
+  padding: 20px;
 `;
 const Box = styled.div`
   width: 100%;
-  height: 80vh;
 `;
 const UpBar = styled.div`
   display: flex;

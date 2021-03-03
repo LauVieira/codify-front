@@ -55,7 +55,7 @@ export default function StudyAreaContent({ activity, setActivity }) {
             {activity.type === 'theory'
               ? (activity.theory
                 ? (
-                  <>
+                  <VideoContainer>
                     <YoutubePlayer link={activity.theory.youtubeLink} />
                     <ContainerBox>
                       <CheckBox
@@ -70,7 +70,7 @@ export default function StudyAreaContent({ activity, setActivity }) {
                         ? <Button onClick={() => handleClick(activity)}>Avançar</Button>
                         : <div />}
                     </ContainerBox>
-                  </>
+                  </VideoContainer>
                 )
                 : <Word>No video</Word>)
               : (
@@ -93,7 +93,6 @@ const Container = styled.section`
   box-shadow: var(--shadow-black);
 
   width: 100%;
-  padding: 40px 20px;
 
   display: flex;
   align-items: center;
@@ -114,7 +113,7 @@ const ContainerBox = styled.section`
   align-items: center;
   justify-content: space-between;
   padding-top: 20px;
-  width: 64%;
+  width: 100%;
   button{
         width: 25%;
         font-size: 18px;
@@ -127,4 +126,8 @@ const ContainerBox = styled.section`
 `;
 
 const Word = styled.h1`
+`;
+
+const VideoContainer = styled.section`
+  padding: 100px 20px;
 `;

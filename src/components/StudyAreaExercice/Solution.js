@@ -21,7 +21,7 @@ export default function Solution({ solution, setSolution }) {
         </Button>
       </UpBar>
       <Editor
-        height="80vh"
+        height="79vh"
         defaultLanguage="javascript"
         defaultValue={solution}
         theme="vs-dark"

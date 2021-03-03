@@ -33,7 +33,7 @@ export default function Test({
             <TestTitle state={state}>
               <p>
                 Teste
-                {id + 1}
+                {` ${id + 1}`}
                 :
                 {' '}
               </p>

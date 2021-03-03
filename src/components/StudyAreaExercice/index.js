@@ -107,16 +107,16 @@ const Container = styled.div`
 const Box = styled.div`
   display: flex;
   width: 100%;
-  height: 100%;
+  height: 50%;
 `;
 const ContainerBox = styled.section`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 10px;
+  padding: 10px;
   width: 100%;
   position: absolute;
-  bottom: 0px;
+  bottom: -680px;
   right: 0px;
   button{
         width: 25%;

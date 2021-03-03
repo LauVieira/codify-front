@@ -97,9 +97,6 @@ export default function StudyArea() {
   );
 }
 
-<<<<<<< HEAD
-const Container = styled.main`
-=======
 const StudyAreaPage = styled.main`
   background-color: #2e2e2e;
   height: 100vh;
@@ -107,5 +104,4 @@ const StudyAreaPage = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
->>>>>>> main
 `;

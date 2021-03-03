@@ -40,7 +40,6 @@ export default function CodeEditor({
 
 const Box = styled.div`
   width: 100%;
-  height: 80vh;
 `;
 const UpBar = styled.div`
   display: flex;
