@@ -1,21 +1,28 @@
 /* eslint-disable react/button-has-type */
-import React, { useContext } from 'react';
+import React, { useContext, useRef } from 'react';
 import styled, { css } from 'styled-components';
 import Editor, { DiffEditor, useMonaco, loader } from '@monaco-editor/react';
 import { HiOutlineLightBulb } from 'react-icons/hi';
 import CheckBox from '../CheckBox';
 import CourseContext from '../../contexts/CourseContext';
 
-export default function StudyAreaExercice({ activity }) {
+export default function CodeEditor({
+  sampleCode, setSolution, setResolution, resolution, 
+}) {
   const {
     activities, setActivityIndex, isChecked, setIsChecked, setActivities,
   } = useContext(CourseContext);
+  const editorRef = useRef(null);
+
+  function handleEditorChange(value) {
+    setResolution(value);
+  }
 
   return (
     <Box>
       <UpBar>
         <Text>Seu Código</Text>
-        <Button>
+        <Button onClick={() => setSolution(false)}>
           <p>Ver solução</p>
           <HiOutlineLightBulb />
         </Button>
@@ -23,8 +30,9 @@ export default function StudyAreaExercice({ activity }) {
       <Editor
         height="40vh"
         defaultLanguage="javascript"
-        defaultValue="// some comment"
+        defaultValue={resolution || sampleCode}
         theme="vs-dark"
+        onChange={handleEditorChange}
       />
     </Box>
   );

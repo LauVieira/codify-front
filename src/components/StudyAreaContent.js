@@ -92,7 +92,7 @@ const Container = styled.section`
   background-color: #2e2e2e;
   box-shadow: var(--shadow-black);
 
-  height: 84.1vh;
+  height: 85vh;
   width: 100%;
 
   display: flex;
@@ -115,7 +115,7 @@ const ContainerBox = styled.section`
   align-items: center;
   justify-content: space-between;
   padding-top: 10px;
-  width: 59%;
+  width: 45%;
   button{
         width: 25%;
         font-size: 18px;

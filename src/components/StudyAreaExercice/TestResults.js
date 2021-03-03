@@ -6,37 +6,30 @@ import Editor, { DiffEditor, useMonaco, loader } from '@monaco-editor/react';
 import { BsPlay } from 'react-icons/bs';
 import { runTests } from '@bootcamp-ra/mocha-as-promised';
 import CourseContext from '../../contexts/CourseContext';
-import TestResults from './TestResults';
+import Test from './Test';
 
-export default function TestingArea({ tests, resolution }) {
-  const {
-    activities, setActivityIndex, isChecked, setIsChecked, setActivities,
-  } = useContext(CourseContext);
-  const [testResults, setTestResults] = useState('');
+export default function TestingElement({
+  testResults,
+}) {
+  console.log(testResults);
 
-  async function testCode() {
-    const result = await runTests(resolution, tests);
-    console.log(result);
-    setTestResults(result.suites[0]);
-  }
   return (
     <Box>
-      <UpBar>
-        <Text>Console</Text>
-        <Button onClick={() => testCode()}>
-          <p>Rodar testes</p>
-          <BsPlay />
-        </Button>
-      </UpBar>
-      <Console>
-        {testResults 
-          ? (
-            <TestResults
-              testResults={testResults}
-            />
-          )
-          : <p>NO test yet</p>}
-      </Console>
+      { testResults === null
+        ? <p>Rode os testes para verificar seu código</p>
+        : (
+          <ul>
+            {testResults.map((t, i) => (
+              <Test
+                key={i}
+                id={i}
+                title={t.title}
+                state={t.state}
+                error={t.error}
+              />
+            ))}
+          </ul>
+        )} 
     </Box>
   );
 }

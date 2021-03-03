@@ -10,7 +10,8 @@ import Solution from './Solution';
 
 export default function StudyAreaExercice({ activity, setActivity }) {
   const [isLastChapter, setIsLastChapter] = useState(false);
-  const [solution, setSolution] = useState(false);
+  const [solution, setSolution] = useState(true);
+  const [resolution, setResolution] = useState('');
   const history = useHistory();
   const { id, chapterId, topicId } = useParams();
   const {
@@ -24,6 +25,7 @@ export default function StudyAreaExercice({ activity, setActivity }) {
     setIsChecked,
     setActivities,
   } = useContext(CourseContext);
+  console.log(activity);
   function handleClick(act) {
     const i = activities.findIndex((a) => a.id == act.id);
     if (i === activities.length - 1) {
@@ -77,11 +79,16 @@ export default function StudyAreaExercice({ activity, setActivity }) {
         {solution
           ? (
             <>
-              <CodeEditor />
-              <TestingArea />
+              <CodeEditor
+                sampleCode={activity.exercise.sampleCode}
+                setSolution={setSolution}
+                setResolution={setResolution}
+                resolution={resolution}
+              />
+              <TestingArea tests={activity.exercise.testCode} resolution={resolution} />
             </>
           )
-          : <Solution />}
+          : <Solution solution={activity.exercise.solution} setSolution={setSolution} />}
       </Container>
     </Box>
   );

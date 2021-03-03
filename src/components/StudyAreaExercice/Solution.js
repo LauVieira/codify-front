@@ -6,7 +6,7 @@ import { BsPencil } from 'react-icons/bs';
 import CheckBox from '../CheckBox';
 import CourseContext from '../../contexts/CourseContext';
 
-export default function StudyAreaExercice({ activity }) {
+export default function Solution({ solution, setSolution }) {
   const {
     activities, setActivityIndex, isChecked, setIsChecked, setActivities,
   } = useContext(CourseContext);
@@ -15,7 +15,7 @@ export default function StudyAreaExercice({ activity }) {
     <Box>
       <UpBar>
         <Text>Nossa solução</Text>
-        <Button>
+        <Button onClick={() => setSolution(true)}>
           <p>Seu código</p>
           <BsPencil />
         </Button>
@@ -23,7 +23,7 @@ export default function StudyAreaExercice({ activity }) {
       <Editor
         height="80vh"
         defaultLanguage="javascript"
-        defaultValue="// some comment"
+        defaultValue={solution}
         theme="vs-dark"
       />
     </Box>
