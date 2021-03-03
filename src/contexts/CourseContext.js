@@ -5,11 +5,11 @@ const CourseContext = createContext();
 export default CourseContext;
 
 export function CourseProvider({ children }) {
-  const [courseData, setCourseData] = useState([]);
-  const [activities, setActivities] = useState('');
-  const [topic, setTopic] = useState('');
-  const [chapter, setChapter] = useState('');
-  const [program, setProgram] = useState('');
+  const [courseData, setCourseData] = useState(null);
+  const [activities, setActivities] = useState(null);
+  const [topic, setTopic] = useState(null);
+  const [chapter, setChapter] = useState(null);
+  const [program, setProgram] = useState(null);
   const [activityIndex, setActivityIndex] = useState(0);
   const [isChecked, setIsChecked] = useState(false);
 

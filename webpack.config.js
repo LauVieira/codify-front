@@ -16,8 +16,13 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-env', '@babel/preset-react'],
+            plugins: ['@babel/transform-runtime'],
           },
         },
+      },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },
@@ -35,6 +40,7 @@ module.exports = {
       process: {
         env: {
           API_BASE_URL: process.env.API_BASE_URL ? `'${process.env.API_BASE_URL}'` : '\'http://localhost:3000\'',
+          TRACKING_ID: '\'UA-190646289-1\'',
         },
       },
     }),

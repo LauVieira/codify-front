@@ -2,29 +2,31 @@ import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import { useHistory, Link } from 'react-router-dom';
 import { RiArrowDownSLine } from 'react-icons/ri';
+
 import axios from '../services/api';
+import { error } from '../lib/notify';
 
 import Logo from './Logo';
 import ProfilePicture from './ProfilePicture';
 import UserContext from '../contexts/UserContext';
 
 export default function Header() {
-  const { setUser } = useContext(UserContext);
+  const { setUser, setFirstEntry } = useContext(UserContext);
   const [showMenu, setShowMenu] = useState(false);
   const history = useHistory();
 
-  function handleSignOut() {
-    axios.post('/users/sign-out')
-      .then(() => {
-        setUser(null);
+  async function handleSignOut() {
+    try {
+      await axios.post('/users/sign-out');
 
-        localStorage.clear();
-        history.push('/entrar');
-      })
-      .catch((error) => {
-        alert(error.response.data.message);
-        console.error(error);
-      });
+      setUser(null);
+      localStorage.clear();
+      setFirstEntry(true);
+      history.push('/entrar');
+    } catch (err) {
+      error(err.response.data.message);
+      console.error(err);
+    }
   }
 
   return (
@@ -44,11 +46,13 @@ export default function Header() {
       <Container showMenu={showMenu} onClick={() => setShowMenu(!showMenu)}>
         <RiArrowDownSLine />
         <ProfilePicture
+          width="70px"
+          height="70px"
           existPhoto={false}
         />
         {showMenu && (
-          <DropDown showMenu={showMenu}>
-            <DropLink to="#" onClick={() => alert('Em construção')}>
+          <DropDown>
+            <DropLink to="/perfil">
               Perfil
             </DropLink>
             <Line />
@@ -79,7 +83,7 @@ const StyledHeader = styled.header`
   top: 0;
   left: 0;
 
-  z-index: 1;
+  z-index: 10;
 `;
 
 const Navigation = styled.nav`
@@ -91,7 +95,7 @@ const Navigation = styled.nav`
 `;
 
 const NavLink = styled(Link)`
-  margin: 0 0 0 40px;
+  margin-left: 40px;
   font-size: 2.5rem;
   color: var(--color-subtitle);
 

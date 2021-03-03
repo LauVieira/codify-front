@@ -5,13 +5,13 @@ import { useHistory, useParams } from 'react-router-dom';
 
 export default function ActivityContainer(props) {
   const {
-    done, doing, type, activityItem, setActivity, activities, setActivityIndex,
+    done, doing, type, activityItem, activities, setActivityIndex,
   } = props;
   const history = useHistory();
   const { id, chapterId, topicId } = useParams();
 
   function handleClick(activity) {
-    const i = activities.findIndex((a) => a.id == activity.id);
+    const i = activities.findIndex((a) => a.id === Number(activity.id));
     setActivityIndex(i);
     history.push(`/curso/${id}/capitulo/${chapterId}/topico/${topicId}/atividade/${activity.id}`);
   }

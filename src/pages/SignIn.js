@@ -4,49 +4,44 @@ import axios from '../services/api';
 
 import Patterns from '../utils/PatternsHtml';
 import UserContext from '../contexts/UserContext';
-
 import {
   Logo,
-  Headline,
   Input,
   Button,
-  LayoutInitialPage,
-  Anchor,
-  Form,
+  Error,
 } from '../components';
+
+import {
+  Anchor, Form, Headline, LayoutInitialPage, 
+} from '../components/InitialPage';
 
 export default function SignIn() {
   const { setUser } = useContext(UserContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [disabled, setDisabled] = useState(false);
+  const [error, setError] = useState('');
 
   const history = useHistory();
 
-  function handleSubmit(event) {
-    event.preventDefault();
+  async function handleSubmit(event) {
+    try {
+      event.preventDefault();
 
-    if (disabled) return;
-    setDisabled(true);
+      if (disabled) return;
+      setDisabled(true);
+  
+      const body = { email, password };
+      const { data } = await axios.post('/users/sign-in', body);
 
-    const body = { email, password };
-    axios
-      .post('/users/sign-in', body)
-      .then(({ data }) => {
-        setUser({ ...data });
+      setUser({ ...data });
+      history.push('/');
+    } catch (err) {
+      console.error(err);
+      setDisabled(false);
 
-        if (confirm('Login feito com sucesso! Redirecionando para a página inicial ...')) {
-          history.push('/');
-        } else {
-          setDisabled(false);
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-        setDisabled(false);
-
-        alert(error.response.data.message);
-      });
+      setError(err.response.data.message);
+    }
   }
 
   return (
@@ -79,6 +74,9 @@ export default function SignIn() {
           title={Patterns.password.helper}
           required
         />
+        <Error align="center"> 
+          { error || ''} 
+        </Error>
         <Button
           type="submit"
           disabled={disabled}
@@ -88,7 +86,7 @@ export default function SignIn() {
         </Button>
 
         <Anchor to="/cadastrar"> primeira vez ? crie uma conta ! </Anchor>
-        <Anchor to="#" onClick={() => alert('Em construção')}> esqueceu sua senha ? </Anchor>
+        <Anchor to="/esqueci-senha"> esqueceu sua senha ? </Anchor>
       </Form>
     </LayoutInitialPage>
   );

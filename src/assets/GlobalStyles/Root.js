@@ -3,7 +3,7 @@ import { css } from 'styled-components';
 export default css`
     :root {
         // Body
-        --background-color: ##E5E5E5;
+        --background-color: #E5E5E5;
         
         // box shadow rest items
         --shadow-strong: 0px 0px 20px rgba(0, 0, 0, 0.15);
@@ -32,10 +32,14 @@ export default css`
         
         // Colors
         --color-blue: #46A7D4;
+        --color-darkblue: #19AACA;
         --color-white: #FFFFFF;
         --color-black: #000000;
+        --color-lightblack: #1C1C1C;
+        --color-red: #C10000;
         --color-black-light: #333333;
         --color-green: #76DF93;
+        --color-darkgreen: #008E16;
         // Nav Bar and Subtitles
         --color-subtitle: #262626;
 

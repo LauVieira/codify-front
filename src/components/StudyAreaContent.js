@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import { useHistory, useParams } from 'react-router-dom';
 import Button from './Button';
@@ -19,11 +19,11 @@ export default function StudyAreaContent({ activity, setActivity }) {
   } = useContext(CourseContext);
 
   function handleClick(act) {
-    const i = activities.findIndex((a) => a.id == act.id);
+    const i = activities.findIndex((a) => a.id === Number(act.id));
     if (i === activities.length - 1) {
-      const j = chapter.topics.findIndex((t) => t.id == topicId);
+      const j = chapter.topics.findIndex((t) => t.id === Number(topicId));
       if (j === chapter.topics.length - 1) {
-        const k = program.findIndex((c) => c.id == chapterId);
+        const k = program.findIndex((c) => c.id === Number(chapterId));
         if (k === program.length - 1) {
           console.log(k);
           console.log(program.length);
@@ -92,30 +92,29 @@ const Container = styled.section`
   background-color: #2e2e2e;
   box-shadow: var(--shadow-black);
 
-  height: 85vh;
   width: 100%;
+  padding: 40px 20px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  z-index: 1;
   position: relative;
 `;
+
 const Box = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction:column;
-  height: 100%;
   width: 100%;
 `;
 const ContainerBox = styled.section`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 10px;
-  width: 45%;
+  padding-top: 20px;
+  width: 64%;
   button{
         width: 25%;
         font-size: 18px;
@@ -126,5 +125,6 @@ const ContainerBox = styled.section`
         }
     }
 `;
+
 const Word = styled.h1`
 `;

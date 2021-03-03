@@ -85,9 +85,10 @@ const StyledHeader = styled.header`
   background-color: #202020;
   box-shadow: var(--shadow-black);
 
-  height: 81px;
+  height: 100px;
+
   width: 100%;
-  padding: 0 20px;
+  padding: 10px 20px;
 
   display: flex;
   align-items: center;
@@ -98,7 +99,6 @@ const StyledHeader = styled.header`
 `;
 
 const Container = styled.section`
-  height: 50%;
   max-width: 50%;
   display: flex;
   align-items: center;
