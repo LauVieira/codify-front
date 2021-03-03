@@ -41,7 +41,6 @@ export default function Summary({ courseData, program }) {
       <Wrapper>
         <ProfilePicture
           onClick={() => history.push('/profile')}
-          existPhoto={false}
         />
 
         <Container>

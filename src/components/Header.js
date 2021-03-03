@@ -48,7 +48,6 @@ export default function Header() {
         <ProfilePicture
           width="70px"
           height="70px"
-          existPhoto={false}
         />
         {showMenu && (
           <DropDown>

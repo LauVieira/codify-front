@@ -4,18 +4,19 @@ import styled from 'styled-components';
 import UserContext from '../contexts/UserContext';
 
 export default function ProfilePicture({
-  children, existPhoto, width, height, ...props 
+  children, width, height, ...props 
 }) {
   const { user } = useContext(UserContext);
   const words = user.name.split(' ');
 
+  const existPhoto = Boolean(user.avatarUrl);
   const initialLetters = `${words[0].charAt()}. ${words[1].charAt()}.`;
 
   return (
     <Photo width={width} height={height} existPhoto={existPhoto} {...props}>
       { 
         (existPhoto)
-          ? <img alt="" />
+          ? <img alt="Foto de perfil" src={user.avatarUrl} />
           : initialLetters
       }
       {children}

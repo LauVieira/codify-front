@@ -12,7 +12,7 @@ import UserContext from '../contexts/UserContext';
 import Patterns from '../utils/PatternsHtml';
 import Helpers from '../utils/Helpers';
 
-import { success } from '../lib/notify';
+import { success, error: errorNotify } from '../lib/notify';
 
 export default function Profile() {
   const { user, setUser } = useContext(UserContext);
@@ -77,7 +77,6 @@ export default function Profile() {
         <WhiteProfilePicture 
           width="65px" 
           height="65px" 
-          existPhoto={false} 
         />
         <Name> 
           { user.name } 
@@ -143,15 +142,18 @@ export default function Profile() {
               accept=".jpeg, .jpg, .png"
               multiple={false}
               withCredentials
-              onError={(res) => console.log(res, 'falha')}
-              onSuccess={(res) => console.log(res, 'sucesso')}
+              onError={(err) => { 
+                console.error(err); 
+                errorNotify(['Não foi possível atualizar sua imagem']) 
+              }}
+              onSuccess={({ data }) => {
+                setUser({ ...data });
+              }}
             >
               <ProfilePicture 
                 width="150px" 
                 height="150px" 
-                existPhoto={false}
               /> 
-
               <WrapperIcon>
                 <BsPencil color="#2C8396" fontSize="30px" />
                 <p> editar </p>
