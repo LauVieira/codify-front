@@ -136,16 +136,27 @@ export default function Profile() {
             )}
           </LeftSide>
           <RightSide>
-            <ProfilePicture 
-              width="150px" 
-              height="150px" 
-              existPhoto={false}
-            > 
+            <Upload
+              name="avatar"
+              action={`${process.env.API_BASE_URL || 'http://localhost:3000'}/users/avatar`}
+              method="post"
+              accept=".jpeg, .jpg, .png"
+              multiple={false}
+              withCredentials
+              onError={(res) => console.log(res, 'falha')}
+              onSuccess={(res) => console.log(res, 'sucesso')}
+            >
+              <ProfilePicture 
+                width="150px" 
+                height="150px" 
+                existPhoto={false}
+              /> 
+
               <WrapperIcon>
                 <BsPencil color="#2C8396" fontSize="30px" />
                 <p> editar </p>
               </WrapperIcon>
-            </ProfilePicture>
+            </Upload>
           </RightSide>
           <Error aling="left"> 
             { error || ''} 
@@ -258,8 +269,9 @@ const WrapperButton = styled.footer`
 
 const WrapperIcon = styled.div`
   position: absolute;
-  top: 32%;
-  left: 32%;
+  pointer-events: none;
+  top: 35%;
+  left: 42.5%;
 
   z-index: 10;
 
@@ -290,7 +302,7 @@ const RightSide = styled.section`
       letter-spacing: initial;
     }
 
-    &:hover div {
+    &:hover + div {
       display: flex;
     }
 
