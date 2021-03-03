@@ -1,22 +1,38 @@
 /* eslint-disable no-param-reassign */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import styled from 'styled-components';
 import ActivityContainer from './ActivityContainer';
 import ActivityLine from './ActivityLine';
 import StudyAreaContent from './StudyAreaContent';
+import CourseContext from '../contexts/CourseContext';
 
 export default function Activities({ activities }) {
   const [act, setAct] = useState('');
   const [activity, setActivity] = useState('');
+  const {
+    activityIndex,
+    setActivityIndex,
+    isChecked,
+  } = useContext(CourseContext);
   useEffect(() => {
-    const arrayActivities = activities.map((activityItem) => {
-      activityItem.doing = true;
-      activityItem.done = true;
+    const arrayActivities = activities.map((activityItem, index) => {
+      if (activityIndex === index) {
+        activityItem.doing = true;
+      } else {
+        activityItem.doing = false;
+      }
+      if (activityItem.activityUsers.length === 0) {
+        activityItem.done = false;
+      } else if (activityItem.activityUsers[0].done === false) {
+        activityItem.done = false;
+      } else {
+        activityItem.done = true;
+      }
       return activityItem;
     });
     setAct(arrayActivities);
-    setActivity(arrayActivities[0]);
-  }, [activities]);
+    setActivity(arrayActivities[activityIndex]);
+  }, [activities, activityIndex]);
 
   return (
     <>
@@ -34,6 +50,8 @@ export default function Activities({ activities }) {
                       key={a.id}
                       activityItem={a}
                       setActivity={setActivity}
+                      setActivityIndex={setActivityIndex}
+                      activities={activities}
                     />
                   );
                 }
@@ -47,6 +65,8 @@ export default function Activities({ activities }) {
                       key={a.id}
                       activityItem={a}
                       setActivity={setActivity}
+                      setActivityIndex={setActivityIndex}
+                      activities={activities}
                     />
                     <ActivityLine doing={a.doing} done={a.done} />
                   </>
@@ -62,12 +82,13 @@ export default function Activities({ activities }) {
 }
 
 const StyledHeader = styled.header`
-  background-color: #3D3D3D;
+  background-color: #202020;
   box-shadow: var(--shadow-black);
 
-  height: 112px;
+  height: 100px;
+
   width: 100%;
-  padding: 0 20px;
+  padding: 10px 20px;
 
   display: flex;
   align-items: center;
@@ -75,11 +96,9 @@ const StyledHeader = styled.header`
 
   z-index: 1;
   position: relative;
-  border-bottom: 1px solid #717171;
 `;
 
 const Container = styled.section`
-  height: 50%;
   max-width: 50%;
   display: flex;
   align-items: center;

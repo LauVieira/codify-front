@@ -3,7 +3,7 @@ import SignUp from './SignUp';
 import ForgotPassword from './ForgotPassword';
 import RedefinePassword from './RedefinePassword';
 import Course from './Course';
-import LandingPage from './LandingPage';
+import Home from './Home';
 import StudyArea from './StudyArea';
 import Profile from './Profile';
 
@@ -13,7 +13,7 @@ export {
   ForgotPassword,
   RedefinePassword,
   Course,
-  LandingPage,
+  Home,
   StudyArea,
   Profile,
 };

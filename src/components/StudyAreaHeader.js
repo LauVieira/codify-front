@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { IoIosArrowDown } from 'react-icons/io';
 import ArrowBackButton from './ArrowBackButton';
+import DropDownTopics from './DropDownTopics';
 
-export default function StudyAreaHeader({ courseInfo }) {
+import CourseContext from '../contexts/CourseContext';
+
+export default function StudyAreaHeader() {
+  const { chapter, topic } = useContext(CourseContext);
+  const [showMenu, setShowMenu] = useState(false);
   const { id } = useParams();
+
   return (
     <StyledHeader>
       <ArrowBackButton
@@ -16,22 +22,19 @@ export default function StudyAreaHeader({ courseInfo }) {
         top="12px"
         fontSize="30px"
       />
-      <ChapterTopicInformation>
-        {courseInfo
-          ? (
-            <h1>
-              {`${courseInfo.chapter.title} - ${courseInfo.topic.title}`}
-            </h1>
-          )
-          : <h1>nada</h1>}
+      <ChapterTopicInformation showMenu={showMenu} onClick={() => setShowMenu(!showMenu)}>
+        <h1>
+          {`${chapter.title} - ${topic.title}`}
+        </h1>
         <IoIosArrowDown className="icon" />
       </ChapterTopicInformation>
+      {showMenu && <DropDownTopics />}
     </StyledHeader>
   );
 }
 
 const StyledHeader = styled.header`
-  background-color: #292929;
+  background-color: #161616;
   box-shadow: var(--shadow-black);
 
   height: 64px;
@@ -42,7 +45,6 @@ const StyledHeader = styled.header`
   align-items: center;
   justify-content: center;
 
-  z-index: 1;
   position: relative;
 `;
 
@@ -50,22 +52,23 @@ const ChapterTopicInformation = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;
+
   height: 100%;
   font-size: 2rem;
-  font-weight:bold;
+  font-weight: bold;
+
   color: var(--color-grey-study-area);
   font-family: var(--font-roboto);
-  
   line-height: 29px;
+
+  cursor: pointer;
 
   h1 {
     margin-right: 10px;
   }
 
-  .icon{
-    top: 38%;
-    transform: rotate(0.11deg);
+  .icon {
+    transform: ${(props) => (props.showMenu ? 'rotate(180deg)' : '0')};
     font-size: 2.5rem;
   }
-  
 `;

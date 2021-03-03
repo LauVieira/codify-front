@@ -34,6 +34,7 @@ export const ActivityCreate = (props) => (
       <ReferenceInput source="topicoId" reference="topicos" label="Tópico">
         <SelectInput optionText="title" />
       </ReferenceInput>
+      <TextInput source="type" />
     </SimpleForm>
   </Create>
 );
@@ -46,6 +47,7 @@ export const ActivityEdit = (props) => (
       <ReferenceInput source="topicoId" reference="topicos" label="Tópico">
         <SelectInput optionText="title" />
       </ReferenceInput>
+      <TextInput source="type" />
     </SimpleForm>
   </Edit>
 );

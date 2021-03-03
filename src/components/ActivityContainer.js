@@ -5,13 +5,14 @@ import { useHistory, useParams } from 'react-router-dom';
 
 export default function ActivityContainer(props) {
   const {
-    done, doing, type, activityItem, setActivity,
+    done, doing, type, activityItem, activities, setActivityIndex,
   } = props;
   const history = useHistory();
   const { id, chapterId, topicId } = useParams();
 
   function handleClick(activity) {
-    setActivity(activity);
+    const i = activities.findIndex((a) => a.id === Number(activity.id));
+    setActivityIndex(i);
     history.push(`/curso/${id}/capitulo/${chapterId}/topico/${topicId}/atividade/${activity.id}`);
   }
 
@@ -32,14 +33,14 @@ const Container = styled.button`
   align-items: center;
 `;
 const Activity = styled.div`
-  height: 25px;
-  width: 25px;
+  height: 22px;
+  width: 22px;
   border-radius:50%;
   background-color: ${(props) => props.isDoing ? '#FFFFFF' : (props.isDone ? '#76DF93' : '#B2B2B2')};
   margin-bottom: 5px;
 `;
 const ActivityName = styled.div`
-font-size: 17px;
+font-size: 15px;
   font-weight: bold;
   color: ${(props) => props.isDoing ? '#FFFFFF' : (props.isDone ? '#76DF93' : '#B2B2B2')};
   margin-bottom: 5px;

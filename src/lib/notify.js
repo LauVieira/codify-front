@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { ToastContainer, toast } from 'react-toastify';
 import { IoCheckmark } from 'react-icons/io5';
-import 'react-toastify/dist/ReactToastify.css';
 
 export default function ToastProvider() {
   return (

@@ -1,6 +1,9 @@
 import React, { useContext } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
+import 'react-toastify/dist/ReactToastify.css';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+
 import ToastProvider from './lib/notify';
 import usePageTracking from './hooks/usePageTracking';
 import GlobalStyle from './assets/GlobalStyles';
@@ -24,7 +27,7 @@ export default function App() {
           <UnprotectedRoute path="/entrar" component={Pages.SignIn} />
           <UnprotectedRoute path="/esqueci-senha" component={Pages.ForgotPassword} />
           <UnprotectedRoute path="/redefinir-senha/:token" component={Pages.RedefinePassword} />
-          <ProtectedRoute path="/" exact component={Pages.LandingPage} />
+          <ProtectedRoute path="/" exact component={Pages.Home} />
           <Route path="/admin" component={Dashboard} />
         </Switch>
         <ToastProvider />
