@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import { BsPencil, BsArrowLeftShort } from 'react-icons/bs';
+import Upload from 'rc-upload';
 
 import axios from '../services/api';
 import {
@@ -14,17 +15,14 @@ import Helpers from '../utils/Helpers';
 import { success } from '../lib/notify';
 
 export default function Profile() {
-  const { user, setUser, setFirstEntry } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const [name, setName] = useState(user.name || '');
   const [email, setEmail] = useState(user.email || '');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const [disabled, setDisabled] = useState(false);
-  const [mouse, setMouse] = useState(false);
   const [changePassword, setChangePassword] = useState(false);
-
-  setFirstEntry(false);
   
   async function handleSubmit(event) {
     try {
@@ -142,10 +140,8 @@ export default function Profile() {
               width="150px" 
               height="150px" 
               existPhoto={false}
-              onMouseOver={() => setMouse(!mouse)}
-              onMouseOut={() => setMouse(!mouse)}
             > 
-              <WrapperIcon mouse={mouse}>
+              <WrapperIcon>
                 <BsPencil color="#2C8396" fontSize="30px" />
                 <p> editar </p>
               </WrapperIcon>
@@ -262,13 +258,14 @@ const WrapperButton = styled.footer`
 
 const WrapperIcon = styled.div`
   position: absolute;
-  top: 31.5%;
-  right: 31.5%;
+  top: 32%;
+  left: 32%;
 
-  display: ${(props) => props.mouse ? 'flex' : 'none'};
+  z-index: 10;
+
+  display: none;
   flex-direction: column;
   align-items: center;
-  z-index: 2;
 
   p {
     text-transform: uppercase;
@@ -281,8 +278,11 @@ const RightSide = styled.section`
   position: relative;
   width: 40%;
 
+  display: flex;
+  justify-content: center;
+
   figure {
-    margin: 30px auto 0 auto;
+    margin-top: 20px;
 
     p {
       color: #2C8396;
@@ -290,8 +290,12 @@ const RightSide = styled.section`
       letter-spacing: initial;
     }
 
+    &:hover div {
+      display: flex;
+    }
+
     &:hover {
-      filter: opacity(30%);
+      opacity: 0.5;
     }
   }
 `;
