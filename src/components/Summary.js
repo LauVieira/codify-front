@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -11,8 +11,10 @@ import { error } from '../lib/notify';
 export default function Summary({ courseData, program, isInitialized }) {
   const history = useHistory();
 
+  console.log(courseData);
+
   const [disabled, setDisabled] = useState(false);
-  const [percentage] = useState(99);
+  const [percentage] = useState(courseData.progress || 0);
   const [usedValue, setUsedValue] = useState(percentage);
   
   useEffect(() => {
@@ -36,7 +38,6 @@ export default function Summary({ courseData, program, isInitialized }) {
       setDisabled(true);
 
       const { data } = await axios.post(`/users/return-course/${courseData.id}`);
-      console.log(data, 'DATA');
       if (data.firstActivity) {
         redirectFirstActivity();
       }
@@ -57,12 +58,16 @@ export default function Summary({ courseData, program, isInitialized }) {
         />
 
         <Container>
-          <Title> Você não iniciou esse curso ainda </Title>
+          <Title> 
+            {isInitialized ? `Faltam só ${100 - percentage}% para concluir o curso!` : 'Você não iniciou esse curso ainda' }
+          </Title>
           <div>
             <Progress id="progress" value={usedValue} max="100" />
             <Percentage percentage={percentage}>
-              {percentage}
-              %
+              <span> 
+                {percentage}
+                % 
+              </span>
             </Percentage>
           </div>
         </Container>
@@ -74,7 +79,7 @@ export default function Summary({ courseData, program, isInitialized }) {
         disabled={disabled}
         onClick={redirect}
       > 
-        {isInitialized ? 'Retomar curso' : 'Iniciar Curso'} 
+        {isInitialized ? 'Continuar curso' : 'Iniciar Curso'} 
       </Button>
     </StyledSummary>
   );
@@ -140,7 +145,7 @@ const Title = styled.h2`
 
 const Progress = styled.progress`
   width: 100%;
-  height: 15px;
+  height: 20px;
   
   box-shadow: 1px 1px 4px rgba( 0, 0, 0, 0.2 );
   border-radius: 7px; 
@@ -160,10 +165,13 @@ const Progress = styled.progress`
 
 const Percentage = styled.p`
   position: absolute;
-  left: ${(props) => (props.percentage <= 10 ? '1.5%' : props.percentage > 99 ? `${props.percentage - 11}%` : `${props.percentage - 8}%`)};
-  bottom: 12%;
+  left: ${(props) => (props.percentage <= 10 ? '1.5%' : props.percentage > 99 ? `${props.percentage - 11}%` : `${props.percentage - 15}%`)};
+  bottom: -5px;
 
-  font-size: 10px;
-  color: white;
-  font-weight: bold;
+
+  span {
+    font-size: 16px;
+    color: white;
+    font-weight: bold;
+  }
 `;

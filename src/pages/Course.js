@@ -37,7 +37,7 @@ export default function Course() {
 
   async function getIfCourseIsInitialized() {
     try {
-      const { data } = await axios.post(`/courses/${id}/is-initialized`);
+      const { data } = await axios.get(`/courses/${id}/is-initialized`);
 
       setIsInitialized(data.initialized);
     } catch (err) {

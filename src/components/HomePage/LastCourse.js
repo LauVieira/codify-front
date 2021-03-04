@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import Button from '../Button';
 
@@ -9,6 +9,7 @@ import { error } from '../../lib/notify';
 
 export default function LastCourse({ courseData, firstEntry }) {
   const [disabled, setDisabled] = useState();
+  const history = useHistory();
 
   const {
     photo, alt, title, description, id, 
@@ -19,14 +20,14 @@ export default function LastCourse({ courseData, firstEntry }) {
       if (disabled) return;
       setDisabled(true);
 
-      const { data } = await axios.post(`/users/return-course/${id}`);
+      const { data } = await axios.get(`/users/return-course/${id}`);
       if (data.firstActivity) {
         const res = await axios.get(`/courses/${id}`);
         const { program } = res.data;
         history.push(`/curso/${id}/capitulo/${program[0].id}/topico/${program[0].topics[0].id}/atividade/${program[0].topics[0].activities[0].id}`);
         return;
       }
-      
+
       history.push(`/curso/${id}/capitulo/${data.chapterId}/topico/${data.topicId}/atividade/${data.activityId}`);
     } catch (err) {
       setDisabled(false);

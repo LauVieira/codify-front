@@ -20,7 +20,7 @@ export default function CardCourse({ course, withButton }) {
       if (disabled) return;
       setDisabled(true);
 
-      const { data } = await axios.post(`/users/return-course/${id}`);
+      const { data } = await axios.get(`/users/return-course/${id}`);
       if (data.firstActivity) {
         const res = await axios.get(`/courses/${id}`);
         const { program } = res.data;
