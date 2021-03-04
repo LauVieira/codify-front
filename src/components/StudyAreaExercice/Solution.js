@@ -1,38 +1,30 @@
 /* eslint-disable react/button-has-type */
-import React, { useContext, useRef } from 'react';
+import React, { useContext } from 'react';
 import styled, { css } from 'styled-components';
 import Editor, { DiffEditor, useMonaco, loader } from '@monaco-editor/react';
-import { HiOutlineLightBulb } from 'react-icons/hi';
+import { BsPencil } from 'react-icons/bs';
 import CheckBox from '../CheckBox';
 import CourseContext from '../../contexts/CourseContext';
 
-export default function CodeEditor({
-  sampleCode, setSolution, setResolution, resolution, 
-}) {
+export default function Solution({ solution, setSolution }) {
   const {
     activities, setActivityIndex, isChecked, setIsChecked, setActivities,
   } = useContext(CourseContext);
-  const editorRef = useRef(null);
-
-  function handleEditorChange(value) {
-    setResolution(value);
-  }
 
   return (
     <Box>
       <UpBar>
-        <Text>Seu Código</Text>
-        <Button onClick={() => setSolution(false)}>
-          <p>Ver solução</p>
-          <HiOutlineLightBulb />
+        <Text>Nossa solução</Text>
+        <Button onClick={() => setSolution(true)}>
+          <p>Seu código</p>
+          <BsPencil />
         </Button>
       </UpBar>
       <Editor
-        height="40vh"
+        height="79vh"
         defaultLanguage="javascript"
-        defaultValue={resolution || sampleCode}
+        defaultValue={solution}
         theme="vs-dark"
-        onChange={handleEditorChange}
       />
     </Box>
   );
@@ -40,6 +32,7 @@ export default function CodeEditor({
 
 const Box = styled.div`
   width: 100%;
+  height: 80vh;
 `;
 const UpBar = styled.div`
   display: flex;
