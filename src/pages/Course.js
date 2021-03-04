@@ -12,6 +12,7 @@ import CourseContext from '../contexts/CourseContext';
 import UserContext from '../contexts/UserContext';
 
 export default function Course() {
+  const [isInitialized, setIsInitialized] = useState(null);
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
   const { setFirstEntry } = useContext(UserContext);
@@ -25,7 +26,7 @@ export default function Course() {
   async function getCourse() {
     try {
       const { data } = await axios.get(`/courses/${id}`);
-      console.log(data);
+
       setCourseData({ ...data.course });
       setProgram([...data.program]);
     } catch (err) {
@@ -34,9 +35,21 @@ export default function Course() {
     }
   }
 
+  async function getIfCourseIsInitialized() {
+    try {
+      const { data } = await axios.post(`/courses/${id}/is-initialized`);
+
+      setIsInitialized(data.initialized);
+    } catch (err) {
+      error(err.response.data.message);
+      console.error(err);
+    }
+  }
+
   useEffect(async () => {
     setFirstEntry(false);
 
+    await getIfCourseIsInitialized();
     await getCourse();
     setLoading(false);
   }, [id]);
@@ -76,7 +89,7 @@ export default function Course() {
           <p> 
             {courseData.description} 
           </p>
-          <Summary courseData={courseData} program={program} />
+          <Summary courseData={courseData} program={program} isInitialized={isInitialized} />
         </Details>
         <StudyProgram program={program} />
       </CoursePage>

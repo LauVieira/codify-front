@@ -8,7 +8,7 @@ import ProfilePicture from './ProfilePicture';
 import axios from '../services/api';
 import { error } from '../lib/notify';
 
-export default function Summary({ courseData, program }) {
+export default function Summary({ courseData, program, isInitialized }) {
   const history = useHistory();
 
   const [disabled, setDisabled] = useState(false);
@@ -21,14 +21,27 @@ export default function Summary({ courseData, program }) {
     }
   }, []);
 
-  async function handleInitializeCourse() {
+  function redirectFirstActivity() {
+    history.push(`/curso/${courseData.id}/capitulo/${program[0].id}/topico/${program[0].topics[0].id}/atividade/${program[0].topics[0].activities[0].id}`);
+  }
+
+  async function redirect() {
     try {
+      if (!isInitialized) {
+        redirectFirstActivity();
+        return;
+      }
+
       if (disabled) return;
       setDisabled(true);
 
-      await axios.post(`/courses/${courseData.id}`);
+      const { data } = await axios.post(`/users/return-course/${courseData.id}`);
+      console.log(data, 'DATA');
+      if (data.firstActivity) {
+        redirectFirstActivity();
+      }
 
-      history.push(`/curso/${courseData.id}/capitulo/${program[0].id}/topico/${program[0].topics[0].id}/atividade/${program[0].topics[0].activities[0].id}`);
+      history.push(`/curso/${courseData.id}/capitulo/${data.chapterId}/topico/${data.topicId}/atividade/${data.activityId}`);
     } catch (err) {
       setDisabled(false);
       error(err.response.data.message);
@@ -59,9 +72,9 @@ export default function Summary({ courseData, program }) {
         type="button"
         isLoading={disabled} 
         disabled={disabled}
-        onClick={handleInitializeCourse}
+        onClick={redirect}
       > 
-        Iniciar curso 
+        {isInitialized ? 'Retomar curso' : 'Iniciar Curso'} 
       </Button>
     </StyledSummary>
   );

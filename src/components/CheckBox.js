@@ -31,12 +31,15 @@ export default function CheckBox({
       });
   }
   return (
-    <Label htmlFor="concluded" isChecked={isChecked}>
+    <Label 
+      htmlFor="concluded" 
+      onChange={() => handleClick()} 
+      isChecked={isChecked}
+    >
       <Check
         id="concluded"
         type="checkbox"
         value={isChecked}
-        onChange={() => handleClick()}
       />
       <Square isChecked={isChecked}>
         <IconCheck isChecked={isChecked} />

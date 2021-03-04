@@ -1,13 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 import Button from '../Button';
 
+import axios from '../../services/api';
+import { error } from '../../lib/notify';
+
 export default function LastCourse({ courseData, firstEntry }) {
+  const [disabled, setDisabled] = useState();
+
   const {
     photo, alt, title, description, id, 
   } = courseData;
+
+  async function redirect() {
+    try {
+      if (disabled) return;
+      setDisabled(true);
+
+      const { data } = await axios.post(`/users/return-course/${id}`);
+      if (data.firstActivity) {
+        const res = await axios.get(`/courses/${id}`);
+        const { program } = res.data;
+        history.push(`/curso/${id}/capitulo/${program[0].id}/topico/${program[0].topics[0].id}/atividade/${program[0].topics[0].activities[0].id}`);
+        return;
+      }
+      
+      history.push(`/curso/${id}/capitulo/${data.chapterId}/topico/${data.topicId}/atividade/${data.activityId}`);
+    } catch (err) {
+      setDisabled(false);
+      error(err.response.data.message);
+      console.error(err);
+    }
+  }
   return (
     <Section firstEntry={firstEntry}>
       <Title> Continue seu curso atual </Title>
@@ -27,9 +53,11 @@ export default function LastCourse({ courseData, firstEntry }) {
           </CourseInformation>
           <Button
             className="btn" 
-            type="button" 
-            isLoading={false}
+            type="button"
+            disabled={disabled}
+            isLoading={disabled}
             width="220px"
+            onClick={redirect}
           >
             Continuar curso
           </Button>

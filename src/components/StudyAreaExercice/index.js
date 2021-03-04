@@ -20,9 +20,7 @@ export default function StudyAreaExercice({ activity, setActivity }) {
     setIsChecked,
     setActivities,
   } = useContext(CourseContext);
-  console.log(activity);
-  console.log(activity.exercise);
-  console.log(activity);
+
   function handleClick(act) {
     const i = activities.findIndex((a) => a.id == act.id);
     if (i === activities.length - 1) {
