@@ -28,7 +28,7 @@ export default function StudyArea() {
 
   async function initializeCourse() {
     try {
-      const { data } = await axios.get(`/users/initialize-course/${id}`);
+      const { data } = await axios.post(`/users/initialize-course/${id}`);
 
       setUser({ ...data });
     } catch (err) {
@@ -101,7 +101,7 @@ export default function StudyArea() {
 
 const StudyAreaPage = styled.main`
   background-color: #2e2e2e;
-  height: 100vh;
+  min-height: 100vh;
 
   display: flex;
   flex-direction: column;

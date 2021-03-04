@@ -17,12 +17,10 @@ export default function ActivityContainer(props) {
   }
 
   return (
-    <>
-      <Container onClick={() => handleClick(activityItem)}>
-        <Activity isDone={done} isDoing={doing} />
-        <ActivityName isDone={done} isDoing={doing}>{(type === 'theory') ? 'Teoria' : 'Exercicio'}</ActivityName>
-      </Container>
-    </>
+    <Container onClick={() => handleClick(activityItem)}>
+      <Activity isDone={done} isDoing={doing} />
+      <ActivityName isDone={done} isDoing={doing}>{(type === 'theory') ? 'Teoria' : 'Exercicio'}</ActivityName>
+    </Container>
   );
 }
 
@@ -31,6 +29,7 @@ const Container = styled.button`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `;
 const Activity = styled.div`
   height: 22px;
