@@ -11,10 +11,8 @@ import { error } from '../lib/notify';
 export default function Summary({ courseData, program, isInitialized }) {
   const history = useHistory();
 
-  console.log(courseData);
-
   const [disabled, setDisabled] = useState(false);
-  const [percentage] = useState(courseData.progress || 0);
+  const [percentage] = useState(courseData.progress);
   const [usedValue, setUsedValue] = useState(percentage);
   
   useEffect(() => {

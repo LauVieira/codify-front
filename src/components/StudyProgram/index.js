@@ -12,10 +12,10 @@ export default function StudyProgram(props) {
 
       <Ul>
         {program.map((chapter, index) => (
-          <>
-            <Chapter key={chapter.id} chapter={chapter} />
+          <React.Fragment key={chapter.id}>
+            <Chapter chapter={chapter} />
             {index !== program.length - 1 && <Line />}
-          </>
+          </React.Fragment>
         ))}
       </Ul>
 
