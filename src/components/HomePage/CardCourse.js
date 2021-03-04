@@ -35,16 +35,8 @@ export default function CardCourse({ course, withButton }) {
     }
   }
 
-  function handleClick() {
-    if (withButton) {
-      redirect();
-    } else {
-      history.push(`/curso/${id}`);
-    }
-  }
-
   return (
-    <StyledCourse onClick={handleClick}>
+    <StyledCourse onClick={() => history.push(`/curso/${id}`)}>
       <Figure>
         <Image src={photo} alt={alt} />
       </Figure>
@@ -62,6 +54,10 @@ export default function CardCourse({ course, withButton }) {
             type="button"
             disabled={disabled} 
             isLoading={disabled}
+            onClick={(event) => {
+              event.stopPropagation();
+              redirect();
+            }}
           >
             Continuar curso
           </Button>
