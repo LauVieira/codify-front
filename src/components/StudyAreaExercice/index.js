@@ -4,9 +4,14 @@ import { useHistory, useParams } from 'react-router-dom';
 import CheckBox from '../CheckBox';
 import Button from '../Button';
 import CourseContext from '../../contexts/CourseContext';
+import CodeEditor from './CodeEditor';
+import TestingArea from './TestingArea';
+import Solution from './Solution';
 
 export default function StudyAreaExercice({ activity, setActivity }) {
   const [isLastChapter, setIsLastChapter] = useState(false);
+  const [solution, setSolution] = useState(true);
+  const [resolution, setResolution] = useState('');
   const history = useHistory();
   const { id, chapterId, topicId } = useParams();
   const {
@@ -20,8 +25,6 @@ export default function StudyAreaExercice({ activity, setActivity }) {
     setIsChecked,
     setActivities,
   } = useContext(CourseContext);
-  console.log(activity);
-  console.log(activity.exercise);
   console.log(activity);
   function handleClick(act) {
     const i = activities.findIndex((a) => a.id == act.id);
@@ -54,9 +57,7 @@ export default function StudyAreaExercice({ activity, setActivity }) {
     <Box>
       <BoxOne>
         <Title>{activity.exercise.title}</Title>
-        <Enun>
-          {activity.exercise.statement}
-        </Enun>
+        <Enun dangerouslySetInnerHTML={{ __html: `${activity.exercise.statement}` }} />
         <Example>
           {activity.exercise.example}
         </Example>
@@ -69,10 +70,26 @@ export default function StudyAreaExercice({ activity, setActivity }) {
             setActivities={setActivities}
             activities={activities}
           />
-          <Button onClick={() => handleClick(activity)}>Avançar</Button>
+          {(!isLastChapter)
+            ? <Button onClick={() => handleClick(activity)}>Avançar</Button>
+            : <div />}
         </ContainerBox>
       </BoxOne>
-      <BoxTwo />
+      <Container>
+        {solution
+          ? (
+            <>
+              <CodeEditor
+                sampleCode={activity.exercise.sampleCode}
+                setSolution={setSolution}
+                setResolution={setResolution}
+                resolution={resolution}
+              />
+              <TestingArea tests={activity.exercise.testCode} resolution={resolution} />
+            </>
+          )
+          : <Solution solution={activity.exercise.solution} setSolution={setSolution} />}
+      </Container>
     </Box>
   );
 }
@@ -82,23 +99,24 @@ const BoxOne = styled.div`
   height: 100%;
   position: relative;
 `;
-const BoxTwo = styled.div`
-  width: 50%;
-  height: 100%;
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 60%;
 `;
 const Box = styled.div`
   display: flex;
   width: 100%;
-  height: 80vh;
+  height: 50%;
 `;
 const ContainerBox = styled.section`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 10px;
+  padding: 10px;
   width: 100%;
   position: absolute;
-  bottom: 0px;
+  bottom: -680px;
   right: 0px;
   button{
         width: 25%;

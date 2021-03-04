@@ -1,43 +1,43 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable react/button-has-type */
-import React, { useContext, useRef } from 'react';
+import React, { useContext, useState } from 'react';
 import styled, { css } from 'styled-components';
 import Editor, { DiffEditor, useMonaco, loader } from '@monaco-editor/react';
-import { HiOutlineLightBulb } from 'react-icons/hi';
-import CheckBox from '../CheckBox';
+import { BsPlay } from 'react-icons/bs';
+import { runTests } from '@bootcamp-ra/mocha-as-promised';
 import CourseContext from '../../contexts/CourseContext';
+import Test from './Test';
 
-export default function CodeEditor({
-  sampleCode, setSolution, setResolution, resolution, 
+export default function TestingElement({
+  testResults,
 }) {
-  const {
-    activities, setActivityIndex, isChecked, setIsChecked, setActivities,
-  } = useContext(CourseContext);
-  const editorRef = useRef(null);
-
-  function handleEditorChange(value) {
-    setResolution(value);
-  }
+  console.log(testResults);
 
   return (
     <Box>
-      <UpBar>
-        <Text>Seu Código</Text>
-        <Button onClick={() => setSolution(false)}>
-          <p>Ver solução</p>
-          <HiOutlineLightBulb />
-        </Button>
-      </UpBar>
-      <Editor
-        height="40vh"
-        defaultLanguage="javascript"
-        defaultValue={resolution || sampleCode}
-        theme="vs-dark"
-        onChange={handleEditorChange}
-      />
+      { testResults === null
+        ? <p>Rode os testes para verificar seu código</p>
+        : (
+          <ul>
+            {testResults.map((t, i) => (
+              <Test
+                key={i}
+                id={i}
+                title={t.title}
+                state={t.state}
+                error={t.error}
+              />
+            ))}
+          </ul>
+        )} 
     </Box>
   );
 }
-
+const Console = styled.div`
+  width: 100%;
+  height: 65%;
+  background-color: #1E1E1E;
+`;
 const Box = styled.div`
   width: 100%;
 `;
