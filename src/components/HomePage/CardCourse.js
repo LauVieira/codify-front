@@ -1,21 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Button from '../Button';
 
+import axios from '../../services/api';
+import { error } from '../../lib/notify';
+
 export default function CardCourse({ course, withButton }) {
   const {
     title, description, photo, alt, id,
   } = course;
+
+  const [disabled, setDisabled] = useState(false);
   const history = useHistory();
 
-  function handleClick() {
-    history.push(`/curso/${id}`);
+  async function redirect() {
+    try {
+      if (disabled) return;
+      setDisabled(true);
+
+      const { data } = await axios.get(`/users/return-course/${id}`);
+      if (data.firstActivity) {
+        const res = await axios.get(`/courses/${id}`);
+        const { program } = res.data;
+        history.push(`/curso/${id}/capitulo/${program[0].id}/topico/${program[0].topics[0].id}/atividade/${program[0].topics[0].activities[0].id}`);
+        return;
+      }
+      history.push(`/curso/${id}/capitulo/${data.chapterId}/topico/${data.topicId}/atividade/${data.activityId}`);
+    } catch (err) {
+      setDisabled(false);
+      error(err.response.data.message);
+      console.error(err);
+    }
   }
 
   return (
-    <StyledCourse onClick={handleClick}>
+    <StyledCourse onClick={() => history.push(`/curso/${id}`)}>
       <Figure>
         <Image src={photo} alt={alt} />
       </Figure>
@@ -30,8 +51,13 @@ export default function CardCourse({ course, withButton }) {
         {withButton && (
           <Button
             className="btn" 
-            type="button" 
-            isLoading={false}
+            type="button"
+            disabled={disabled} 
+            isLoading={disabled}
+            onClick={(event) => {
+              event.stopPropagation();
+              redirect();
+            }}
           >
             Continuar curso
           </Button>

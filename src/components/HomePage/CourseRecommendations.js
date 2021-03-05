@@ -22,7 +22,7 @@ export default function CourseRecommendations({ coursesData, firstTime, firstEnt
 }
 
 const Section = styled.section`
-  padding-top: ${(props) => props.firstEntry ? '150px' : '0px'};
+  padding-top: ${(props) => props.firstEntry ? '150px' : '50px'};
   margin-bottom: 50px;
   width: 100%;
 `;

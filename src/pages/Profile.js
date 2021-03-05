@@ -12,7 +12,7 @@ import UserContext from '../contexts/UserContext';
 import Patterns from '../utils/PatternsHtml';
 import Helpers from '../utils/Helpers';
 
-import { success } from '../lib/notify';
+import { success, error } from '../lib/notify';
 
 export default function Profile() {
   const { user, setUser } = useContext(UserContext);
@@ -20,7 +20,7 @@ export default function Profile() {
   const [email, setEmail] = useState(user.email || '');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [error, setError] = useState('');
+  const [errorLine, setErrorLine] = useState('');
   const [disabled, setDisabled] = useState(false);
   const [changePassword, setChangePassword] = useState(false);
   
@@ -32,7 +32,7 @@ export default function Profile() {
       setDisabled(true);
 
       if (name === user.name && email === user.email && !changePassword) {
-        setError('Não ocorrerão mudanças!');
+        setErrorLine('Não ocorrerão mudanças!');
         setDisabled(false);
 
         return;
@@ -40,14 +40,14 @@ export default function Profile() {
 
       const nameCapitalized = Helpers.capitalizeAllAndTrim(name);
       if (nameCapitalized.split(' ').length === 1) {
-        setError('Digite o nome completo');
+        setErrorLine('Digite o nome completo');
         setDisabled(false);
 
         return;
       }
 
       if (password !== confirmPassword && changePassword) {
-        setError('As senhas digitadas não batem!');
+        setErrorLine('As senhas digitadas não batem!');
 
         setDisabled(false);
         return;
@@ -60,13 +60,13 @@ export default function Profile() {
 
       setUser({ ...data });
       setDisabled(false);
-      setError('');
+      setErrorLine('');
       success(['Perfil atualizado com sucesso!']);
     } catch (err) {
       console.error(err);
       setDisabled(false);
 
-      setError(err.response.data.message);
+      setErrorLine(err.response.data.message);
     }
   }
 
@@ -77,7 +77,6 @@ export default function Profile() {
         <WhiteProfilePicture 
           width="65px" 
           height="65px" 
-          existPhoto={false} 
         />
         <Name> 
           { user.name } 
@@ -136,19 +135,36 @@ export default function Profile() {
             )}
           </LeftSide>
           <RightSide>
-            <ProfilePicture 
-              width="150px" 
-              height="150px" 
-              existPhoto={false}
+            <Upload
+              style={{ outline: 'none' }}
+              name="avatar"
+              action={`${process.env.API_BASE_URL || 'http://localhost:3000'}/users/avatar`}
+              method="post"
+              accept=".jpeg, .jpg, .png"
+              multiple={false}
+              withCredentials
+              onError={(err) => { 
+                console.error(err); 
+                error('Não foi possível atualizar sua imagem'); 
+              }}
+              onSuccess={(res) => {
+                setUser({ ...res });
+              }}
             > 
-              <WrapperIcon>
-                <BsPencil color="#2C8396" fontSize="30px" />
-                <p> editar </p>
-              </WrapperIcon>
-            </ProfilePicture>
+              <ContainerIcon>
+                <WrapperIcon>
+                  <BsPencil color="#2C8396" fontSize="30px" />
+                  <p> editar </p>
+                </WrapperIcon>
+                <ProfilePictureInput
+                  width="150px" 
+                  height="150px" 
+                />
+              </ContainerIcon> 
+            </Upload>
           </RightSide>
           <Error aling="left"> 
-            { error || ''} 
+            { errorLine || ''} 
           </Error> 
           <WrapperButton>
             <div>
@@ -256,16 +272,40 @@ const WrapperButton = styled.footer`
   }
 `;
 
+const ContainerIcon = styled.div`
+  position: relative;
+  width: 150px;
+  height: 150px;
+
+  margin-top: 30px;
+  cursor: pointer;
+
+  border-radius: 50%;
+
+  &:hover figure {
+    opacity: 0.3;
+  }
+
+  &:hover > div {
+    display: flex;
+  }
+`;
+
 const WrapperIcon = styled.div`
   position: absolute;
-  top: 32%;
-  left: 32%;
+  top: 0;
+  left: 5px;
 
-  z-index: 10;
-
+  width: 150px;
+  height: 150px;
+  
   display: none;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  font-weight: bold;
+
+  z-index: 5;
 
   p {
     text-transform: uppercase;
@@ -280,23 +320,14 @@ const RightSide = styled.section`
 
   display: flex;
   justify-content: center;
+`;
 
-  figure {
-    margin-top: 20px;
-
-    p {
-      color: #2C8396;
-      font-size: 1.6rem;
-      letter-spacing: initial;
-    }
-
-    &:hover div {
-      display: flex;
-    }
-
-    &:hover {
-      opacity: 0.5;
-    }
+const ProfilePictureInput = styled(ProfilePicture)`
+  
+  p {
+    color: #2C8396;
+    font-size: 1.6rem;
+    letter-spacing: initial;
   }
 `;
 

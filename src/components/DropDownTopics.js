@@ -23,12 +23,16 @@ export default function DropDownTopics() {
               {chapter.title} 
             </h2>
             {chapter.topics.map((topic) => (
-              <li key={topic.id} onClick={() => redirect(chapter.id, topic.id, topic.activities[0].id)}> 
-                <RiCheckboxBlankCircleFill />
+              <ItemLine 
+                checked={topic.done} 
+                key={topic.id}
+                onClick={() => redirect(chapter.id, topic.id, topic.activities[0].id)}
+              > 
+                {topic.done ? <RiCheckboxCircleFill /> : <RiCheckboxBlankCircleFill />}
                 <p>
                   {topic.title}
                 </p>
-              </li> 
+              </ItemLine> 
             ))}
           </ul> 
         ))}
@@ -57,31 +61,31 @@ const StyledDropTopics = styled.section`
     margin-bottom: 15px;
   }
 
-  li {
-    display: flex;
-    align-items: center;
-    margin-bottom: 3px;
-    cursor: pointer;
-  }
-
   h2 {
     color: white;
     font-weight: 700;
     margin-bottom: 10px;
     font-size: 1.8rem;
   }
+`;
+
+const ItemLine = styled.li`
+  display: flex;
+  align-items: center;
+  margin-bottom: 3px;
+  cursor: pointer;
+
+  svg {
+    color: ${(props) => (props.checked ? '#76DF93' : '#CFCFCF')};
+    font-size: 1.6rem;
+    margin-right: 15px;
+    margin-left: 10px; 
+  }
 
   p {
     color: var(--color-grey-study-area);
     font-weight: 300;
     font-size: 1.6rem;
-  }
-
-  svg {
-    color: #6a6a6a;
-    font-size: 1.6rem;
-    margin-right: 15px;
-    margin-left: 10px; 
   }
 `;
 

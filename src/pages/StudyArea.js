@@ -26,10 +26,9 @@ export default function StudyArea() {
     setActivityIndex,
   } = useContext(CourseContext);
 
-  async function changeLastCourse() {
+  async function initializeCourse() {
     try {
-      console.log(id, 'ID');
-      const { data } = await axios.post(`/users/last-course/${id}`);
+      const { data } = await axios.post(`/users/initialize-course/${id}`);
 
       setUser({ ...data });
     } catch (err) {
@@ -69,7 +68,10 @@ export default function StudyArea() {
   }
 
   useEffect(async () => {
-    await changeLastCourse();
+    await initializeCourse();
+  }, []);
+
+  useEffect(async () => {
     await getCourse();
     await getChapterTopicAndActivities();
 
@@ -99,7 +101,7 @@ export default function StudyArea() {
 
 const StudyAreaPage = styled.main`
   background-color: #2e2e2e;
-  height: 100vh;
+  min-height: 100vh;
 
   display: flex;
   flex-direction: column;

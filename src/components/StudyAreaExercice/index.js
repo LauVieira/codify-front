@@ -25,7 +25,7 @@ export default function StudyAreaExercice({ activity, setActivity }) {
     setIsChecked,
     setActivities,
   } = useContext(CourseContext);
-  console.log(activity);
+  
   function handleClick(act) {
     const i = activities.findIndex((a) => a.id == act.id);
     if (i === activities.length - 1) {
@@ -97,50 +97,56 @@ export default function StudyAreaExercice({ activity, setActivity }) {
 const BoxOne = styled.div`
   width: 50%;
   height: 100%;
-  position: relative;
 `;
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 60%;
 `;
+
 const Box = styled.div`
+  position: relative;
   display: flex;
   width: 100%;
   height: 50%;
 `;
+
 const ContainerBox = styled.section`
+  position: absolute;
+  bottom: 0;
+  left: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 10px;
-  width: 100%;
-  position: absolute;
-  bottom: -680px;
-  right: 0px;
-  button{
-        width: 25%;
-        font-size: 18px;
-        color:white-space;
-        span::after{
-            font-size: 30px;
-            top: -5px;
-        }
+  width: 45%;
+
+  button {
+    width: 25%;
+    font-size: 18px;
+    color: white-space;
+    span::after{
+      font-size: 30px;
+      top: -5px;
     }
+  }
 `;
 const Title = styled.h1`
-    font-size: 33px;
-    font-weight: bold;
-    color: #ffffff;
-    margin: 20px 0 0 20px;
+  font-size: 33px;
+  font-weight: bold;
+  color: #ffffff;
+  margin: 20px 0 0 20px;
 `;
+
 const Enun = styled.p`
-    font-size: 17px;
-    color: #ffffff;
-    margin: 20px 10px 0 20px;
+  font-size: 17px;
+  color: #ffffff;
+  margin: 20px 10px 0 20px;
 `;
+
 const Example = styled.p`
-    font-size: 17px;
-    color: #ffffff;
-    margin: 20px 10px 0 20px;
+  font-size: 17px;
+  color: #ffffff;
+  margin: 20px 10px 0 20px;
 `;

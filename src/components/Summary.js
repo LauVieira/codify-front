@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -8,11 +8,11 @@ import ProfilePicture from './ProfilePicture';
 import axios from '../services/api';
 import { error } from '../lib/notify';
 
-export default function Summary({ courseData, program }) {
+export default function Summary({ courseData, program, isInitialized }) {
   const history = useHistory();
 
   const [disabled, setDisabled] = useState(false);
-  const [percentage] = useState(99);
+  const [percentage] = useState(courseData.progress);
   const [usedValue, setUsedValue] = useState(percentage);
   
   useEffect(() => {
@@ -21,14 +21,26 @@ export default function Summary({ courseData, program }) {
     }
   }, []);
 
-  async function handleInitializeCourse() {
+  function redirectFirstActivity() {
+    history.push(`/curso/${courseData.id}/capitulo/${program[0].id}/topico/${program[0].topics[0].id}/atividade/${program[0].topics[0].activities[0].id}`);
+  }
+
+  async function redirect() {
     try {
+      if (!isInitialized) {
+        redirectFirstActivity();
+        return;
+      }
+
       if (disabled) return;
       setDisabled(true);
 
-      await axios.post(`/courses/${courseData.id}`);
+      const { data } = await axios.post(`/users/return-course/${courseData.id}`);
+      if (data.firstActivity) {
+        redirectFirstActivity();
+      }
 
-      history.push(`/curso/${courseData.id}/capitulo/${program[0].id}/topico/${program[0].topics[0].id}/atividade/${program[0].topics[0].activities[0].id}`);
+      history.push(`/curso/${courseData.id}/capitulo/${data.chapterId}/topico/${data.topicId}/atividade/${data.activityId}`);
     } catch (err) {
       setDisabled(false);
       error(err.response.data.message);
@@ -41,16 +53,19 @@ export default function Summary({ courseData, program }) {
       <Wrapper>
         <ProfilePicture
           onClick={() => history.push('/profile')}
-          existPhoto={false}
         />
 
         <Container>
-          <Title> Você não iniciou esse curso ainda </Title>
+          <Title> 
+            {isInitialized ? `Faltam só ${100 - percentage}% para concluir o curso!` : 'Você não iniciou esse curso ainda' }
+          </Title>
           <div>
             <Progress id="progress" value={usedValue} max="100" />
             <Percentage percentage={percentage}>
-              {percentage}
-              %
+              <span> 
+                {percentage}
+                % 
+              </span>
             </Percentage>
           </div>
         </Container>
@@ -60,9 +75,9 @@ export default function Summary({ courseData, program }) {
         type="button"
         isLoading={disabled} 
         disabled={disabled}
-        onClick={handleInitializeCourse}
+        onClick={redirect}
       > 
-        Iniciar curso 
+        {isInitialized ? 'Continuar curso' : 'Iniciar Curso'} 
       </Button>
     </StyledSummary>
   );
@@ -128,7 +143,7 @@ const Title = styled.h2`
 
 const Progress = styled.progress`
   width: 100%;
-  height: 15px;
+  height: 20px;
   
   box-shadow: 1px 1px 4px rgba( 0, 0, 0, 0.2 );
   border-radius: 7px; 
@@ -148,10 +163,13 @@ const Progress = styled.progress`
 
 const Percentage = styled.p`
   position: absolute;
-  left: ${(props) => (props.percentage <= 10 ? '1.5%' : props.percentage > 99 ? `${props.percentage - 11}%` : `${props.percentage - 8}%`)};
-  bottom: 12%;
+  left: ${(props) => (props.percentage <= 10 ? '1.5%' : props.percentage > 99 ? `${props.percentage - 11}%` : `${props.percentage - 15}%`)};
+  bottom: -5px;
 
-  font-size: 10px;
-  color: white;
-  font-weight: bold;
+
+  span {
+    font-size: 16px;
+    color: white;
+    font-weight: bold;
+  }
 `;
